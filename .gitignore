@@ -1,6 +1,7 @@
 
 # Distribution
 build
+dist
 public
 
 # elm-package generated files
