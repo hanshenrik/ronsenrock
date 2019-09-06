@@ -8,6 +8,6 @@
     "node-elm-compiler": "^5.0.4"
   },
   "scripts": {
-    "build": "parcel build index.html --out-dir public"
+    "build": "parcel build index.html"
   }
 }

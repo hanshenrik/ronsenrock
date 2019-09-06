@@ -2,7 +2,6 @@
 # Distribution
 build
 dist
-public
 
 # elm-package generated files
 elm-stuff
