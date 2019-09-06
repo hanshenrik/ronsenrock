@@ -1,15 +1,13 @@
 {
   "version": 2,
+  "name": "ronsenrock",
   "builds": [
     {
-      "src": "./dist/**",
-      "use": "@now/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "dist/$1"
+      "src": "package.json",
+      "use": "@now/static-build",
+      "config": {
+        "distDir": "dist"
+      }
     }
   ]
 }
