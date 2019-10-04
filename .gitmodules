@@ -1,0 +1,3 @@
+[submodule "lib/elm-style-animation"]
+	path = lib/elm-style-animation
+	url = git@github.com:mdgriffith/elm-style-animation.git
