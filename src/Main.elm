@@ -1,12 +1,11 @@
 module Main exposing (main)
 
-import Animation exposing (percent, px, turn)
+import Animation as Animation exposing (percent, turn)
 import Browser
 import Browser.Navigation as Nav
-import Color.Palette exposing (..)
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
+import Color.Palette as Color
+import Element exposing (..)
+import Element.Events as Events
 import Url
 
 
@@ -105,12 +104,12 @@ update action model =
             ( onWidgetStyle model i <|
                 Animation.interrupt
                     [ Animation.to
-                        [ Animation.backgroundColor (rgba 100 100 100 1.0)
-                        , Animation.borderColor (rgba 100 100 100 1.0)
+                        [ Animation.backgroundColor (Color.rgba 100 100 100 1.0)
+                        , Animation.borderColor (Color.rgba 100 100 100 1.0)
                         ]
                     , Animation.to
-                        [ Animation.backgroundColor white
-                        , Animation.borderColor white
+                        [ Animation.backgroundColor Color.white
+                        , Animation.borderColor Color.white
                         ]
                     ]
             , Cmd.none
@@ -126,13 +125,13 @@ update action model =
                                 , Animation.borderColor color
                                 ]
                         )
-                        [ red
-                        , orange
-                        , yellow
-                        , green
-                        , blue
-                        , purple
-                        , white
+                        [ Color.red
+                        , Color.orange
+                        , Color.yellow
+                        , Color.green
+                        , Color.blue
+                        , Color.purple
+                        , Color.white
                         ]
                 )
             , Cmd.none
@@ -155,25 +154,25 @@ update action model =
             ( onWidgetStyle model i <|
                 Animation.interrupt
                     [ Animation.to
-                        [ Animation.translate (px 100) (px 100)
+                        [ Animation.translate (Animation.px 100) (Animation.px 100)
                         , Animation.scale 1.2
                         , Animation.shadow
                             { offsetX = 50
                             , offsetY = 55
                             , blur = 15
                             , size = 0
-                            , color = rgba 0 0 0 0.1
+                            , color = Color.rgba 0 0 0 0.1
                             }
                         ]
                     , Animation.to
-                        [ Animation.translate (px 0) (px 0)
+                        [ Animation.translate (Animation.px 0) (Animation.px 0)
                         , Animation.scale 1
                         , Animation.shadow
                             { offsetX = 0
                             , offsetY = 1
                             , size = 0
                             , blur = 2
-                            , color = rgba 0 0 0 0.1
+                            , color = Color.rgba 0 0 0 0.1
                             }
                         ]
                     ]
@@ -195,43 +194,20 @@ view : Model -> Browser.Document Msg
 view model =
     { title = "Rønsenrock 2020"
     , body =
-        [ div
-            [ style "position" "absolute"
-            , style "left" "0px"
-            , style "top" "0px"
-            , style "width" "100%"
-            , style "height" "100%"
-            , style "background-color" "#f0f0f0"
-            ]
-            [ div
-                [ style "display" "flex"
-                , style "flex-direction" "row"
-                , style "flex-wrap" "wrap"
-                , style "justify-content" "center"
-                , style "position" "absolute"
-                , style "left" "0px"
-                , style "top" "0px"
-                , style "width" "100%"
-                ]
-                (List.map viewWidget model.widgets)
-            ]
+        [ layout [] <|
+            column [] (List.map viewWidget model.widgets)
         ]
     }
 
 
-viewWidget : Widget -> Html Msg
+viewWidget : Widget -> Element Msg
 viewWidget widget =
-    div
-        (Animation.render widget.style
-            ++ [ style "position" "relative"
-               , style "text-align" "center"
-               , style "cursor" "pointer"
-               , style "border-style" "solid"
-               , style "vertical-align" "middle"
-               , onMouseOver widget.action
+    el
+        (List.map Element.htmlAttribute (Animation.render widget.style)
+            ++ [ Events.onMouseEnter widget.action
                ]
         )
-        [ text widget.label ]
+        (text widget.label)
 
 
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
@@ -240,27 +216,27 @@ init flags url key =
         initialWidgetStyle =
             Animation.style
                 [ Animation.display Animation.inlineBlock
-                , Animation.width (px 100)
-                , Animation.height (px 100)
-                , Animation.margin (px 50)
-                , Animation.padding (px 25)
+                , Animation.width (Animation.px 100)
+                , Animation.height (Animation.px 100)
+                , Animation.margin (Animation.px 50)
+                , Animation.padding (Animation.px 25)
                 , Animation.rotate (turn 0.0)
                 , Animation.rotate3d (turn 0.0) (turn 0.0) (turn 0.0)
-                , Animation.translate (px 0) (px 0)
+                , Animation.translate (Animation.px 0) (Animation.px 0)
                 , Animation.opacity 1
-                , Animation.backgroundColor white
-                , Animation.color black
+                , Animation.backgroundColor Color.white
+                , Animation.color Color.black
                 , Animation.scale 1.0
-                , Animation.borderColor white
-                , Animation.borderWidth (px 4)
-                , Animation.borderRadius (px 8)
-                , Animation.translate3d (percent 0) (percent 0) (px 0)
+                , Animation.borderColor Color.white
+                , Animation.borderWidth (Animation.px 4)
+                , Animation.borderRadius (Animation.px 8)
+                , Animation.translate3d (percent 0) (percent 0) (Animation.px 0)
                 , Animation.shadow
                     { offsetX = 0
                     , offsetY = 1
                     , size = 0
                     , blur = 2
-                    , color = rgba 0 0 0 0.1
+                    , color = Color.rgba 0 0 0 0.1
                     }
                 ]
     in
