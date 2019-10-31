@@ -1,0 +1,46 @@
+a {
+  border-bottom: 4px solid rgb(233, 141, 155) !important;
+  padding: 0.25rem !important;
+}
+
+.hoverable {
+  transition: background-color 0.2s linear;
+}
+.hoverable:not(a) {
+  padding: 0.5rem !important;
+}
+.hoverable:hover {
+  background-color: rgba(233, 141, 155, 0.5);
+}
+
+*:focus {
+  outline: 3px #9bcbff solid !important;
+}
+
+nav {
+  position: fixed !important;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+
+  transition: all 0.25s linear;
+}
+nav.closed {
+  margin-left: -300px;
+  transform: translateX(-300px);
+  opacity: 0;
+  visibility: hidden;
+}
+nav.open {
+  margin-right: 0;
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.dimmable {
+  transition: background-color 0.2s linear;
+}
+.dimmed {
+  background-color: rgba(0,0,0,0.4);
+}

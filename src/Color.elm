@@ -1,4 +1,4 @@
-module Color.Palette exposing (black, lightpink, white)
+module Color exposing (black, lightpink, white)
 
 import Element exposing (Color, rgb255)
 
