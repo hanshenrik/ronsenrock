@@ -76,9 +76,22 @@ header isMenuOpen =
     row [ UI.mSpacing, UI.mPadding, width fill ] [ openMenuButton ]
 
 
-footer : Element Msg
-footer =
-    column [ Region.footer, UI.mSpacing, UI.mPadding, alignBottom, centerX, width fill ]
+footer : Bool -> Element Msg
+footer isMenuOpen =
+    column
+        [ Region.footer
+        , UI.mSpacing
+        , UI.mPadding
+        , alignBottom
+        , centerX
+        , width fill
+        , UI.class "dimmable"
+        , if isMenuOpen then
+            UI.class "dimmed"
+
+          else
+            UI.class ""
+        ]
         [ row [ centerX ]
             [ text "✉️ "
             , link [ UI.class "hoverable" ] { label = text "post@rønsenrock.no", url = "mailto:post@rønsenrock.no" }
@@ -116,9 +129,19 @@ closeMenuButton =
     toggleMenuButton True
 
 
-mainContent : Element Msg
-mainContent =
-    column [ width fill, height fill, Region.mainContent ]
+mainContent : Bool -> Element Msg
+mainContent isMenuOpen =
+    column
+        [ width fill
+        , height fill
+        , Region.mainContent
+        , UI.class "dimmable"
+        , if isMenuOpen then
+            UI.class "dimmed"
+
+          else
+            UI.class ""
+        ]
         [ el [ Region.heading 1, centerX, centerY ] <| text "RønsenRock" ]
 
 
@@ -130,17 +153,11 @@ view model =
             column
                 [ width fill
                 , height fill
-                , UI.class "dimmable"
-                , if model.isMenuOpen then
-                    UI.class "dimmed"
-
-                  else
-                    UI.class "noAttribute"
                 ]
                 [ header model.isMenuOpen
                 , navMenu model
-                , mainContent
-                , footer
+                , mainContent model.isMenuOpen
+                , footer model.isMenuOpen
                 ]
         ]
     }
