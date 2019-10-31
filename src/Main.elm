@@ -46,12 +46,10 @@ update action model =
 
 navMenu : Model -> Element Msg
 navMenu model =
-    column
+    el
         [ Region.navigation
         , width (fill |> maximum 300)
         , height fill
-        , UI.mPadding
-        , UI.mSpacing
         , Background.color Color.lightpink
         , Font.color Color.black
         , Font.center
@@ -61,14 +59,19 @@ navMenu model =
           else
             htmlAttribute <| Html.Attributes.class "closed"
         ]
-        [ closeMenuButton
-        , link [ UI.class "hoverable" ] { label = text "Hjem", url = "/" }
-        , link [ UI.class "hoverable" ] { label = text "Historie", url = "/historie" }
-        , link [ UI.class "hoverable" ]
-            { label = text "Facebook"
-            , url = "https://facebook.com/rockogrull"
-            }
-        ]
+    <|
+        column
+            [ UI.mPadding
+            , UI.mSpacing
+            ]
+            [ closeMenuButton
+            , link [ UI.class "hoverable" ] { label = text "Hjem", url = "/" }
+            , link [ UI.class "hoverable" ] { label = text "Historie", url = "/historie" }
+            , link [ UI.class "hoverable" ]
+                { label = text "Facebook"
+                , url = "https://facebook.com/rockogrull"
+                }
+            ]
 
 
 header : Bool -> Element Msg
