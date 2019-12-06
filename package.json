@@ -3,15 +3,14 @@
   "version": "0.0.1",
   "license": "MIT",
   "dependencies": {
-    "elm": "^0.19.1-no-deps",
-    "parcel-bundler": "^1.12.3"
+    "elm": "^0.19.1-no-deps"
   },
   "devDependencies": {
-    "elm-hot": "^1.1.2",
-    "node-elm-compiler": "^5.0.4"
+    "create-elm-app": "4.1.1",
+    "elm-test": "0.19.1",
+    "elm-analyse": "0.16.5"
   },
   "scripts": {
-    "build": "parcel build index.html",
-    "dev": "parcel index.html"
+    "dev": "yarn elm-app start"
   }
 }

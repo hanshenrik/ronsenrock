@@ -176,7 +176,7 @@ mainContent model =
         ]
         [ case model.page of
             LandingPage ->
-                el [ Region.heading 1, centerX, centerY, UI.class "shake" ] <| text "RønsenRock"
+                el [ Background.uncropped "/images/logo-2018-mm-transparent.png", centerX, centerY, height <| px 500, width <| px 500, UI.class "shake" ] none
 
             ProgramPage ->
                 column [ centerX ]
