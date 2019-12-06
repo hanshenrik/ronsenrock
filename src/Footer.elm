@@ -7,17 +7,19 @@ import Element.Events as Events
 import Element.Font as Font
 import Element.Input as Input
 import Element.Region as Region
+import Type.Window exposing (Window)
 import UI
 
 
-default : Bool -> Element msg
-default isMenuOpen =
-    column
+default : Window -> Bool -> Element msg
+default window isMenuOpen =
+    UI.rowOrColumn window
         [ Region.footer
         , alignBottom
         , Font.size 16
         , Background.color <| Color.whiteTransparent 0.1
-        , UI.mPadding
+        , UI.lPadding
+        , UI.xlSpacing
         , UI.fillWidth
         , UI.class "dimmable"
         , if isMenuOpen then
@@ -26,7 +28,8 @@ default isMenuOpen =
           else
             UI.class ""
         ]
-        [ column [ UI.sSpacing, centerX ]
+        [ column
+            [ alignTop, UI.sSpacing, centerX ]
             [ row []
                 [ text "✉️ "
                 , link [ UI.class "hoverable" ] { label = text "post@rønsenrock.no", url = "mailto:post@rønsenrock.no" }
@@ -39,5 +42,8 @@ default isMenuOpen =
                 [ text "🔨 av "
                 , link [ UI.class "hoverable" ] { label = text "hanshenrik", url = "https://github.com/hanshenrik" }
                 ]
+            ]
+        , column [ alignTop, UI.sSpacing, centerX ]
+            [ link [ UI.class "hoverable" ] { label = text "Facebook", url = "https://facebook.com/rockogrull" }
             ]
         ]

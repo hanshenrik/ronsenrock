@@ -133,10 +133,6 @@ navMenu model =
             [ closeMenuButton
             , link [ UI.class "hoverable", Events.onClick (Click LandingPage) ] { label = text "Hjem", url = "/" }
             , link [ UI.class "hoverable", Events.onClick (Click HistoryPage) ] { label = text "Historie", url = "/historie" }
-            , link [ UI.class "hoverable" ]
-                { label = text "Facebook"
-                , url = "https://facebook.com/rockogrull"
-                }
             ]
 
 
@@ -201,7 +197,7 @@ view model =
                 ]
                 [ navMenu model
                 , mainContent model
-                , el [ UI.fillWidth, Events.onClick <| ToggleMenu (Just False) ] <| Footer.default model.isMenuOpen
+                , el [ UI.fillWidth, Events.onClick <| ToggleMenu (Just False) ] <| Footer.default model.window model.isMenuOpen
                 ]
         ]
     }

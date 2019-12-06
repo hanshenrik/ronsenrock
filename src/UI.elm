@@ -1,7 +1,8 @@
-module UI exposing (class, dimmed, fillWidth, lPadding, lSpacing, mPadding, mSpacing, sPadding, sSpacing)
+module UI exposing (class, dimmed, fillWidth, lPadding, lSpacing, mPadding, mSpacing, rowOrColumn, sPadding, sSpacing, xlSpacing)
 
 import Element exposing (..)
 import Html.Attributes
+import Type.Window exposing (Window)
 
 
 class : String -> Attribute msg
@@ -36,14 +37,29 @@ sSpacing =
 
 mSpacing : Attribute msg
 mSpacing =
-    spacing 18
+    spacing <| 9 * 2
 
 
 lSpacing : Attribute msg
 lSpacing =
-    spacing 36
+    spacing <| 9 * 4
+
+
+xlSpacing : Attribute msg
+xlSpacing =
+    spacing <| 9 * 12
 
 
 fillWidth : Attribute msg
 fillWidth =
     width fill
+
+
+rowOrColumn : Window -> (List (Attribute msg) -> List (Element msg) -> Element msg)
+rowOrColumn window =
+    case (classifyDevice window).class of
+        Phone ->
+            column
+
+        _ ->
+            row
