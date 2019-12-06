@@ -1,6 +1,7 @@
 module Main exposing (main)
 
 import Browser
+import Browser.Events as Browser
 import Browser.Navigation as Nav
 import Color
 import Element exposing (..)
@@ -9,8 +10,14 @@ import Element.Events as Events
 import Element.Font as Font
 import Element.Input as Input
 import Element.Region as Region
+import Footer
 import Html.Attributes
+import Json.Decode as Decode
+import Page.History
+import Page.Landing
 import Transit exposing (Step(..))
+import Type.Flags as Flags
+import Type.Window as Window exposing (Window)
 import UI
 import Url
 import Url.Parser as Url
@@ -22,13 +29,13 @@ type alias Model =
         , url : Url.Url
         , isMenuOpen : Bool
         , page : Page
+        , window : Window
         }
 
 
 type Page
     = LandingPage
-    | ProgramPage
-    | ArtistsPage
+    | HistoryPage
 
 
 type Msg
@@ -36,7 +43,8 @@ type Msg
     | UrlChanged Url.Url
     | Click Page
     | SetPage Page
-    | ToggleMenu
+    | ToggleMenu (Maybe Bool)
+    | Resized Int Int
     | TransitMsg (Transit.Msg Msg)
 
 
@@ -46,8 +54,8 @@ pageFromUrl url =
         "/" ->
             LandingPage
 
-        "/artister" ->
-            ArtistsPage
+        "/historie" ->
+            HistoryPage
 
         _ ->
             LandingPage
@@ -56,8 +64,15 @@ pageFromUrl url =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update action model =
     case action of
+        Resized x y ->
+            ( { model | window = { width = x, height = y } }, Cmd.none )
+
         Click page ->
-            Transit.start TransitMsg (SetPage page) ( 200, 200 ) model
+            if model.page == page then
+                ( model, Cmd.none )
+
+            else
+                Transit.start TransitMsg (SetPage page) ( 200, 200 ) model
 
         SetPage page ->
             ( { model | page = page }, Cmd.none )
@@ -71,13 +86,28 @@ update action model =
                     ( model, Nav.load href )
 
         UrlChanged url ->
-            ( { model | url = url }, Cmd.none )
+            ( { model
+                | url = url
+                , isMenuOpen =
+                    if model.url /= url then
+                        False
 
-        ToggleMenu ->
-            ( { model | isMenuOpen = not model.isMenuOpen }, Cmd.none )
+                    else
+                        model.isMenuOpen
+              }
+            , Cmd.none
+            )
+
+        ToggleMenu maybeState ->
+            ( { model | isMenuOpen = Maybe.withDefault (not model.isMenuOpen) maybeState }, Cmd.none )
 
         TransitMsg transitMsg ->
             Transit.tick TransitMsg transitMsg model
+
+
+header : Bool -> Element Msg
+header isMenuOpen =
+    row [ UI.class "position-sticky", UI.mSpacing, UI.mPadding, UI.fillWidth ] [ openMenuButton ]
 
 
 navMenu : Model -> Element Msg
@@ -86,7 +116,7 @@ navMenu model =
         [ Region.navigation
         , width (fill |> maximum 300)
         , height fill
-        , Background.color Color.lightpink
+        , Background.color Color.pink
         , Font.color Color.black
         , Font.center
         , if model.isMenuOpen then
@@ -102,8 +132,7 @@ navMenu model =
             ]
             [ closeMenuButton
             , link [ UI.class "hoverable", Events.onClick (Click LandingPage) ] { label = text "Hjem", url = "/" }
-            , link [ UI.class "hoverable", Events.onClick (Click ProgramPage) ] { label = text "Program", url = "/program" }
-            , link [ UI.class "hoverable", Events.onClick (Click ArtistsPage) ] { label = text "Artister", url = "/artister" }
+            , link [ UI.class "hoverable", Events.onClick (Click HistoryPage) ] { label = text "Historie", url = "/historie" }
             , link [ UI.class "hoverable" ]
                 { label = text "Facebook"
                 , url = "https://facebook.com/rockogrull"
@@ -111,47 +140,9 @@ navMenu model =
             ]
 
 
-header : Bool -> Element Msg
-header isMenuOpen =
-    row [ UI.mSpacing, UI.mPadding, width fill ] [ openMenuButton ]
-
-
-footer : Bool -> Element Msg
-footer isMenuOpen =
-    column
-        [ Region.footer
-        , UI.mSpacing
-        , UI.mPadding
-        , alignBottom
-        , centerX
-        , width fill
-        , UI.class "dimmable"
-        , if isMenuOpen then
-            UI.dimmed
-
-          else
-            UI.class ""
-        ]
-        [ column [ Font.size 16, centerX, UI.sSpacing ]
-            [ row []
-                [ text "✉️ "
-                , link [ UI.class "hoverable" ] { label = text "post@rønsenrock.no", url = "mailto:post@rønsenrock.no" }
-                ]
-            , row []
-                [ text "🎸 "
-                , link [ UI.class "hoverable" ] { label = text "booking@rønsenrock.no", url = "mailto:booking@rønsenrock.no" }
-                ]
-            , row []
-                [ text "🔨 av "
-                , link [ UI.class "hoverable" ] { label = text "hanshenrik", url = "https://github.com/hanshenrik" }
-                ]
-            ]
-        ]
-
-
 toggleMenuButton : Bool -> Element Msg
 toggleMenuButton isMenuOpen =
-    Input.button [ UI.sPadding, Font.color Color.white, UI.class "hoverable" ]
+    Input.button [ UI.sPadding, Font.color Color.white, UI.class "hoverable-alternative" ]
         { label =
             text <|
                 if isMenuOpen then
@@ -159,7 +150,7 @@ toggleMenuButton isMenuOpen =
 
                 else
                     "🍔"
-        , onPress = Just ToggleMenu
+        , onPress = Just <| ToggleMenu Nothing
         }
 
 
@@ -176,8 +167,9 @@ closeMenuButton =
 mainContent : Model -> Element Msg
 mainContent model =
     column
-        [ width fill
+        [ UI.fillWidth
         , height fill
+        , UI.lPadding
         , Region.mainContent
         , UI.class "dimmable"
         , if model.isMenuOpen then
@@ -190,60 +182,56 @@ mainContent model =
         ]
         [ case model.page of
             LandingPage ->
-                el [ Background.uncropped "/images/logo-2018-mm-transparent.png", centerX, centerY, height <| px 500, width <| px 500, UI.class "shake" ] none
+                Page.Landing.view model.window
 
-            ProgramPage ->
-                column [ centerX ]
-                    [ el [ Region.heading 1 ] <| text "Program"
-                    , column []
-                        []
-                    ]
-
-            ArtistsPage ->
-                column [ centerX ]
-                    [ el [ Region.heading 1 ] <| text "Artists"
-                    , column []
-                        []
-                    ]
+            HistoryPage ->
+                Page.History.view
         ]
 
 
 view : Model -> Browser.Document Msg
 view model =
-    { title = "Rønsenrock 2020"
+    { title = "RønsenRock 2020"
     , body =
         [ layout [ Background.color Color.black, Font.color Color.white ] <|
             column
-                [ width fill
+                [ UI.fillWidth
                 , height fill
+                , inFront <| header model.isMenuOpen
                 ]
-                [ header model.isMenuOpen
-                , navMenu model
+                [ navMenu model
                 , mainContent model
-                , footer model.isMenuOpen
+                , el [ UI.fillWidth, Events.onClick <| ToggleMenu (Just False) ] <| Footer.default model.isMenuOpen
                 ]
         ]
     }
 
 
-init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
+init : Decode.Value -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init flags url key =
-    ( { key = key
-      , url = url
-      , isMenuOpen = False
-      , transition = Transit.empty
-      , page = pageFromUrl url
-      }
-    , Cmd.none
-    )
+    Flags.decode flags
+        |> (\{ window, time } ->
+                ( { key = key
+                  , url = url
+                  , isMenuOpen = False
+                  , transition = Transit.empty
+                  , page = pageFromUrl url
+                  , window = window
+                  }
+                , Cmd.none
+                )
+           )
 
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Transit.subscriptions TransitMsg model
+    Sub.batch
+        [ Transit.subscriptions TransitMsg model
+        , Browser.onResize Resized
+        ]
 
 
-main : Program () Model Msg
+main : Program Decode.Value Model Msg
 main =
     Browser.application
         { init = init

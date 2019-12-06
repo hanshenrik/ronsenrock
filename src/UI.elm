@@ -1,4 +1,4 @@
-module UI exposing (class, dimmed, lPadding, lSpacing, mPadding, mSpacing, sPadding, sSpacing)
+module UI exposing (class, dimmed, fillWidth, lPadding, lSpacing, mPadding, mSpacing, sPadding, sSpacing)
 
 import Element exposing (..)
 import Html.Attributes
@@ -42,3 +42,8 @@ mSpacing =
 lSpacing : Attribute msg
 lSpacing =
     spacing 36
+
+
+fillWidth : Attribute msg
+fillWidth =
+    width fill

@@ -1,10 +1,10 @@
-module Color exposing (black, lightpink, white)
+module Color exposing (black, pink, white, whiteTransparent)
 
-import Element exposing (Color, rgb255)
+import Element exposing (..)
 
 
-lightpink : Color
-lightpink =
+pink : Color
+pink =
     rgb255 255 182 193
 
 
@@ -16,3 +16,12 @@ white =
 black : Color
 black =
     rgb255 21 21 21
+
+
+whiteTransparent : Float -> Color
+whiteTransparent alpha =
+    let
+        original =
+            toRgb white
+    in
+    fromRgb <| { original | alpha = alpha }
