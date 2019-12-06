@@ -1,4 +1,4 @@
-module UI exposing (class, lPadding, lSpacing, mPadding, mSpacing, sPadding, sSpacing)
+module UI exposing (class, dimmed, lPadding, lSpacing, mPadding, mSpacing, sPadding, sSpacing)
 
 import Element exposing (..)
 import Html.Attributes
@@ -7,6 +7,11 @@ import Html.Attributes
 class : String -> Attribute msg
 class name =
     htmlAttribute <| Html.Attributes.class name
+
+
+dimmed : Attribute msg
+dimmed =
+    htmlAttribute <| Html.Attributes.style "opacity" "0.5"
 
 
 sPadding : Attribute msg

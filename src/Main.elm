@@ -5,30 +5,49 @@ import Browser.Navigation as Nav
 import Color
 import Element exposing (..)
 import Element.Background as Background
+import Element.Events as Events
 import Element.Font as Font
 import Element.Input as Input
 import Element.Region as Region
 import Html.Attributes
+import Transit exposing (Step(..))
 import UI
 import Url
 
 
 type alias Model =
-    { key : Nav.Key
-    , url : Url.Url
-    , isMenuOpen : Bool
-    }
+    Transit.WithTransition
+        { key : Nav.Key
+        , url : Url.Url
+        , isMenuOpen : Bool
+        , page : Page
+        }
+
+
+type Page
+    = LandingPage
+    | ProgramPage
+    | ArtistsPage
 
 
 type Msg
     = LinkClicked Browser.UrlRequest
     | UrlChanged Url.Url
+    | Click Page
+    | SetPage Page
     | ToggleMenu
+    | TransitMsg (Transit.Msg Msg)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update action model =
     case action of
+        Click page ->
+            Transit.start TransitMsg (SetPage page) ( 200, 200 ) model
+
+        SetPage page ->
+            ( { model | page = page }, Cmd.none )
+
         LinkClicked urlRequest ->
             case urlRequest of
                 Browser.Internal url ->
@@ -42,6 +61,9 @@ update action model =
 
         ToggleMenu ->
             ( { model | isMenuOpen = not model.isMenuOpen }, Cmd.none )
+
+        TransitMsg transitMsg ->
+            Transit.tick TransitMsg transitMsg model
 
 
 navMenu : Model -> Element Msg
@@ -65,8 +87,9 @@ navMenu model =
             , UI.mSpacing
             ]
             [ closeMenuButton
-            , link [ UI.class "hoverable" ] { label = text "Hjem", url = "/" }
-            , link [ UI.class "hoverable" ] { label = text "Historie", url = "/historie" }
+            , link [ UI.class "hoverable", Events.onClick (Click LandingPage) ] { label = text "Hjem", url = "/" }
+            , link [ UI.class "hoverable", Events.onClick (Click ProgramPage) ] { label = text "Program", url = "/program" }
+            , link [ UI.class "hoverable", Events.onClick (Click ArtistsPage) ] { label = text "Artister", url = "/artister" }
             , link [ UI.class "hoverable" ]
                 { label = text "Facebook"
                 , url = "https://facebook.com/rockogrull"
@@ -90,20 +113,24 @@ footer isMenuOpen =
         , width fill
         , UI.class "dimmable"
         , if isMenuOpen then
-            UI.class "dimmed"
+            UI.dimmed
 
           else
             UI.class ""
         ]
-        [ row [ centerX ]
-            [ text "✉️ "
-            , link [ UI.class "hoverable" ] { label = text "post@rønsenrock.no", url = "mailto:post@rønsenrock.no" }
-            , text " | "
-            , link [ UI.class "hoverable" ] { label = text "booking@rønsenrock.no", url = "mailto:booking@rønsenrock.no" }
-            ]
-        , row [ centerX ]
-            [ text "🔨 av "
-            , link [ UI.class "hoverable" ] { label = text "hanshenrik", url = "https://github.com/hanshenrik" }
+        [ column [ Font.size 16, centerX, UI.sSpacing ]
+            [ row []
+                [ text "✉️ "
+                , link [ UI.class "hoverable" ] { label = text "post@rønsenrock.no", url = "mailto:post@rønsenrock.no" }
+                ]
+            , row []
+                [ text "🎸 "
+                , link [ UI.class "hoverable" ] { label = text "booking@rønsenrock.no", url = "mailto:booking@rønsenrock.no" }
+                ]
+            , row []
+                [ text "🔨 av "
+                , link [ UI.class "hoverable" ] { label = text "hanshenrik", url = "https://github.com/hanshenrik" }
+                ]
             ]
         ]
 
@@ -132,20 +159,39 @@ closeMenuButton =
     toggleMenuButton True
 
 
-mainContent : Bool -> Element Msg
-mainContent isMenuOpen =
+mainContent : Model -> Element Msg
+mainContent model =
     column
         [ width fill
         , height fill
         , Region.mainContent
         , UI.class "dimmable"
-        , if isMenuOpen then
-            UI.class "dimmed"
+        , if model.isMenuOpen then
+            UI.dimmed
 
           else
             UI.class ""
+        , htmlAttribute <| Html.Attributes.style "margin-bottom" ("" ++ String.fromFloat (20 * Transit.getValue model.transition) ++ "px")
+        , htmlAttribute <| Html.Attributes.style "opacity" (String.fromFloat (Transit.getValue model.transition))
         ]
-        [ el [ Region.heading 1, centerX, centerY ] <| text "RønsenRock" ]
+        [ case model.page of
+            LandingPage ->
+                el [ Region.heading 1, centerX, centerY, UI.class "shake" ] <| text "RønsenRock"
+
+            ProgramPage ->
+                column [ centerX ]
+                    [ el [ Region.heading 1 ] <| text "Program"
+                    , column []
+                        []
+                    ]
+
+            ArtistsPage ->
+                column [ centerX ]
+                    [ el [ Region.heading 1 ] <| text "Artists"
+                    , column []
+                        []
+                    ]
+        ]
 
 
 view : Model -> Browser.Document Msg
@@ -159,7 +205,7 @@ view model =
                 ]
                 [ header model.isMenuOpen
                 , navMenu model
-                , mainContent model.isMenuOpen
+                , mainContent model
                 , footer model.isMenuOpen
                 ]
         ]
@@ -171,6 +217,8 @@ init flags url key =
     ( { key = key
       , url = url
       , isMenuOpen = False
+      , transition = Transit.empty
+      , page = LandingPage
       }
     , Cmd.none
     )
@@ -178,7 +226,7 @@ init flags url key =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    Transit.subscriptions TransitMsg model
 
 
 main : Program () Model Msg
