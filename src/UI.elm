@@ -1,6 +1,8 @@
-module UI exposing (class, dimmed, fillWidth, lPadding, lSpacing, mPadding, mSpacing, rowOrColumn, sPadding, sSpacing, xlSpacing)
+module UI exposing (class, dimmed, divider, fillWidth, lPadding, lSpacing, mPadding, mSpacing, rowOrColumn, sPadding, sSpacing, xlSpacing)
 
+import Color
 import Element exposing (..)
+import Element.Border as Border
 import Html.Attributes
 import Type.Window exposing (Window)
 
@@ -63,3 +65,13 @@ rowOrColumn window =
 
         _ ->
             row
+
+
+divider : Window -> Element msg
+divider window =
+    case (classifyDevice window).class of
+        Phone ->
+            el [ Border.widthEach { top = 0, left = 0, right = 0, bottom = 1 }, Border.color <| Color.whiteTransparent 0.1, width fill ] none
+
+        _ ->
+            el [ Border.widthEach { top = 0, left = 1, right = 0, bottom = 0 }, Border.color <| Color.whiteTransparent 0.1, height fill ] none
