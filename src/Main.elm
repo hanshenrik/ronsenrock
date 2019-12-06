@@ -13,6 +13,7 @@ import Html.Attributes
 import Transit exposing (Step(..))
 import UI
 import Url
+import Url.Parser as Url
 
 
 type alias Model =
@@ -37,6 +38,19 @@ type Msg
     | SetPage Page
     | ToggleMenu
     | TransitMsg (Transit.Msg Msg)
+
+
+pageFromUrl : Url.Url -> Page
+pageFromUrl url =
+    case url.path of
+        "/" ->
+            LandingPage
+
+        "/artister" ->
+            ArtistsPage
+
+        _ ->
+            LandingPage
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -218,7 +232,7 @@ init flags url key =
       , url = url
       , isMenuOpen = False
       , transition = Transit.empty
-      , page = LandingPage
+      , page = pageFromUrl url
       }
     , Cmd.none
     )
