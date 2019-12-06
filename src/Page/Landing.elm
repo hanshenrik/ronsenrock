@@ -8,6 +8,7 @@ import Element.Events as Events
 import Element.Font as Font
 import Element.Input as Input
 import Element.Region as Region
+import Html as Html
 import Html.Attributes
 import Type.Window exposing (Window)
 import UI
@@ -27,12 +28,22 @@ view window =
                 _ ->
                     500
     in
-    el
-        [ Background.uncropped "/images/logo-2018-mm-transparent.png"
-        , centerX
-        , centerY
-        , height <| px logoSize
-        , width <| px logoSize
-        , UI.class "shake"
+    column [ UI.fillWidth, centerY, UI.lSpacing ]
+        [ el
+            [ Background.uncropped "/images/logo-2018-mm-transparent.png"
+            , centerX
+            , centerY
+            , height <| px logoSize
+            , width <| px logoSize
+            , UI.class "shake"
+            ]
+            none
+        , el [ centerX ] <|
+            html <|
+                Html.iframe
+                    [ Html.Attributes.src "https://open.spotify.com/embed/user/1113006308/playlist/6FfNqW0AcFkrhlUaDfqfpD?si=S36Q1tleRB6w5MYvFWtS2g"
+                    , Html.Attributes.style "border" "none"
+                    , Html.Attributes.style "height" "400px"
+                    ]
+                    []
         ]
-        none
