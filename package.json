@@ -11,6 +11,7 @@
     "elm-analyse": "0.16.5"
   },
   "scripts": {
-    "dev": "yarn elm-app start"
+    "dev": "yarn elm-app start",
+    "build": "yarn elm-app build"
   }
 }
