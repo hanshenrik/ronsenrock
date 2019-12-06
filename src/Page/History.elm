@@ -27,18 +27,15 @@ view : Element msg
 view =
     column [ UI.lSpacing, UI.fillWidth ]
         [ column bannerImageAttributes
-            [ image [ UI.fillWidth ] { src = "/images/logo-2019-mm.png", description = "Logo 2019" }
+            [ image [ UI.fillWidth ] { src = "/images/logo-2019-mm-transparent.png", description = "Logo 2019" }
             ]
         , column bannerImageAttributes
-            [ image [ UI.fillWidth ] { src = "/images/logo-2018-mm.jpg", description = "Logo 2018" }
+            [ image [ UI.fillWidth ] { src = "/images/logo-2018-mm-transparent.png", description = "Logo 2018" }
             ]
         , column bannerImageAttributes
             [ image [ UI.fillWidth ] { src = "/images/logo-2017-mm.png", description = "Logo 2017" }
             ]
         , column bannerImageAttributes
             [ image [ UI.fillWidth ] { src = "/images/logo-2016-mm.png", description = "Logo 2016" }
-            ]
-        , column bannerImageAttributes
-            [ image [ UI.fillWidth ] { src = "/images/logo-2015.jpg", description = "Logo 2015" }
             ]
         ]
