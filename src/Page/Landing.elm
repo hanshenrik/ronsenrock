@@ -1,21 +1,16 @@
 module Page.Landing exposing (view)
 
-import Color
+import Countdown
 import Element exposing (..)
 import Element.Background as Background
-import Element.Border as Border
-import Element.Events as Events
-import Element.Font as Font
-import Element.Input as Input
-import Element.Region as Region
 import Html as Html
 import Html.Attributes
 import Type.Window exposing (Window)
 import UI
 
 
-view : Window -> Element msg
-view window =
+view : { a | window : Window, time : Int } -> Element msg
+view { window, time } =
     let
         logoSize =
             case (classifyDevice window).class of
@@ -38,6 +33,7 @@ view window =
             , UI.class "shake"
             ]
             none
+        , el [ centerX ] <| Countdown.view time
         , el [ centerX ] <|
             html <|
                 Html.iframe

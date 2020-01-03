@@ -1,10 +1,32 @@
-module UI exposing (class, dimmed, divider, fillWidth, lPadding, lSpacing, mPadding, mSpacing, rowOrColumn, sPadding, sSpacing, xlSpacing)
+module UI exposing (class, dimmed, divider, fillWidth, h1, h2, h3, horisontalDivider, lPadding, lSpacing, mPadding, mSpacing, rowOrColumn, sPadding, sSpacing, verticalDivider, xlSpacing)
 
 import Color
 import Element exposing (..)
 import Element.Border as Border
+import Element.Font as Font
+import Element.Region as Region
 import Html.Attributes
 import Type.Window exposing (Window)
+
+
+heading : Int -> List (Attribute msg) -> Element msg -> Element msg
+heading size attributes =
+    el (Region.heading size :: attributes)
+
+
+h1 : Element msg -> Element msg
+h1 =
+    heading 1 [ Font.size 64 ]
+
+
+h2 : Element msg -> Element msg
+h2 =
+    heading 2 [ Font.size 32 ]
+
+
+h3 : Element msg -> Element msg
+h3 =
+    heading 3 [ Font.size 24 ]
 
 
 class : String -> Attribute msg
@@ -67,11 +89,21 @@ rowOrColumn window =
             row
 
 
+horisontalDivider : Element msg
+horisontalDivider =
+    el [ Border.widthEach { top = 0, left = 0, right = 0, bottom = 1 }, Border.color <| Color.whiteTransparent 0.1, width fill ] none
+
+
+verticalDivider : Element msg
+verticalDivider =
+    el [ Border.widthEach { top = 0, left = 1, right = 0, bottom = 0 }, Border.color <| Color.whiteTransparent 0.1, height fill ] none
+
+
 divider : Window -> Element msg
 divider window =
     case (classifyDevice window).class of
         Phone ->
-            el [ Border.widthEach { top = 0, left = 0, right = 0, bottom = 1 }, Border.color <| Color.whiteTransparent 0.1, width fill ] none
+            horisontalDivider
 
         _ ->
-            el [ Border.widthEach { top = 0, left = 1, right = 0, bottom = 0 }, Border.color <| Color.whiteTransparent 0.1, height fill ] none
+            verticalDivider

@@ -6,6 +6,7 @@ import Browser.Navigation as Nav
 import Color
 import Element exposing (..)
 import Element.Background as Background
+import Element.Border as Border
 import Element.Events as Events
 import Element.Font as Font
 import Element.Input as Input
@@ -15,9 +16,10 @@ import Html.Attributes
 import Json.Decode as Decode
 import Page.History
 import Page.Landing
+import Time
 import Transit exposing (Step(..))
 import Type.Flags as Flags
-import Type.Window as Window exposing (Window)
+import Type.Window exposing (Window)
 import UI
 import Url
 import Url.Parser as Url
@@ -30,6 +32,7 @@ type alias Model =
         , isMenuOpen : Bool
         , page : Page
         , window : Window
+        , time : Int
         }
 
 
@@ -46,6 +49,7 @@ type Msg
     | ToggleMenu (Maybe Bool)
     | Resized Int Int
     | TransitMsg (Transit.Msg Msg)
+    | Tick Time.Posix
 
 
 pageFromUrl : Url.Url -> Page
@@ -62,8 +66,8 @@ pageFromUrl url =
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update action model =
-    case action of
+update msg model =
+    case msg of
         Resized x y ->
             ( { model | window = { width = x, height = y } }, Cmd.none )
 
@@ -104,6 +108,15 @@ update action model =
         TransitMsg transitMsg ->
             Transit.tick TransitMsg transitMsg model
 
+        Tick time ->
+            let
+                millis =
+                    Time.posixToMillis time
+            in
+            ( { model | time = millis }
+            , Cmd.none
+            )
+
 
 header : Bool -> Element Msg
 header isMenuOpen =
@@ -117,6 +130,12 @@ navMenu model =
         , width (fill |> maximum 300)
         , height fill
         , Background.color Color.pink
+        , Border.shadow
+            { offset = ( 0, 0 )
+            , size = 1
+            , blur = 4
+            , color = Color.gray
+            }
         , Font.color Color.black
         , Font.center
         , if model.isMenuOpen then
@@ -178,10 +197,10 @@ mainContent model =
         ]
         [ case model.page of
             LandingPage ->
-                Page.Landing.view model.window
+                Page.Landing.view model
 
             HistoryPage ->
-                Page.History.view
+                Page.History.view model.window
         ]
 
 
@@ -213,6 +232,7 @@ init flags url key =
                   , transition = Transit.empty
                   , page = pageFromUrl url
                   , window = window
+                  , time = Time.posixToMillis time
                   }
                 , Cmd.none
                 )
@@ -224,6 +244,7 @@ subscriptions model =
     Sub.batch
         [ Transit.subscriptions TransitMsg model
         , Browser.onResize Resized
+        , Time.every 1000 Tick
         ]
 
 
