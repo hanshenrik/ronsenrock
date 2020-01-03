@@ -44,8 +44,7 @@ type Page
 type Msg
     = LinkClicked Browser.UrlRequest
     | UrlChanged Url.Url
-    | Click Page
-    | SetPage Page
+    | SetPage Url.Url
     | ToggleMenu (Maybe Bool)
     | Resized Int Int
     | TransitMsg (Transit.Msg Msg)
@@ -71,15 +70,8 @@ update msg model =
         Resized x y ->
             ( { model | window = { width = x, height = y } }, Cmd.none )
 
-        Click page ->
-            if model.page == page then
-                ( model, Cmd.none )
-
-            else
-                Transit.start TransitMsg (SetPage page) ( 200, 200 ) model
-
-        SetPage page ->
-            ( { model | page = page }, Cmd.none )
+        SetPage url ->
+            ( { model | page = pageFromUrl url, url = url }, Cmd.none )
 
         LinkClicked urlRequest ->
             case urlRequest of
@@ -90,17 +82,16 @@ update msg model =
                     ( model, Nav.load href )
 
         UrlChanged url ->
-            ( { model
-                | url = url
-                , isMenuOpen =
-                    if model.url /= url then
-                        False
+            if model.url == url then
+                ( model, Cmd.none )
 
-                    else
-                        model.isMenuOpen
-              }
-            , Cmd.none
-            )
+            else
+                Transit.start TransitMsg
+                    (SetPage url)
+                    ( 300, 300 )
+                    { model
+                        | isMenuOpen = False
+                    }
 
         ToggleMenu maybeState ->
             ( { model | isMenuOpen = Maybe.withDefault (not model.isMenuOpen) maybeState }, Cmd.none )
@@ -150,8 +141,8 @@ navMenu model =
             , UI.mSpacing
             ]
             [ closeMenuButton
-            , link [ UI.class "hoverable", Events.onClick (Click LandingPage) ] { label = text "Hjem", url = "/" }
-            , link [ UI.class "hoverable", Events.onClick (Click HistoryPage) ] { label = text "Historie", url = "/historie" }
+            , link [ UI.class "hoverable" ] { label = text "Hjem", url = "/" }
+            , link [ UI.class "hoverable" ] { label = text "Historie", url = "/historie" }
             ]
 
 
@@ -186,13 +177,8 @@ mainContent model =
         , height fill
         , UI.lPadding
         , Region.mainContent
-        , UI.class "dimmable"
-        , if model.isMenuOpen then
-            UI.dimmed
 
-          else
-            UI.class ""
-        , htmlAttribute <| Html.Attributes.style "margin-bottom" ("" ++ String.fromFloat (20 * Transit.getValue model.transition) ++ "px")
+        -- , htmlAttribute <| Html.Attributes.style "transform" ("scale(" ++ String.fromFloat (0.01 * Transit.getValue model.transition + 0.99) ++ ")")
         , htmlAttribute <| Html.Attributes.style "opacity" (String.fromFloat (Transit.getValue model.transition))
         ]
         [ case model.page of
