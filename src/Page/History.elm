@@ -34,12 +34,12 @@ artists =
     }
 
 
-bannerImageAttributes : List (Attribute msg)
-bannerImageAttributes =
+bannerImageAttributes : Window -> List (Attribute msg)
+bannerImageAttributes window =
     [ UI.mSpacing
-    , UI.xlPadding
+    , UI.responsivePadding window
     , Background.color <| Color.whiteTransparent 0.075
-    , Border.rounded 2
+    , UI.roundedCorners
     ]
 
 
@@ -62,7 +62,7 @@ view window =
                 |> maximum 800
             )
         ]
-        [ column bannerImageAttributes
+        [ column (bannerImageAttributes window)
             [ UI.h1 <| text "2019"
             , rowOrColumn [ UI.fillWidth ]
                 [ image [ UI.fillWidth ] { src = "/images/logo-2019-mm-transparent.png", description = "Logo 2019" }
@@ -73,19 +73,19 @@ view window =
                     )
                 ]
             ]
-        , column bannerImageAttributes
+        , column (bannerImageAttributes window)
             [ UI.h1 <| text "2018"
             , rowOrColumn [ UI.fillWidth ]
                 [ image [ UI.fillWidth ] { src = "/images/logo-2018-mm-transparent.png", description = "Logo 2018" }
                 ]
             ]
-        , column bannerImageAttributes
+        , column (bannerImageAttributes window)
             [ UI.h1 <| text "2017"
             , rowOrColumn [ UI.fillWidth ]
                 [ image [ UI.fillWidth ] { src = "/images/logo-2017-mm.png", description = "Logo 2017" }
                 ]
             ]
-        , column bannerImageAttributes
+        , column (bannerImageAttributes window)
             [ UI.h1 <| text "2016"
             , rowOrColumn [ UI.fillWidth ]
                 [ image [ UI.fillWidth ] { src = "/images/logo-2016-mm.png", description = "Logo 2016" }

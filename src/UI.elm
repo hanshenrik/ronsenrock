@@ -1,4 +1,26 @@
-module UI exposing (class, dimmed, divider, fillWidth, h1, h2, h3, horisontalDivider, lPadding, lSpacing, mPadding, mSpacing, rowOrColumn, sPadding, sSpacing, verticalDivider, xlPadding, xlSpacing)
+module UI exposing
+    ( class
+    , dimmed
+    , divider
+    , fillWidth
+    , h1
+    , h2
+    , h3
+    , horisontalDivider
+    , lPadding
+    , lSpacing
+    , mPadding
+    , mSpacing
+    , responsivePadding
+    , roundedCorners
+    , rowOrColumn
+    , sPadding
+    , sSpacing
+    , verticalDivider
+    , xlPadding
+    , xlSpacing
+    , xsSpacing
+    )
 
 import Color
 import Element exposing (..)
@@ -59,6 +81,16 @@ xlPadding =
     padding <| 9 * 8
 
 
+responsivePadding : Window -> Attribute msg
+responsivePadding { width } =
+    padding <| clamp 9 (9 * 8) (9 * width // 320)
+
+
+xsSpacing : Attribute msg
+xsSpacing =
+    spacing 5
+
+
 sSpacing : Attribute msg
 sSpacing =
     spacing 9
@@ -112,3 +144,8 @@ divider window =
 
         _ ->
             verticalDivider
+
+
+roundedCorners : Attribute msg
+roundedCorners =
+    Border.rounded 1

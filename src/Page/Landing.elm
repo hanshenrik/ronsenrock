@@ -34,13 +34,14 @@ view { window, time } =
             , UI.class "shake"
             ]
             none
-        , column [ centerX, Font.center ]
+        , column [ centerX, Font.center, UI.sSpacing ]
             [ el [ Font.center, UI.fillWidth ] <| text "Spille på RønsenROCK2020?"
-            , row [ Font.center ]
+            , paragraph [ Font.center ]
                 [ text "Send mail til "
                 , link [ UI.class "hoverable" ] { label = text "booking@rønsenrock.no", url = "mailto:booking@rønsenrock.no" }
                 ]
             ]
+        , el [ centerX ] <| Countdown.view window time
         , el [ centerX ] <|
             html <|
                 Html.iframe
@@ -51,5 +52,4 @@ view { window, time } =
                     , Html.Attributes.style "max-width" "100%"
                     ]
                     []
-        , el [ centerX ] <| Countdown.view time
         ]

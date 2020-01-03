@@ -1,4 +1,4 @@
-module Transition exposing (fadeInWhen, transition, transitionAll)
+module Transition exposing (fadeInWhen, slowTransition, transition, transitionAll)
 
 import Element exposing (..)
 import Html.Attributes
@@ -7,6 +7,11 @@ import Html.Attributes
 fast : Float
 fast =
     0.2
+
+
+slow : Float
+slow =
+    0.6
 
 
 easing : String
@@ -19,12 +24,22 @@ style property value =
     htmlAttribute <| Html.Attributes.style property value
 
 
-transition : List String -> Attribute msg
-transition properties =
+genTransition : Float -> List String -> Attribute msg
+genTransition speed properties =
     style "transition" <|
         String.join ", " <|
-            List.map (\property -> property ++ " " ++ String.fromFloat fast ++ "s " ++ easing)
+            List.map (\property -> property ++ " " ++ String.fromFloat speed ++ "s " ++ easing)
                 properties
+
+
+slowTransition : List String -> Attribute msg
+slowTransition properties =
+    genTransition slow properties
+
+
+transition : List String -> Attribute msg
+transition properties =
+    genTransition fast properties
 
 
 transitionAll : Attribute msg
