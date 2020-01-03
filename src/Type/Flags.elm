@@ -2,7 +2,7 @@ module Type.Flags exposing (Flags, decode)
 
 import Json.Decode as Decode exposing (Decoder)
 import Json.Decode.Pipeline as Decode
-import Time exposing (Posix, Zone)
+import Time exposing (Posix)
 import Type.Window as Window exposing (Window)
 
 
@@ -15,11 +15,6 @@ type alias Flags =
 posix : Decoder Posix
 posix =
     Decode.map Time.millisToPosix Decode.int
-
-
-zone : Decoder Zone
-zone =
-    Decode.map (\offset -> Time.customZone offset []) Decode.int
 
 
 type alias MaybeFlags =
@@ -43,7 +38,7 @@ decode json =
             , time = Time.millisToPosix 1541679590000
             }
 
-        unpack name defaultValue maybeValue =
+        unpack defaultValue maybeValue =
             case maybeValue of
                 Nothing ->
                     defaultValue
@@ -53,9 +48,9 @@ decode json =
     in
     case Decode.decodeValue decoder json of
         Result.Ok maybeFlags ->
-            { window = unpack "window" default.window maybeFlags.window
-            , time = unpack "time" default.time maybeFlags.time
+            { window = unpack default.window maybeFlags.window
+            , time = unpack default.time maybeFlags.time
             }
 
-        Result.Err e ->
+        Result.Err _ ->
             default

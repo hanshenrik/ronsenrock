@@ -83,7 +83,7 @@ xlPadding =
 
 responsivePadding : Window -> Attribute msg
 responsivePadding { width } =
-    padding <| clamp 9 (9 * 8) (9 * width // 320)
+    padding <| clamp (9 * 2) (9 * 8) (9 * width // 320)
 
 
 xsSpacing : Attribute msg

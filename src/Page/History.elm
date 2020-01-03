@@ -3,7 +3,6 @@ module Page.History exposing (view)
 import Color
 import Element exposing (..)
 import Element.Background as Background
-import Element.Border as Border
 import Type.Window exposing (Window)
 import UI
 

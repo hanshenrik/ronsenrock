@@ -3,10 +3,7 @@ module Footer exposing (default)
 import Color
 import Element exposing (..)
 import Element.Background as Background
-import Element.Border as Border
-import Element.Events as Events
 import Element.Font as Font
-import Element.Input as Input
 import Element.Region as Region
 import Type.Window exposing (Window)
 import UI
