@@ -64,7 +64,7 @@ nav.open {
 }
 
 .dimmable {
-  transition: opacity 0.2s ease-out;
+  transition: opacity 0.2s ease-in-out;
 }
 
 .shake:hover,

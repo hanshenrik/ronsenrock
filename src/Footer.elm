@@ -18,6 +18,12 @@ default window isMenuOpen =
         , Background.color <| Color.whiteTransparent 0.075
         , UI.lPadding
         , UI.fillWidth
+        , UI.class "dimmable"
+        , if isMenuOpen then
+            UI.dimmed
+
+          else
+            UI.class ""
         ]
     <|
         UI.rowOrColumn window

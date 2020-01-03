@@ -88,7 +88,7 @@ update msg model =
             else
                 Transit.start TransitMsg
                     (SetPage url)
-                    ( 300, 300 )
+                    ( 0, 300 )
                     { model
                         | isMenuOpen = False
                     }
@@ -172,22 +172,30 @@ closeMenuButton =
 
 mainContent : Model -> Element Msg
 mainContent model =
-    column
+    el
         [ UI.fillWidth
         , height fill
         , UI.lPadding
         , Region.mainContent
-
-        -- , htmlAttribute <| Html.Attributes.style "transform" ("scale(" ++ String.fromFloat (0.01 * Transit.getValue model.transition + 0.99) ++ ")")
-        , htmlAttribute <| Html.Attributes.style "opacity" (String.fromFloat (Transit.getValue model.transition))
+        , htmlAttribute <| Html.Attributes.style "bottom" (String.fromFloat (Transit.getValue model.transition))
         ]
-        [ case model.page of
-            LandingPage ->
-                Page.Landing.view model
+    <|
+        el
+            [ UI.class "dimmable"
+            , centerX
+            , if model.isMenuOpen then
+                UI.dimmed
 
-            HistoryPage ->
-                Page.History.view model.window
-        ]
+              else
+                UI.class ""
+            ]
+        <|
+            case model.page of
+                LandingPage ->
+                    Page.Landing.view model
+
+                HistoryPage ->
+                    Page.History.view model.window
 
 
 view : Model -> Browser.Document Msg
