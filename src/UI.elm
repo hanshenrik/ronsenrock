@@ -1,4 +1,4 @@
-module UI exposing (class, dimmed, divider, fillWidth, h1, h2, h3, horisontalDivider, lPadding, lSpacing, mPadding, mSpacing, rowOrColumn, sPadding, sSpacing, verticalDivider, xlSpacing)
+module UI exposing (class, dimmed, divider, fillWidth, h1, h2, h3, horisontalDivider, lPadding, lSpacing, mPadding, mSpacing, rowOrColumn, sPadding, sSpacing, verticalDivider, xlPadding, xlSpacing)
 
 import Color
 import Element exposing (..)
@@ -46,12 +46,17 @@ sPadding =
 
 mPadding : Attribute msg
 mPadding =
-    padding 18
+    padding <| 9 * 2
 
 
 lPadding : Attribute msg
 lPadding =
-    padding 36
+    padding <| 9 * 4
+
+
+xlPadding : Attribute msg
+xlPadding =
+    padding <| 9 * 8
 
 
 sSpacing : Attribute msg
@@ -71,7 +76,7 @@ lSpacing =
 
 xlSpacing : Attribute msg
 xlSpacing =
-    spacing <| 9 * 12
+    spacing <| 9 * 8
 
 
 fillWidth : Attribute msg

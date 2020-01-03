@@ -18,9 +18,8 @@ default window isMenuOpen =
         [ Region.footer
         , alignBottom
         , Font.size 16
-        , Background.color <| Color.whiteTransparent 0.1
+        , Background.color <| Color.whiteTransparent 0.075
         , UI.lPadding
-        , UI.xlSpacing
         , UI.fillWidth
         , UI.class "dimmable"
         , if isMenuOpen then

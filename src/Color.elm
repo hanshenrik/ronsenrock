@@ -1,4 +1,4 @@
-module Color exposing (black, darkpink, gray, pink, white, whiteTransparent)
+module Color exposing (black, darkpink, gray, lightblack, pink, white, whiteTransparent)
 
 import Element exposing (..)
 
@@ -18,9 +18,14 @@ white =
     rgb255 250 250 250
 
 
+lightblack : Color
+lightblack =
+    rgb255 21 21 21
+
+
 black : Color
 black =
-    rgb255 21 21 21
+    rgb255 2 2 2
 
 
 gray : Color
