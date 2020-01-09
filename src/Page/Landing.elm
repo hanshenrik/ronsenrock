@@ -13,16 +13,16 @@ import UI
 view : { a | window : Window, time : Int } -> Element msg
 view { window, time } =
     let
-        logoSize =
+        ( logoSize, dividerImageSize ) =
             case (classifyDevice window).class of
                 Phone ->
-                    300
+                    ( 300, 300 )
 
                 BigDesktop ->
-                    600
+                    ( 600, 600 )
 
                 _ ->
-                    500
+                    ( 500, 500 )
     in
     column [ UI.fillWidth, centerY, UI.lSpacing ]
         [ el
@@ -52,4 +52,5 @@ view { window, time } =
                     , Html.Attributes.style "max-width" "100%"
                     ]
                     []
+        , el [ UI.fillWidth, height <| px dividerImageSize, Background.image "/images/chill-2018.jpg" ] none
         ]

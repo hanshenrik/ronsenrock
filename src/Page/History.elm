@@ -55,6 +55,7 @@ view window =
     in
     column
         [ UI.lSpacing
+        , UI.lPadding
         , centerX
         , width
             (fill

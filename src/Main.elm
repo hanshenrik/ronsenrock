@@ -175,13 +175,13 @@ mainContent model =
     el
         [ UI.fillWidth
         , height fill
-        , UI.lPadding
+        , paddingEach { top = 9 * 4, right = 0, bottom = 0, left = 0 }
         , Region.mainContent
-        , htmlAttribute <| Html.Attributes.style "bottom" (String.fromFloat (Transit.getValue model.transition))
         ]
     <|
         el
             [ UI.class "dimmable"
+            , UI.fillWidth
             , centerX
             , if model.isMenuOpen then
                 UI.dimmed
