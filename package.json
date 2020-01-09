@@ -13,5 +13,8 @@
   "scripts": {
     "dev": "yarn elm-app start",
     "build": "yarn elm-app build"
+  },
+  "engines": {
+    "node": "12.x"
   }
 }
