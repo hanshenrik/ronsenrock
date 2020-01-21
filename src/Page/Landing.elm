@@ -26,7 +26,7 @@ view { window, time } =
     in
     column [ UI.fillWidth, centerY, UI.xlSpacing ]
         [ el
-            [ Background.uncropped "/images/logo-2018-mm-transparent.png"
+            [ Background.uncropped "/images/logo-2020-mm-transparent.png"
             , centerX
             , centerY
             , height <| px logoSize
