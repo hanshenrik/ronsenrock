@@ -24,7 +24,7 @@ view { window, time } =
                 _ ->
                     ( 500, 500 )
     in
-    column [ UI.fillWidth, centerY, UI.lSpacing ]
+    column [ UI.fillWidth, centerY, UI.xlSpacing ]
         [ el
             [ Background.uncropped "/images/logo-2018-mm-transparent.png"
             , centerX
@@ -34,6 +34,7 @@ view { window, time } =
             , UI.class "shake"
             ]
             none
+        , el [ centerX ] <| UI.h2 <| text "2. – 5. juli 2020"
         , column [ centerX, Font.center, UI.sSpacing ]
             [ el [ Font.center, UI.fillWidth ] <| text "Spille på RønsenROCK2020?"
             , paragraph [ Font.center ]

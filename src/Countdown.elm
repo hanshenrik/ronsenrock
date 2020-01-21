@@ -34,7 +34,7 @@ view window time =
         barColumn unitsLeft label =
             column
                 [ alignBottom
-                , Transition.transition [ "height", "transform" ]
+                , Transition.transition [ "height" ]
                 , UI.xsSpacing
                 , UI.sPadding
                 , UI.roundedCorners
@@ -44,7 +44,7 @@ view window time =
 
                     _ ->
                         width (px 120)
-                , height <| px (4 * min 60 unitsLeft + 64)
+                , height <| px (2 * min 60 unitsLeft + 64)
                 , Background.color Color.pink
                 ]
                 [ el [ alignBottom, centerX ] <| text <| String.fromInt unitsLeft
@@ -63,7 +63,7 @@ view window time =
         none
 
     else
-        row [ UI.fillWidth, spaceEvenly, UI.sSpacing, Font.color Color.black, height <| px (4 * 60 + 64) ]
+        row [ UI.fillWidth, spaceEvenly, UI.sSpacing, Font.color Color.black, height <| px (2 * 60 + 64) ]
             [ barColumn daysLeft "dager"
             , barColumn hoursLeft "timer"
             , barColumn minutesLeft minutesLabel
