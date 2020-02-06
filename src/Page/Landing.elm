@@ -43,6 +43,7 @@ view { window, time } =
                 none
             ]
         , el [ centerX ] <| Countdown.view window time
+        , el [ UI.fillWidth, height <| px dividerImageSize, Background.image "/images/tak-2019-tk.jpg" ] none
         , el
             (centerX
                 :: (case deviceClass of

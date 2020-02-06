@@ -9,6 +9,7 @@ module UI exposing
     , h1
     , h2
     , h3
+    , headingFont
     , horisontalDivider
     , lPadding
     , lSpacing
@@ -49,6 +50,17 @@ bodyFont =
         ]
 
 
+headingFont : Attribute msg
+headingFont =
+    Font.family
+        [ Font.external
+            { name = "Cabin Sketch"
+            , url = "https://fonts.googleapis.com/css?family=Cabin+Sketch&display=swap"
+            }
+        , Font.sansSerif
+        ]
+
+
 
 -- Barriecito, Barrio, Cabin Sketch
 
@@ -57,13 +69,7 @@ heading : Int -> List (Attribute msg) -> Element msg -> Element msg
 heading size attributes =
     el
         (Region.heading size
-            :: Font.family
-                [ Font.external
-                    { name = "Cabin Sketch"
-                    , url = "https://fonts.googleapis.com/css?family=Cabin+Sketch&display=swap"
-                    }
-                , Font.sansSerif
-                ]
+            :: headingFont
             :: attributes
         )
 
