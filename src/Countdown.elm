@@ -31,30 +31,33 @@ view window time =
         secondsLeft =
             floor (toFloat (remainderBy (1000 * 60) timeDiff) / toFloat 1000)
 
-        barColumn unitsLeft label =
-            column
+        barColumn unitsLeft color =
+            el
                 [ alignBottom
                 , Transition.transition [ "height" ]
+                , Font.color Color.black
+                , Font.bold
                 , UI.xsSpacing
                 , UI.sPadding
-                , UI.roundedCorners
+                , UI.sRoundedTopCorners
                 , case (classifyDevice window).class of
                     Phone ->
-                        width shrink
+                        width (px 60)
 
                     _ ->
                         width (px 120)
                 , height <| px (2 * min 60 unitsLeft + 64)
-                , Background.color Color.pink
+                , Background.color color
                 ]
-                [ el [ alignBottom, centerX ] <| text <| String.fromInt unitsLeft
-                , el [ alignBottom, centerX ] <| text label
-                ]
+            <|
+                UI.h2 [ alignBottom, centerX ] <|
+                    text <|
+                        String.fromInt unitsLeft
 
         ( minutesLabel, secondsLabel ) =
             case (classifyDevice window).class of
                 Phone ->
-                    ( "min", "  s  " )
+                    ( "min", "sek" )
 
                 _ ->
                     ( "minutter", "sekunder" )
@@ -63,9 +66,9 @@ view window time =
         none
 
     else
-        row [ UI.fillWidth, spaceEvenly, UI.sSpacing, Font.color Color.black, height <| px (2 * 60 + 64) ]
-            [ barColumn daysLeft "dager"
-            , barColumn hoursLeft "timer"
-            , barColumn minutesLeft minutesLabel
-            , barColumn secondsLeft secondsLabel
+        row [ UI.fillWidth, spaceEvenly, UI.sSpacing, height <| px (2 * 60 + 64) ]
+            [ column [ alignBottom, UI.sSpacing ] [ barColumn daysLeft Color.yellow, el [ centerX ] <| text "dager" ]
+            , column [ alignBottom, UI.sSpacing ] [ barColumn hoursLeft Color.orange, el [ centerX ] <| text "timer" ]
+            , column [ alignBottom, UI.sSpacing ] [ barColumn minutesLeft Color.pink, el [ centerX ] <| text minutesLabel ]
+            , column [ alignBottom, UI.sSpacing ] [ barColumn secondsLeft Color.darkPink, el [ centerX ] <| text secondsLabel ]
             ]

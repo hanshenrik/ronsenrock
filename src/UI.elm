@@ -1,5 +1,8 @@
 module UI exposing
-    ( class
+    ( bodyFont
+    , boxed
+    , buttonLink
+    , class
     , dimmed
     , divider
     , fillWidth
@@ -12,18 +15,22 @@ module UI exposing
     , mPadding
     , mSpacing
     , responsivePadding
-    , roundedCorners
     , rowOrColumn
     , sPadding
+    , sRoundedCorners
+    , sRoundedTopCorners
     , sSpacing
     , verticalDivider
     , xlPadding
+    , xlRoundedCorners
     , xlSpacing
     , xsSpacing
+    , xxlPadding
     )
 
 import Color
 import Element exposing (..)
+import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Element.Region as Region
@@ -31,24 +38,49 @@ import Html.Attributes
 import Type.Window exposing (Window)
 
 
+bodyFont : Attribute msg
+bodyFont =
+    Font.family
+        [ Font.external
+            { name = "Barlow"
+            , url = "https://fonts.googleapis.com/css?family=Barlow:300,400,600,700&display=swap"
+            }
+        , Font.sansSerif
+        ]
+
+
+
+-- Barriecito, Barrio, Cabin Sketch
+
+
 heading : Int -> List (Attribute msg) -> Element msg -> Element msg
 heading size attributes =
-    el (Region.heading size :: attributes)
+    el
+        (Region.heading size
+            :: Font.family
+                [ Font.external
+                    { name = "Cabin Sketch"
+                    , url = "https://fonts.googleapis.com/css?family=Cabin+Sketch&display=swap"
+                    }
+                , Font.sansSerif
+                ]
+            :: attributes
+        )
 
 
-h1 : Element msg -> Element msg
-h1 =
-    heading 1 [ Font.size 64 ]
+h1 : List (Attribute msg) -> Element msg -> Element msg
+h1 attributes =
+    heading 1 (Font.size 64 :: attributes)
 
 
-h2 : Element msg -> Element msg
-h2 =
-    heading 2 [ Font.size 32 ]
+h2 : List (Attribute msg) -> Element msg -> Element msg
+h2 attributes =
+    heading 2 (Font.size 32 :: attributes)
 
 
-h3 : Element msg -> Element msg
-h3 =
-    heading 3 [ Font.size 24 ]
+h3 : List (Attribute msg) -> Element msg -> Element msg
+h3 attributes =
+    heading 3 (Font.size 24 :: attributes)
 
 
 class : String -> Attribute msg
@@ -78,6 +110,11 @@ lPadding =
 
 xlPadding : Attribute msg
 xlPadding =
+    padding <| 9 * 6
+
+
+xxlPadding : Attribute msg
+xxlPadding =
     padding <| 9 * 8
 
 
@@ -146,6 +183,29 @@ divider window =
             verticalDivider
 
 
-roundedCorners : Attribute msg
-roundedCorners =
-    Border.rounded 1
+sRoundedCorners : Attribute msg
+sRoundedCorners =
+    Border.rounded 4
+
+
+sRoundedTopCorners : Attribute msg
+sRoundedTopCorners =
+    Border.roundEach { topLeft = 4, topRight = 4, bottomLeft = 0, bottomRight = 0 }
+
+
+xlRoundedCorners : Attribute msg
+xlRoundedCorners =
+    Border.rounded 40
+
+
+boxed : List (Attribute msg)
+boxed =
+    [ htmlAttribute <| Html.Attributes.style "background" "linear-gradient(145deg, #1c1c1c, #171717)"
+    , htmlAttribute <| Html.Attributes.style "box-shadow" "15px 15px 0px #161616, -15px -15px 0px #1e1e1e"
+    , sRoundedCorners
+    ]
+
+
+buttonLink : List (Attribute msg) -> { label : Element msg, url : String } -> Element msg
+buttonLink attributes parameters =
+    link (Background.color Color.yellow :: Font.color Color.black :: paddingXY (9 * 4) (9 * 2) :: xlRoundedCorners :: attributes) parameters

@@ -120,7 +120,7 @@ navMenu model =
         [ Region.navigation
         , width (fill |> maximum 300)
         , height fill
-        , Background.color Color.pink
+        , Background.color Color.yellow
         , Border.shadow
             { offset = ( 0, 0 )
             , size = 1
@@ -148,7 +148,7 @@ navMenu model =
 
 toggleMenuButton : Bool -> Element Msg
 toggleMenuButton isMenuOpen =
-    Input.button [ UI.sPadding, Font.color Color.white, UI.class "hoverable-alternative" ]
+    Input.button [ UI.sPadding, Font.color Color.white, Font.size 30, UI.class "hoverable-alternative" ]
         { label =
             text <|
                 if isMenuOpen then
@@ -175,7 +175,7 @@ mainContent model =
     el
         [ UI.fillWidth
         , height fill
-        , paddingEach { top = 9 * 4, right = 0, bottom = 0, left = 0 }
+        , paddingEach { top = 9 * 6, right = 0, bottom = 0, left = 0 }
         , Region.mainContent
         ]
     <|
@@ -202,7 +202,7 @@ view : Model -> Browser.Document Msg
 view model =
     { title = "RønsenRock 2020"
     , body =
-        [ layout [ Background.color Color.black, Font.color Color.white ] <|
+        [ layout [ Background.color Color.mainBackground, Font.color Color.white, UI.bodyFont ] <|
             column
                 [ UI.fillWidth
                 , height fill

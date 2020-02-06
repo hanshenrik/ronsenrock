@@ -3,6 +3,7 @@ module Page.History exposing (view)
 import Color
 import Element exposing (..)
 import Element.Background as Background
+import Html.Attributes
 import Type.Window exposing (Window)
 import UI
 
@@ -35,11 +36,9 @@ artists =
 
 bannerImageAttributes : Window -> List (Attribute msg)
 bannerImageAttributes window =
-    [ UI.mSpacing
-    , UI.responsivePadding window
-    , Background.color <| Color.whiteTransparent 0.075
-    , UI.roundedCorners
-    ]
+    UI.mSpacing
+        :: UI.responsivePadding window
+        :: UI.boxed
 
 
 view : Window -> Element msg
@@ -63,7 +62,7 @@ view window =
             )
         ]
         [ column (bannerImageAttributes window)
-            [ UI.h1 <| text "2019"
+            [ UI.h1 [] <| text "2019"
             , rowOrColumn [ UI.fillWidth ]
                 [ image [ UI.fillWidth ] { src = "/images/logo-2019-mm-transparent.png", description = "Logo 2019" }
                 , column [ UI.sSpacing, alignTop ]
@@ -74,19 +73,19 @@ view window =
                 ]
             ]
         , column (bannerImageAttributes window)
-            [ UI.h1 <| text "2018"
+            [ UI.h1 [] <| text "2018"
             , rowOrColumn [ UI.fillWidth ]
                 [ image [ UI.fillWidth ] { src = "/images/logo-2018-mm-transparent.png", description = "Logo 2018" }
                 ]
             ]
         , column (bannerImageAttributes window)
-            [ UI.h1 <| text "2017"
+            [ UI.h1 [] <| text "2017"
             , rowOrColumn [ UI.fillWidth ]
                 [ image [ UI.fillWidth ] { src = "/images/logo-2017-mm.png", description = "Logo 2017" }
                 ]
             ]
         , column (bannerImageAttributes window)
-            [ UI.h1 <| text "2016"
+            [ UI.h1 [] <| text "2016"
             , rowOrColumn [ UI.fillWidth ]
                 [ image [ UI.fillWidth ] { src = "/images/logo-2016-mm.png", description = "Logo 2016" }
                 ]

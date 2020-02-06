@@ -1,28 +1,32 @@
 :root {
-  --pink: rgb(255, 182, 193);
-  --pinkLight: rgb(233, 141, 155);
-  --pinkLighter: rgba(233, 141, 155, 0.5);
+  --lightYellow: rgb(248, 198, 82);
+  --yellow: rgb(255, 184, 20);
+  --orange: rgb(255, 96, 43);
+  --black: rgb(23, 23, 23);
 }
 
 head,
 body {
-  background-color: rgb(21, 21, 21);
+  background-color: rgb(23, 23, 23);
   font-weight: lighter;
 }
 
 a {
-  border-bottom: 4px solid var(--pinkLight) !important;
-  padding: 0.25rem !important;
+  border-width: 2px 0 4px 0 !important;
+  border-color: transparent transparent var(--lightYellow) transparent !important;
+  border-style: solid;
 }
 
 .hoverable {
-  transition: background-color 0.2s ease-out;
+  transition: background-color 0.2s ease-out, color 0.2s ease-out;
+  padding: 1rem 0;
 }
 .hoverable:not(a) {
   padding: 0.5rem !important;
 }
 .hoverable:hover {
-  background-color: var(--pinkLighter);
+  background-color: var(--lightYellow);
+  color: var(--black);
 }
 
 .hoverable-alternative {
