@@ -4,6 +4,7 @@ import Browser
 import Browser.Events as Browser
 import Browser.Navigation as Nav
 import Color
+import Ease
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
@@ -16,6 +17,8 @@ import Html.Attributes
 import Json.Decode as Decode
 import Page.History
 import Page.Landing
+import SmoothScroll exposing (scrollTo)
+import Task exposing (Task)
 import Time
 import Transit exposing (Step(..))
 import Type.Flags as Flags
@@ -23,6 +26,16 @@ import Type.Window exposing (Window)
 import UI
 import Url
 import Url.Parser as Url
+
+
+scrollTo : Float -> Task x ()
+scrollTo =
+    SmoothScroll.scrollTo <| SmoothScroll.createConfig Ease.inOutQuint 400
+
+
+scrollToTop : Cmd Msg
+scrollToTop =
+    Task.attempt (always NoOp) (scrollTo 0)
 
 
 type alias Model =
@@ -49,6 +62,7 @@ type Msg
     | Resized Int Int
     | TransitMsg (Transit.Msg Msg)
     | Tick Time.Posix
+    | NoOp
 
 
 pageFromUrl : Url.Url -> Page
@@ -71,7 +85,7 @@ update msg model =
             ( { model | window = { width = x, height = y } }, Cmd.none )
 
         SetPage url ->
-            ( { model | page = pageFromUrl url, url = url }, Cmd.none )
+            ( { model | page = pageFromUrl url, url = url }, scrollToTop )
 
         LinkClicked urlRequest ->
             case urlRequest of
@@ -83,7 +97,7 @@ update msg model =
 
         UrlChanged url ->
             if model.url == url then
-                ( model, Cmd.none )
+                ( model, scrollToTop )
 
             else
                 Transit.start TransitMsg
@@ -107,6 +121,9 @@ update msg model =
             ( { model | time = millis }
             , Cmd.none
             )
+
+        NoOp ->
+            ( model, Cmd.none )
 
 
 header : Bool -> Element Msg
