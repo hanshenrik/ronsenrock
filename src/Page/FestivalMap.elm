@@ -11,16 +11,28 @@ import Type.Window exposing (Window)
 import UI
 
 
-view : Window -> Element msg
-view window =
-    el
-        [ UI.lSpacing
-        , UI.lPadding
-        , centerX
-        , width
-            (fill
-                |> maximum 1000
-            )
+view : DeviceClass -> Element msg
+view deviceClass =
+    let
+        pageHeading =
+            case deviceClass of
+                Phone ->
+                    UI.h2
+
+                _ ->
+                    UI.h1
+    in
+    column [ UI.xlSpacing, centerX ]
+        [ pageHeading [ Font.color Color.yellow, centerX ] <| text "Festivalkart"
+        , el
+            [ UI.lSpacing
+            , UI.lPadding
+            , centerX
+            , width
+                (fill
+                    |> maximum 1000
+                )
+            ]
+          <|
+            UI.imageWithAttribution [] { src = "/images/kart-lm.jpg", description = "Festivalkart", attribution = "Lisa Løtvedt Martinsen", isBoxed = True }
         ]
-    <|
-        UI.imageWithAttribution [] { src = "/images/kart-lm.jpg", description = "Festivalkart", attribution = "Lisa Løtvedt Martinsen", isBoxed = True }

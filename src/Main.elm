@@ -254,7 +254,7 @@ mainContent model =
                     Page.About.view deviceClass
 
                 FestivalMapPage ->
-                    Page.FestivalMap.view model.window
+                    Page.FestivalMap.view deviceClass
 
                 ProgramPage ->
                     Page.Program.view deviceClass

@@ -46,8 +46,11 @@ bannerImageAttributes window =
 view : Window -> Element msg
 view window =
     let
-        ( heading, move2018Heading, ( height2018Logo, width2018Logo ) ) =
-            case (classifyDevice window).class of
+        deviceClass =
+            (classifyDevice window).class
+
+        ( heading2018, move2018Heading, ( height2018Logo, width2018Logo ) ) =
+            case deviceClass of
                 BigDesktop ->
                     ( UI.h1, -250, ( px 600, px <| round <| 600 * 0.7587719298 ) )
 
@@ -56,6 +59,14 @@ view window =
 
                 _ ->
                     ( UI.h2, -80, ( shrink, fill ) )
+
+        pageHeading =
+            case deviceClass of
+                Phone ->
+                    UI.h2
+
+                _ ->
+                    UI.h1
     in
     column
         [ UI.lSpacing
@@ -66,7 +77,8 @@ view window =
                 |> maximum 1000
             )
         ]
-        [ el [ UI.sPadding ] <|
+        [ UI.p <| pageHeading [ Font.color Color.yellow, centerX ] <| text "Tidligere artister"
+        , el [ UI.sPadding ] <|
             column (bannerImageAttributes window)
                 [ column [ UI.fillWidth, UI.lSpacing ]
                     [ image [ UI.fillWidth, UI.class "shake" ] { src = "/images/logo-2019-mm-transparent.png", description = "Logo 2019" }
@@ -80,7 +92,7 @@ view window =
                 ]
         , el [ UI.sPadding ] <|
             column (bannerImageAttributes window)
-                [ heading [ centerX, Font.color Color.yellow, htmlAttribute <| Html.Attributes.style "transform" <| "rotate(-25deg) translateX(" ++ String.fromInt move2018Heading ++ "px)" ] <| text "2018"
+                [ heading2018 [ centerX, Font.color Color.yellow, htmlAttribute <| Html.Attributes.style "transform" <| "rotate(-25deg) translateX(" ++ String.fromInt move2018Heading ++ "px)" ] <| text "2018"
                 , column [ UI.fillWidth, UI.lSpacing ]
                     [ image
                         [ centerX

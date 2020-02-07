@@ -15,13 +15,13 @@ import UI
 view : DeviceClass -> Element msg
 view deviceClass =
     let
-        dayHeading =
+        ( pageHeading, dayHeading ) =
             case deviceClass of
                 Phone ->
-                    UI.h3
+                    ( UI.h2, UI.h3 )
 
                 _ ->
-                    UI.h2
+                    ( UI.h1, UI.h2 )
     in
     column
         [ UI.lSpacing
@@ -29,9 +29,9 @@ view deviceClass =
         , centerX
         , centerY
         ]
-        [ UI.h1 [ Font.color Color.yellow ] <| text "Program"
+        [ pageHeading [] <| text "Program"
         , column [ UI.mSpacing ]
-            [ dayHeading [] <| text "Torsdag 11. juli"
+            [ dayHeading [ Font.color Color.yellow ] <| text "Torsdag 11. juli"
             , row [ UI.lSpacing ]
                 [ el [ alignTop, UI.monoFont ] <| text "🕛 12:00"
                 , UI.p <| text "Festivalområdet åpner!"
@@ -46,7 +46,7 @@ view deviceClass =
             --     ]
             ]
         , column [ UI.mSpacing ]
-            [ dayHeading [] <| text "Fredag 12. juli"
+            [ dayHeading [ Font.color Color.yellow ] <| text "Fredag 12. juli"
             , row [ UI.lSpacing ]
                 [ el [ alignTop, UI.monoFont ] <| text "🕔 17:00"
                 , UI.p <| text "Tautrekking"
@@ -96,7 +96,7 @@ view deviceClass =
             --     ]
             ]
         , column [ UI.mSpacing ]
-            [ dayHeading [] <| text "Lørdag 13. juli"
+            [ dayHeading [ Font.color Color.yellow ] <| text "Lørdag 13. juli"
             , row [ UI.lSpacing ]
                 [ el [ alignTop, UI.monoFont ] <| text "🕙 10:00"
                 , UI.p <| text "Ryddeyoga"
