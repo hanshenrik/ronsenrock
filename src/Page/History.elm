@@ -59,7 +59,7 @@ view window =
                     ( UI.h1, -175, ( px 600, px <| round <| 600 * 0.7587719298 ) )
 
                 _ ->
-                    ( UI.h3, -60, ( shrink, fill ) )
+                    ( UI.h3, -75, ( shrink, fill ) )
 
         ( pageHeading, imagePadding ) =
             case deviceClass of
