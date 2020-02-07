@@ -284,9 +284,13 @@ imageWithAttribution attributes { attribution, src, description } =
 
 ul : List (Element msg) -> Element msg
 ul elements =
-    column [ sSpacing, paddingXY (4 * spacingUnit) 0 ] (List.map (\element -> row [ sSpacing ] [ el [] <| text "•", element ]) elements)
+    column
+        [ mSpacing
+        , paddingXY (4 * spacingUnit) 0
+        ]
+        (List.map (\element -> row [ sSpacing ] [ el [ alignTop ] <| text "•", element ]) elements)
 
 
-p : String -> Element msg
-p s =
-    paragraph [] [ text s ]
+p : Element msg -> Element msg
+p element =
+    paragraph [ htmlAttribute <| Html.Attributes.style "overflow-wrap" "break-word" ] [ element ]

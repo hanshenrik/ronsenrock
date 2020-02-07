@@ -117,7 +117,11 @@ update msg model =
 
         UrlChanged url ->
             if model.url == url then
-                ( model, scrollToTop )
+                ( { model
+                    | isMenuOpen = False
+                  }
+                , scrollToTop
+                )
 
             else
                 Transit.start TransitMsg
@@ -213,6 +217,10 @@ closeMenuButton =
 
 mainContent : Model -> Element Msg
 mainContent model =
+    let
+        deviceClass =
+            (classifyDevice model.window).class
+    in
     el
         [ UI.fillWidth
         , height fill
@@ -240,16 +248,16 @@ mainContent model =
                     Page.History.view model.window
 
                 PracticalInfoPage ->
-                    Page.PracticalInfo.view model.window
+                    Page.PracticalInfo.view deviceClass
 
                 AboutPage ->
-                    Page.About.view model.window
+                    Page.About.view deviceClass
 
                 FestivalMapPage ->
                     Page.FestivalMap.view model.window
 
                 ProgramPage ->
-                    Page.Program.view model.window
+                    Page.Program.view deviceClass
 
 
 view : Model -> Browser.Document Msg

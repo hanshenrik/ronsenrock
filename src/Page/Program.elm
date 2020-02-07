@@ -12,12 +12,9 @@ import Type.Window exposing (Window)
 import UI
 
 
-view : Window -> Element msg
-view window =
+view : DeviceClass -> Element msg
+view deviceClass =
     let
-        deviceClass =
-            (classifyDevice window).class
-
         dayHeading =
             case deviceClass of
                 Phone ->
@@ -37,7 +34,7 @@ view window =
             [ dayHeading [] <| text "Torsdag 11. juli"
             , row [ UI.lSpacing ]
                 [ el [ alignTop, UI.monoFont ] <| text "12:00"
-                , UI.p "Festivalområdet åpner!"
+                , UI.p <| text "Festivalområdet åpner!"
 
                 -- , el [ alignRight, UI.class "show-more-button", pointer, mouseOver [ scale 1.2 ] ] <| text "👇"
                 ]
@@ -52,7 +49,7 @@ view window =
             [ dayHeading [] <| text "Fredag 12. juli"
             , row [ UI.lSpacing ]
                 [ el [ alignTop, UI.monoFont ] <| text "17:00"
-                , UI.p "Tautrekking"
+                , UI.p <| text "Tautrekking"
 
                 -- , el [ alignRight, UI.class "show-more-button", pointer, mouseOver [ scale 1.2 ] ] <| text "👇"
                 ]
@@ -62,7 +59,7 @@ view window =
             -- ]
             , row [ UI.lSpacing ]
                 [ el [ alignTop, UI.monoFont ] <| text "19:00"
-                , UI.p "Konsertrekke #1"
+                , UI.p <| text "Konsertrekke #1"
 
                 -- , el [ alignRight, UI.class "show-more-button", pointer, mouseOver [ scale 1.2 ] ] <| text "👇"
                 ]
@@ -102,7 +99,7 @@ view window =
             [ dayHeading [] <| text "Lørdag 13. juli"
             , row [ UI.lSpacing ]
                 [ el [ alignTop, UI.monoFont ] <| text "10:00"
-                , UI.p "Ryddeyoga"
+                , UI.p <| text "Ryddeyoga"
 
                 -- , el [ alignRight, UI.class "show-more-button", pointer, mouseOver [ scale 1.2 ] ] <| text "👇"
                 ]
@@ -110,7 +107,7 @@ view window =
             -- , Html.div [ UI.class "event-info" ] [ el [] <| text "Når man bor sammen på slikt et stort område er det viktig å hjelpe hverandre med å holde det fint og hyggelig rundt seg. Vi inviterer derfor til yoga-time for å løsne litt på ledda og friske opp sjela, selvfølgelig med en kopp kaffe attot! Så tar vi oss en rydderunde og gjør oss klare til verdens koseligste dagssett" ]
             , row [ UI.lSpacing ]
                 [ el [ alignTop, UI.monoFont ] <| text "12:00"
-                , UI.p "Konsertrekke #2"
+                , UI.p <| text "Konsertrekke #2"
 
                 -- , el [ alignRight, UI.class "show-more-button", pointer, mouseOver [ scale 1.2 ] ] <| text "👇"
                 ]
@@ -146,7 +143,7 @@ view window =
             --     ]
             , row [ UI.lSpacing ]
                 [ el [ alignTop, UI.monoFont ] <| text "17:00"
-                , UI.p "Båreløp"
+                , UI.p <| text "Båreløp"
 
                 -- , el [ alignRight, UI.class "show-more-button", pointer, mouseOver [ scale 1.2 ] ] <| text "👇"
                 ]
@@ -158,7 +155,7 @@ view window =
             --     ]
             , row [ UI.lSpacing ]
                 [ el [ alignTop, UI.monoFont ] <| text "19:00"
-                , UI.p "Konsertrekke #3"
+                , UI.p <| text "Konsertrekke #3"
 
                 -- , el [ alignRight, UI.class "show-more-button", pointer, mouseOver [ scale 1.2 ] ] <| text "👇"
                 ]

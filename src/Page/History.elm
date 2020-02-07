@@ -49,13 +49,13 @@ view window =
         ( heading, move2018Heading ) =
             case (classifyDevice window).class of
                 BigDesktop ->
-                    ( UI.h1, -200 )
+                    ( UI.h1, -300 )
 
                 Desktop ->
-                    ( UI.h1, -100 )
+                    ( UI.h1, -200 )
 
                 _ ->
-                    ( UI.h2, -100 )
+                    ( UI.h2, -70 )
     in
     column
         [ UI.lSpacing
@@ -72,8 +72,9 @@ view window =
                     [ image [ UI.fillWidth ] { src = "/images/logo-2019-mm-transparent.png", description = "Logo 2019" }
                     , artists.y2019
                         |> List.sort
+                        |> List.intersperse "•"
                         |> List.map text
-                        |> wrappedRow [ UI.fillWidth, UI.mSpacing ]
+                        |> wrappedRow [ UI.fillWidth, UI.sSpacing ]
                     , image [ UI.fillWidth ] { src = "/images/tak-2019-tk.jpg", description = "Fellesbilde 2019" }
                     ]
                 ]

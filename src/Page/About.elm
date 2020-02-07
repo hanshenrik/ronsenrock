@@ -11,8 +11,17 @@ import Type.Window exposing (Window)
 import UI
 
 
-view : Window -> Element msg
-view window =
+view : DeviceClass -> Element msg
+view deviceClass =
+    let
+        heading =
+            case deviceClass of
+                Phone ->
+                    UI.h3
+
+                _ ->
+                    UI.h1
+    in
     column
         [ UI.lSpacing
         , UI.mPadding
@@ -22,7 +31,7 @@ view window =
                 |> maximum 1000
             )
         ]
-        [ UI.h1 [ Font.color Color.yellow ] <| text "Hva er RønsenROCK?"
+        [ UI.p <| heading [ Font.color Color.yellow ] <| text "Hva er RønsenROCK?"
         , paragraph [ UI.sSpacing ]
             [ text """
                 Ideen bak RønsenROCK dukket først opp på en bandøving i 2014. Alle band drømmer om et stort publikum,
