@@ -40,13 +40,7 @@ a {
   outline: 3px #9bcbff solid !important;
 }
 
-.position-sticky {
-  position: sticky !important;
-  position: -webkit-sticky !important;
-  top: 0;
-}
-
-nav {
+.mobile-nav {
   position: fixed !important;
   top: 0;
   bottom: 0;
@@ -54,13 +48,13 @@ nav {
 
   transition: all 0.25s ease-out;
 }
-nav.closed {
+.mobile-nav.closed {
   margin-left: -300px;
   transform: translateX(-300px);
   opacity: 0;
   visibility: hidden;
 }
-nav.open {
+.mobile-nav.open {
   margin-left: 0;
   transform: translateX(0);
   opacity: 1;

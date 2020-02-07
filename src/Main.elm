@@ -150,26 +150,96 @@ update msg model =
             ( model, Cmd.none )
 
 
-header : Bool -> Element Msg
-header isMenuOpen =
-    row [ UI.class "position-sticky", UI.mSpacing, UI.mPadding, UI.fillWidth ] [ openMenuButton ]
+menuItems : List (Element Msg)
+menuItems =
+    [ link [ UI.class "hoverable", UI.sPadding ] { label = text "🎸 Hjem", url = "/" }
+    , link [ UI.class "hoverable", UI.sPadding ] { label = text "📆 Program", url = "/program" }
+    , link [ UI.class "hoverable", UI.sPadding ] { label = text "⛺️ Praktisk info", url = "/praktisk" }
+    , link [ UI.class "hoverable", UI.sPadding ] { label = text "\u{1F9ED} Festivalkart", url = "/festivalkart" }
+    , link [ UI.class "hoverable", UI.sPadding ] { label = text "📜 Tidligere artister", url = "/tidligere-artister" }
+    , link [ UI.class "hoverable", UI.sPadding ] { label = text "ℹ️ Om RønsenROCK", url = "/om" }
+    ]
 
 
 navMenu : Model -> Element Msg
 navMenu model =
+    let
+        deviceClass =
+            (classifyDevice model.window).class
+    in
+    case deviceClass of
+        Phone ->
+            mobileNavMenu model
+
+        Tablet ->
+            mobileNavMenu model
+
+        _ ->
+            desktopNavMenu model
+
+
+desktopNavMenu : Model -> Element Msg
+desktopNavMenu model =
     el
         [ Region.navigation
-        , width (fill |> maximum 300)
-        , height fill
-        , Background.color Color.yellow
+        , UI.fillWidth
+        , height shrink
+        , htmlAttribute <| Html.Attributes.style "position" "sticky"
+        , htmlAttribute <| Html.Attributes.style "top" "0"
+        , htmlAttribute <| Html.Attributes.style "z-index" "2"
+        , htmlAttribute <|
+            Html.Attributes.style "background"
+                """linear-gradient(122deg
+                , rgb(255, 184, 20) 50%
+                , rgb(255, 96, 43) 50%
+                , rgb(255, 96, 43) 60%
+                , rgb(255, 63, 102) 60%
+                , rgb(255, 63, 102) 80%
+                , rgb(214, 25, 91) 80%)
+                """
         , Border.shadow
             { offset = ( 0, 0 )
             , size = 1
             , blur = 4
-            , color = Color.gray
+            , color = Color.gray15
+            }
+        , Font.color Color.mainBackground
+        , Font.letterSpacing 2
+        ]
+    <|
+        row
+            [ UI.sPadding
+            , UI.lSpacing
+            , centerX
+            ]
+            menuItems
+
+
+mobileNavMenu : Model -> Element Msg
+mobileNavMenu model =
+    el
+        [ Region.navigation
+        , width (fill |> maximum 280)
+        , height fill
+        , htmlAttribute <|
+            Html.Attributes.style "background"
+                """linear-gradient(150deg
+                , rgb(255, 184, 20) 70%
+                , rgb(255, 96, 43) 70%
+                , rgb(255, 96, 43) 80%
+                , rgb(255, 63, 102) 80%
+                , rgb(255, 63, 102) 85%
+                , rgb(214, 25, 91) 85%)
+                """
+        , Border.shadow
+            { offset = ( 0, 0 )
+            , size = 1
+            , blur = 4
+            , color = Color.gray15
             }
         , Font.color Color.black
         , Font.center
+        , UI.class "mobile-nav"
         , if model.isMenuOpen then
             htmlAttribute <| Html.Attributes.class "open"
 
@@ -181,14 +251,9 @@ navMenu model =
             [ UI.mPadding
             , UI.mSpacing
             ]
-            [ closeMenuButton
-            , link [ UI.class "hoverable" ] { label = text "🎸 Hjem", url = "/" }
-            , link [ UI.class "hoverable" ] { label = text "📆 Program", url = "/program" }
-            , link [ UI.class "hoverable" ] { label = text "⛺️ Praktisk info", url = "/praktisk" }
-            , link [ UI.class "hoverable" ] { label = text "\u{1F9ED} Festivalkart", url = "/festivalkart" }
-            , link [ UI.class "hoverable" ] { label = text "📜 Tidligere artister", url = "/tidligere-artister" }
-            , link [ UI.class "hoverable" ] { label = text "ℹ️ Om RønsenROCK", url = "/om" }
-            ]
+            (closeMenuButton
+                :: menuItems
+            )
 
 
 toggleMenuButton : Bool -> Element Msg
@@ -268,7 +333,14 @@ view model =
             column
                 [ UI.fillWidth
                 , height fill
-                , inFront <| header model.isMenuOpen
+                , inFront <|
+                    el
+                        [ htmlAttribute <| Html.Attributes.style "position" "sticky"
+                        , htmlAttribute <| Html.Attributes.style "top" "0"
+                        , UI.mSpacing
+                        , UI.mPadding
+                        ]
+                        openMenuButton
                 ]
                 [ navMenu model
                 , mainContent model
