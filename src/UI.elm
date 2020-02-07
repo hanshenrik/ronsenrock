@@ -245,7 +245,7 @@ xlRoundedCorners =
 boxed : List (Attribute msg)
 boxed =
     [ htmlAttribute <| Html.Attributes.style "background" "linear-gradient(145deg, #1c1c1c, #171717)"
-    , htmlAttribute <| Html.Attributes.style "box-shadow" "15px 15px 0px #161616, -15px -15px 0px #1e1e1e"
+    , htmlAttribute <| Html.Attributes.style "box-shadow" "15px 15px 0px #0a0a0a, -15px -15px 0px #2a2a2a"
     , sRoundedCorners
     ]
 
