@@ -30,20 +30,18 @@ default window isMenuOpen =
             [ centerX, UI.lSpacing ]
             [ column [ alignTop, UI.sSpacing ]
                 [ row []
-                    [ text "✉️ "
-                    , link [ UI.class "hoverable" ] { label = text "post@rønsenrock.no", url = "mailto:post@rønsenrock.no" }
+                    [ newTabLink [ UI.class "hoverable" ] { label = text "✉️ post@rønsenrock.no", url = "mailto:post@rønsenrock.no" }
                     ]
                 , row []
-                    [ text "🎸 "
-                    , link [ UI.class "hoverable" ] { label = text "booking@rønsenrock.no", url = "mailto:booking@rønsenrock.no" }
+                    [ newTabLink [ UI.class "hoverable" ] { label = text "🎸 booking@rønsenrock.no", url = "mailto:booking@rønsenrock.no" }
                     ]
                 , row []
-                    [ text "🔨 av "
-                    , link [ UI.class "hoverable" ] { label = text "hanshenrik", url = "https://github.com/hanshenrik" }
+                    [ newTabLink [ UI.class "hoverable" ] { label = text "🔨 hanshenrik", url = "https://github.com/hanshenrik" }
                     ]
                 ]
             , UI.divider window
             , column [ alignTop, UI.sSpacing ]
-                [ link [ UI.class "hoverable" ] { label = text "Facebook", url = "https://facebook.com/rockogrull" }
+                [ newTabLink [ UI.class "hoverable" ] { label = text "🙂📘 Facebook", url = "https://facebook.com/rockogrull" }
+                , newTabLink [ UI.class "hoverable" ] { label = text "📸 Instagram", url = "https://www.instagram.com/ronsen_rock/" }
                 ]
             ]

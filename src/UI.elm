@@ -252,7 +252,7 @@ boxed =
 
 buttonLink : List (Attribute msg) -> { label : Element msg, url : String } -> Element msg
 buttonLink attributes parameters =
-    link (Background.color Color.yellow :: Font.color Color.black :: paddingXY (9 * 4) (9 * 2) :: xlRoundedCorners :: attributes) parameters
+    newTabLink (Background.color Color.yellow :: Font.color Color.black :: paddingXY (9 * 4) (9 * 2) :: xlRoundedCorners :: attributes) parameters
 
 
 imageWithAttribution : List (Attribute msg) -> { attribution : String, src : String, description : String } -> Element msg

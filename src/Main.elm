@@ -79,7 +79,7 @@ pageFromUrl url =
         "/" ->
             LandingPage
 
-        "/historie" ->
+        "/tidligere-artister" ->
             HistoryPage
 
         "/praktisk" ->
@@ -182,12 +182,12 @@ navMenu model =
             , UI.mSpacing
             ]
             [ closeMenuButton
-            , link [ UI.class "hoverable" ] { label = text "Hjem", url = "/" }
-            , link [ UI.class "hoverable" ] { label = text "Historie", url = "/historie" }
-            , link [ UI.class "hoverable" ] { label = text "Praktisk", url = "/praktisk" }
-            , link [ UI.class "hoverable" ] { label = text "Festivalkart", url = "/festivalkart" }
-            , link [ UI.class "hoverable" ] { label = text "Program", url = "/program" }
-            , link [ UI.class "hoverable" ] { label = text "Om RønsenROCK", url = "/om" }
+            , link [ UI.class "hoverable" ] { label = text "🎸 Hjem", url = "/" }
+            , link [ UI.class "hoverable" ] { label = text "📆 Program", url = "/program" }
+            , link [ UI.class "hoverable" ] { label = text "⛺️ Praktisk info", url = "/praktisk" }
+            , link [ UI.class "hoverable" ] { label = text "\u{1F9ED} Festivalkart", url = "/festivalkart" }
+            , link [ UI.class "hoverable" ] { label = text "📜 Tidligere artister", url = "/tidligere-artister" }
+            , link [ UI.class "hoverable" ] { label = text "ℹ️ Om RønsenROCK", url = "/om" }
             ]
 
 

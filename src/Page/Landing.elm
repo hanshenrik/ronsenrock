@@ -23,7 +23,7 @@ view { window, time } =
                     ( ( 300, 300 ), ( UI.lPadding, UI.h2 ) )
 
                 BigDesktop ->
-                    ( ( 700, 700 ), ( UI.xxlPadding, UI.h1 ) )
+                    ( ( 700, 1000 ), ( UI.xxlPadding, UI.h1 ) )
 
                 _ ->
                     ( ( 600, 600 ), ( UI.xxlPadding, UI.h1 ) )
@@ -80,4 +80,29 @@ view { window, time } =
                     ]
                     []
         , el [ UI.fillWidth, height <| px dividerImageSize, Background.image "/images/chill-2018.jpg" ] none
+        , el
+            (centerX
+                :: (case deviceClass of
+                        Phone ->
+                            [ UI.sPadding ]
+
+                        _ ->
+                            []
+                   )
+            )
+          <|
+            column
+                (Font.center
+                    :: UI.lSpacing
+                    :: responsivePadding
+                    :: UI.boxed
+                )
+                [ column [ UI.mSpacing ]
+                    [ paragraph [ Font.center, UI.fillWidth ] [ UI.h3 [] <| text "Få oppdateringer på Facebook" ]
+                    , paragraph [ Font.center ]
+                        [ text "Ikke gå glipp av nyheter om årets festival – meld deg på eventet på Facebook." ]
+                    ]
+                , UI.buttonLink [ UI.class "hoverable", centerX ] { label = row [ UI.mSpacing ] [ text "Til Facebook", text "▷" ], url = "https://www.facebook.com/events/1276322845893719/" }
+                ]
+        , el [] none
         ]

@@ -67,4 +67,5 @@ view deviceClass =
                 Ta turen, sjekk det ut, du vil ikke angre!
                 """
             ]
+        , el [] none
         ]

@@ -33,7 +33,7 @@ view deviceClass =
         , column [ UI.mSpacing ]
             [ dayHeading [] <| text "Torsdag 11. juli"
             , row [ UI.lSpacing ]
-                [ el [ alignTop, UI.monoFont ] <| text "12:00"
+                [ el [ alignTop, UI.monoFont ] <| text "🕛 12:00"
                 , UI.p <| text "Festivalområdet åpner!"
 
                 -- , el [ alignRight, UI.class "show-more-button", pointer, mouseOver [ scale 1.2 ] ] <| text "👇"
@@ -48,7 +48,7 @@ view deviceClass =
         , column [ UI.mSpacing ]
             [ dayHeading [] <| text "Fredag 12. juli"
             , row [ UI.lSpacing ]
-                [ el [ alignTop, UI.monoFont ] <| text "17:00"
+                [ el [ alignTop, UI.monoFont ] <| text "🕔 17:00"
                 , UI.p <| text "Tautrekking"
 
                 -- , el [ alignRight, UI.class "show-more-button", pointer, mouseOver [ scale 1.2 ] ] <| text "👇"
@@ -58,7 +58,7 @@ view deviceClass =
             -- , el [] <| text "Tautrekking skrev seg inn i olympisk historie på 1900-tallet, og selv om det ikke er en gren i OL i dag har RønsenROCK tatt på seg jobben med å føre konkurransen videre! Her vanker det heftig premie til vinnerlaget."
             -- ]
             , row [ UI.lSpacing ]
-                [ el [ alignTop, UI.monoFont ] <| text "19:00"
+                [ el [ alignTop, UI.monoFont ] <| text "🕖 19:00"
                 , UI.p <| text "Konsertrekke #1"
 
                 -- , el [ alignRight, UI.class "show-more-button", pointer, mouseOver [ scale 1.2 ] ] <| text "👇"
@@ -98,7 +98,7 @@ view deviceClass =
         , column [ UI.mSpacing ]
             [ dayHeading [] <| text "Lørdag 13. juli"
             , row [ UI.lSpacing ]
-                [ el [ alignTop, UI.monoFont ] <| text "10:00"
+                [ el [ alignTop, UI.monoFont ] <| text "🕙 10:00"
                 , UI.p <| text "Ryddeyoga"
 
                 -- , el [ alignRight, UI.class "show-more-button", pointer, mouseOver [ scale 1.2 ] ] <| text "👇"
@@ -106,7 +106,7 @@ view deviceClass =
 
             -- , Html.div [ UI.class "event-info" ] [ el [] <| text "Når man bor sammen på slikt et stort område er det viktig å hjelpe hverandre med å holde det fint og hyggelig rundt seg. Vi inviterer derfor til yoga-time for å løsne litt på ledda og friske opp sjela, selvfølgelig med en kopp kaffe attot! Så tar vi oss en rydderunde og gjør oss klare til verdens koseligste dagssett" ]
             , row [ UI.lSpacing ]
-                [ el [ alignTop, UI.monoFont ] <| text "12:00"
+                [ el [ alignTop, UI.monoFont ] <| text "🕛 12:00"
                 , UI.p <| text "Konsertrekke #2"
 
                 -- , el [ alignRight, UI.class "show-more-button", pointer, mouseOver [ scale 1.2 ] ] <| text "👇"
@@ -142,7 +142,7 @@ view deviceClass =
             --         ]
             --     ]
             , row [ UI.lSpacing ]
-                [ el [ alignTop, UI.monoFont ] <| text "17:00"
+                [ el [ alignTop, UI.monoFont ] <| text "🕔 17:00"
                 , UI.p <| text "Båreløp"
 
                 -- , el [ alignRight, UI.class "show-more-button", pointer, mouseOver [ scale 1.2 ] ] <| text "👇"
@@ -154,7 +154,7 @@ view deviceClass =
             --     , Html.img [ UI.src "/images/beste-camp-mm.jpg" ] []
             --     ]
             , row [ UI.lSpacing ]
-                [ el [ alignTop, UI.monoFont ] <| text "19:00"
+                [ el [ alignTop, UI.monoFont ] <| text "🕖 19:00"
                 , UI.p <| text "Konsertrekke #3"
 
                 -- , el [ alignRight, UI.class "show-more-button", pointer, mouseOver [ scale 1.2 ] ] <| text "👇"
