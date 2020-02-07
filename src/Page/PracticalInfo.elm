@@ -70,7 +70,7 @@ view deviceClass =
             , paragraph [ UI.sSpacing ]
                 [ text "Når du har gått av på Eidsvoll stasjon (ikke Eidsvoll Verk!), er det fremdeles rundt 7 kilometer til du er framme. Kollektivtilbudet herfra er heller skralt, så her er alternativene taxi, venner med bil, sykkel eller å ta beina fatt." ]
             , paragraph [ UI.sSpacing ]
-                [ text "Det er mange som kjører forbi stasjonen på vei til festivalen, så det er sikkert mulig å organisere samkjøring på ", newTabLink [ UI.class "hoverable" ] { label = text "Facebook-eventet.", url = "https://www.facebook.com/events/1276322845893719/" } ]
+                [ text "Det er mange som kjører forbi stasjonen på vei til festivalen, så det er sikkert mulig å organisere samkjøring på ", newTabLink [ UI.class "hoverable" ] { label = text "Facebook-eventet", url = "https://www.facebook.com/events/1276322845893719/" }, text "." ]
             ]
         , column [ UI.lSpacing ]
             [ h1 [ Font.color Color.yellow ] <| text "Hvor mye koster det?"
