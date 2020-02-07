@@ -31,16 +31,14 @@ view { window, time } =
     column [ UI.fillWidth, centerY, UI.xxlSpacing ]
         [ column [ UI.sSpacing, centerX ]
             [ el [ centerX ] <| dateHeading [ Font.color Color.yellow, htmlAttribute <| Html.Attributes.style "transform" "rotate(-10deg)" ] <| text "2. – 5. juli"
-            , el
-                [ Background.uncropped "/images/logo-2020-mm-transparent.png"
-                , centerX
+            , image
+                [ centerX
                 , centerY
                 , height <| px <| round <| logoSize / 1.5
                 , width <| px logoSize
-                , UI.xxlPadding
                 , UI.class "shake"
                 ]
-                none
+                { src = "/images/logo-2020-mm-transparent.png", description = "Logo" }
             ]
         , el [ centerX ] <| Countdown.view window time
         , el [ UI.fillWidth, height <| px dividerImageSize, Background.image "/images/tak-2019-tk.jpg" ] none
@@ -68,17 +66,19 @@ view { window, time } =
                     ]
                 , UI.buttonLink [ UI.class "hoverable", centerX ] { label = row [ UI.mSpacing ] [ text "Meld interesse", text "▷" ], url = "mailto:booking@rønsenrock.no" }
                 ]
-        , el (centerX :: UI.boxed) <|
-            html <|
-                Html.iframe
-                    [ Html.Attributes.src "https://open.spotify.com/embed/user/1113006308/playlist/6FfNqW0AcFkrhlUaDfqfpD?si=S36Q1tleRB6w5MYvFWtS2g"
-                    , Html.Attributes.style "border" "none"
-                    , Html.Attributes.style "height" "400px"
-                    , Html.Attributes.style "width" "600px"
-                    , Html.Attributes.style "max-width" "100%"
-                    , Html.Attributes.style "border-radius" "4px"
-                    ]
-                    []
+
+        -- , el [ centerX, width <| px 200 ] <| UI.horisontalDivider
+        -- , el [ centerX ] <|
+        --     html <|
+        --         Html.iframe
+        --             [ Html.Attributes.src "https://open.spotify.com/embed/user/1113006308/playlist/6FfNqW0AcFkrhlUaDfqfpD?si=S36Q1tleRB6w5MYvFWtS2g"
+        --             , Html.Attributes.style "border" "none"
+        --             , Html.Attributes.style "height" "400px"
+        --             , Html.Attributes.style "width" "600px"
+        --             , Html.Attributes.style "max-width" "100%"
+        --             , Html.Attributes.style "border-radius" "4px"
+        --             ]
+        --             []
         , el [ UI.fillWidth, height <| px dividerImageSize, Background.image "/images/chill-2018.jpg" ] none
         , el
             (centerX

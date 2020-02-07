@@ -81,7 +81,14 @@ view window =
         [ UI.p <| pageHeading [ Font.color Color.yellow, centerX ] <| text "Tidligere artister"
         , el [ UI.sPadding ] <|
             column (bannerImageAttributes window)
-                [ image (UI.fillWidth :: centerX :: imagePadding :: UI.class "shake" :: UI.boxed) { src = "/images/logo-2019-mm-transparent.png", description = "Logo 2019" }
+                [ image
+                    (UI.fillWidth
+                        :: centerX
+                        :: imagePadding
+                        :: UI.class "shake"
+                        :: UI.boxed
+                    )
+                    { src = "/images/logo-2019-mm-transparent.png", description = "Logo 2019" }
                 , artists.y2019
                     |> List.sort
                     |> List.intersperse "•"
@@ -95,6 +102,7 @@ view window =
                 [ column
                     (UI.fillWidth
                         :: imagePadding
+                        :: UI.class "shake"
                         :: UI.boxed
                     )
                     [ heading2018 [ centerX, Font.color Color.yellow, htmlAttribute <| Html.Attributes.style "transform" <| "rotate(-30deg) translateX(" ++ String.fromInt move2018Heading ++ "px)" ] <| text "2018"
@@ -115,6 +123,7 @@ view window =
                     [ image
                         (UI.fillWidth
                             :: imagePadding
+                            :: UI.class "shake"
                             :: UI.boxed
                         )
                         { src = "/images/logo-2017-mm.png", description = "Logo 2017" }
@@ -128,6 +137,7 @@ view window =
                     [ image
                         (UI.fillWidth
                             :: imagePadding
+                            :: UI.class "shake"
                             :: UI.boxed
                         )
                         { src = "/images/logo-2016-mm.png", description = "Logo 2016" }
