@@ -15,6 +15,7 @@ import Element.Region as Region
 import Footer
 import Html.Attributes
 import Json.Decode as Decode
+import Page.About
 import Page.History
 import Page.Landing
 import SmoothScroll exposing (scrollTo)
@@ -52,6 +53,7 @@ type alias Model =
 type Page
     = LandingPage
     | HistoryPage
+    | AboutPage
 
 
 type Msg
@@ -73,6 +75,9 @@ pageFromUrl url =
 
         "/historie" ->
             HistoryPage
+
+        "/om" ->
+            AboutPage
 
         _ ->
             LandingPage
@@ -160,6 +165,7 @@ navMenu model =
             [ closeMenuButton
             , link [ UI.class "hoverable" ] { label = text "Hjem", url = "/" }
             , link [ UI.class "hoverable" ] { label = text "Historie", url = "/historie" }
+            , link [ UI.class "hoverable" ] { label = text "Om RønsenROCK", url = "/om" }
             ]
 
 
@@ -213,6 +219,9 @@ mainContent model =
 
                 HistoryPage ->
                     Page.History.view model.window
+
+                AboutPage ->
+                    Page.About.view model.window
 
 
 view : Model -> Browser.Document Msg

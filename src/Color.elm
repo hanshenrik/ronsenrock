@@ -1,5 +1,6 @@
 module Color exposing
     ( black
+    , blackTransparent
     , darkPink
     , gray
     , gray15
@@ -82,5 +83,14 @@ whiteTransparent alpha =
     let
         original =
             toRgb white
+    in
+    fromRgb <| { original | alpha = alpha }
+
+
+blackTransparent : Float -> Color
+blackTransparent alpha =
+    let
+        original =
+            toRgb black
     in
     fromRgb <| { original | alpha = alpha }

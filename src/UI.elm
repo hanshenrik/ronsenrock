@@ -13,6 +13,7 @@ module UI exposing
     , h5
     , headingFont
     , horisontalDivider
+    , imageWithAttribution
     , lPadding
     , lSpacing
     , mPadding
@@ -232,3 +233,30 @@ boxed =
 buttonLink : List (Attribute msg) -> { label : Element msg, url : String } -> Element msg
 buttonLink attributes parameters =
     link (Background.color Color.yellow :: Font.color Color.black :: paddingXY (9 * 4) (9 * 2) :: xlRoundedCorners :: attributes) parameters
+
+
+imageWithAttribution : List (Attribute msg) -> { photographer : String, src : String, description : String } -> Element msg
+imageWithAttribution attributes { photographer, src, description } =
+    image
+        ([ fillWidth
+         , Background.color Color.pink
+         , sRoundedCorners
+         , clip
+         , inFront <|
+            el
+                [ alignBottom
+                , alignLeft
+                , Border.roundEach { topLeft = 0, topRight = 4, bottomRight = 0, bottomLeft = 0 }
+                , mPadding
+                , Background.color <| Color.blackTransparent 0.7
+                , Font.size 14
+                ]
+            <|
+                text <|
+                    "📷 "
+                        ++ photographer
+         ]
+            ++ boxed
+            ++ attributes
+        )
+        { src = src, description = description }
