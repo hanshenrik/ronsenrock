@@ -144,5 +144,19 @@ view window =
                     , UI.imageWithAttribution [] { src = "/images/tak-2016-tk.jpg", description = "Fellesbilde 2016", attribution = "Thomas Kvehaugen", isBoxed = False }
                     ]
                 ]
+        , UI.horisontalDivider
+        , el [ UI.sPadding ] <|
+            column (bannerImageAttributes window)
+                [ column [ UI.fillWidth, UI.lSpacing ]
+                    [ image
+                        (UI.fillWidth
+                            :: imagePadding
+                            :: UI.class "shake"
+                            :: UI.boxed
+                        )
+                        { src = "/images/logo-2015.jpg", description = "Logo 2015" }
+                    , UI.imageWithAttribution [] { src = "/images/tak-2015-1-tk.jpg", description = "Fellesbilde 2015", attribution = "Thomas Kvehaugen", isBoxed = False }
+                    ]
+                ]
         , el [] none
         ]
