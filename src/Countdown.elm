@@ -42,7 +42,7 @@ view window time =
                 , UI.sRoundedTopCorners
                 , case (classifyDevice window).class of
                     Phone ->
-                        width (px 60)
+                        width (px 66)
 
                     _ ->
                         width (px 120)

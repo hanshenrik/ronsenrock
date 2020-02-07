@@ -28,7 +28,7 @@ view { window, time } =
                 _ ->
                     ( ( 600, 600 ), ( UI.xxlPadding, UI.h1 ) )
     in
-    column [ UI.fillWidth, centerY, UI.xxlSpacing ]
+    column [ UI.fillWidth, centerY, UI.xxlSpacing, paddingXY 0 (4 * 9) ]
         [ column [ UI.sSpacing, centerX ]
             [ el [ centerX ] <| dateHeading [ Font.color Color.yellow, htmlAttribute <| Html.Attributes.style "transform" "rotate(-10deg)" ] <| text "2. – 5. juli"
             , image
