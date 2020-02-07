@@ -23,16 +23,16 @@ view deviceClass =
                 _ ->
                     ( UI.h1, UI.h2, UI.h3 )
 
-        dividerImageSize =
+        rowOrColumn =
             case deviceClass of
                 Phone ->
-                    300
+                    column
 
-                BigDesktop ->
-                    700
+                Tablet ->
+                    column
 
                 _ ->
-                    600
+                    row
     in
     column
         [ UI.xlSpacing
@@ -45,7 +45,20 @@ view deviceClass =
         ]
         [ column [ UI.lSpacing ]
             [ h1 [ Font.color Color.yellow ] <| text "Hvor er det?"
-            , el (UI.xlPadding :: centerX :: UI.boxed) <| h3 [] <| column [ UI.mSpacing, Font.center ] [ text "Rønsenvegen 121", text "2080 Eidsvoll" ]
+            , rowOrColumn [ centerX, UI.xlSpacing ]
+                [ el (UI.xlPadding :: centerX :: UI.boxed) <| h3 [] <| column [ UI.mSpacing, Font.center ] [ text "Rønsenvegen 121", text "2080 Eidsvoll" ]
+                , el (centerX :: UI.boxed) <|
+                    html <|
+                        Html.iframe
+                            [ Html.Attributes.src "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d253946.81596734625!2d10.8967322!3d60.1814026!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46418944b6c95a29%3A0xae3dc036a509a24e!2sR%C3%B8nsenvegen%20121%2C%202080%20Eidsvoll!5e0!3m2!1sen!2sno!4v1581105541826!5m2!1sen!2sno"
+                            , Html.Attributes.style "border" "none"
+                            , Html.Attributes.style "height" "400px"
+                            , Html.Attributes.style "width" "600px"
+                            , Html.Attributes.style "max-width" "100%"
+                            , Html.Attributes.style "border-radius" "4px"
+                            ]
+                            []
+                ]
             , h3 [] <| text "🚗 Med bil"
             , paragraph [ UI.sSpacing ]
                 [ text "Kommer du nordfra, er det greieste å kjøre av E6 ved Minnesund. Deretter følger du skilting til Vormsund (177). Etter ca. 5 kilometer sørover vil du se skilting til festivalområdet." ]
@@ -82,7 +95,7 @@ view deviceClass =
                 så dersom du trenger vatret underlag, bør du komme tidlig på torsdag.
                 """
                 ]
-            , h3 [] <| text "👙 Hvor kan jeg bade?"
+            , h3 [] <| text "👙 Kan jeg bade noe sted?"
             , paragraph [ UI.sSpacing ]
                 [ text "Ja! En kort rusletur fra festivalområdet kan vi by på finfine badefasiliteter!" ]
             , UI.imageWithAttribution [] { src = "/images/strand-mm.jpg", description = "Bading", attribution = "Maria Martinsen", isBoxed = True }
