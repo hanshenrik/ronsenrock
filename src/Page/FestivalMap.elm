@@ -18,8 +18,8 @@ view deviceClass =
             UI.imageWithAttribution [] { src = "/images/kart-lm.jpg", description = "Festivalkart", attribution = "Lisa Løtvedt Martinsen", isBoxed = False }
 
         _ ->
-            column [ UI.xlSpacing, centerX ]
-                [ UI.h1 [ Font.color Color.yellow, centerX ] <| text "Festivalkart"
+            column [ UI.mPadding, UI.xlSpacing, centerX ]
+                [ UI.h1 [ Font.color Color.yellow ] <| text "Festivalkart"
                 , el
                     [ UI.lSpacing
                     , UI.lPadding
