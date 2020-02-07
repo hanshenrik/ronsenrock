@@ -255,31 +255,34 @@ buttonLink attributes parameters =
     newTabLink (Background.color Color.yellow :: Font.color Color.black :: paddingXY (9 * 4) (9 * 2) :: xlRoundedCorners :: attributes) parameters
 
 
-imageWithAttribution : List (Attribute msg) -> { attribution : String, src : String, description : String } -> Element msg
-imageWithAttribution attributes { attribution, src, description } =
-    image
-        ([ fillWidth
-         , Background.color Color.pink
-         , sRoundedCorners
-         , clip
-         , inFront <|
-            el
-                [ alignBottom
-                , alignLeft
-                , Border.roundEach { topLeft = 0, topRight = 4, bottomRight = 0, bottomLeft = 0 }
-                , mPadding
-                , Background.color <| Color.blackTransparent 0.7
-                , Font.size 14
-                ]
-            <|
-                text <|
-                    "📷 "
-                        ++ attribution
-         ]
-            ++ boxed
-            ++ attributes
-        )
-        { src = src, description = description }
+imageWithAttribution : List (Attribute msg) -> { attribution : String, src : String, description : String, isBoxed : Bool } -> Element msg
+imageWithAttribution attributes { attribution, src, description, isBoxed } =
+    column attributes
+        [ image
+            ([ fillWidth
+             , sRoundedCorners
+             , clip
+             ]
+                ++ (if isBoxed then
+                        boxed
+
+                    else
+                        []
+                   )
+            )
+            { src = src, description = description }
+        , el
+            [ alignBottom
+            , alignLeft
+            , Border.roundEach { topLeft = 0, topRight = 4, bottomRight = 0, bottomLeft = 0 }
+            , paddingXY 0 (3 * spacingUnit)
+            , Font.size 14
+            ]
+          <|
+            text <|
+                "📷 "
+                    ++ attribution
+        ]
 
 
 ul : List (Element msg) -> Element msg

@@ -44,7 +44,7 @@ view deviceClass =
             )
         ]
         [ column [ UI.lSpacing ]
-            [ h1 [ Font.color Color.yellow ] <| text "🗺 Hvor er det?"
+            [ h1 [ Font.color Color.yellow ] <| text "Hvor er det?"
             , el (UI.xlPadding :: centerX :: UI.boxed) <| h3 [] <| column [ UI.mSpacing, Font.center ] [ text "Rønsenvegen 121", text "2080 Eidsvoll" ]
             , h3 [] <| text "🚗 Med bil"
             , paragraph [ UI.sSpacing ]
@@ -60,7 +60,7 @@ view deviceClass =
                 [ text "Det er mange som kjører forbi stasjonen på vei til festivalen, så det er sikkert mulig å organisere samkjøring på ", newTabLink [ UI.class "hoverable" ] { label = text "Facebook-eventet.", url = "https://www.facebook.com/events/1276322845893719/" } ]
             ]
         , column [ UI.lSpacing ]
-            [ h1 [ Font.color Color.yellow ] <| text "💰 Hvor mye koster det?"
+            [ h1 [ Font.color Color.yellow ] <| text "Hvor mye koster det?"
             , paragraph [ UI.sSpacing ]
                 [ text """
                 RønsenROCK finansieres etter spleiselagprinsippet. Derfor oppfordrer vi alle til å bidra litt, slik at vi har muligheten til å fortsette å arrangere RønsenROCK også i årene fremover.
@@ -74,7 +74,7 @@ view deviceClass =
                 [ text "Du kan også bidra i etterkant av festivalen på kontonummer 8475 10 75285." ]
             ]
         , column [ UI.lSpacing ]
-            [ h1 [ Font.color Color.yellow ] <| text "❓ Andre spørsmål"
+            [ h1 [ Font.color Color.yellow ] <| text "Andre spørsmål"
             , h3 [] <| text "⛺️ Kan jeg overnatte?"
             , paragraph [ UI.sSpacing ]
                 [ text """
@@ -85,7 +85,7 @@ view deviceClass =
             , h3 [] <| text "👙 Hvor kan jeg bade?"
             , paragraph [ UI.sSpacing ]
                 [ text "Ja! En kort rusletur fra festivalområdet kan vi by på finfine badefasiliteter!" ]
-            , UI.imageWithAttribution [] { src = "/images/strand-mm.jpg", description = "Bading", attribution = "Maria Martinsen" }
+            , UI.imageWithAttribution [] { src = "/images/strand-mm.jpg", description = "Bading", attribution = "Maria Martinsen", isBoxed = True }
 
             --
             , h3 [] <| text "🚽 Hvilke fasiliteter finnes?"

@@ -75,7 +75,7 @@ view window =
                         |> List.intersperse "•"
                         |> List.map text
                         |> wrappedRow [ UI.fillWidth, UI.sSpacing ]
-                    , image [ UI.fillWidth, UI.sRoundedCorners, clip ] { src = "/images/tak-2019-tk.jpg", description = "Fellesbilde 2019" }
+                    , UI.imageWithAttribution [] { src = "/images/tak-2019-tk.jpg", description = "Fellesbilde 2019", attribution = "Thomas Kvehaugen", isBoxed = False }
                     ]
                 ]
         , el [ UI.sPadding ] <|
@@ -89,21 +89,21 @@ view window =
                         , width width2018Logo
                         ]
                         { src = "/images/logo-2018-mm-transparent.png", description = "Logo 2018" }
-                    , image [ UI.fillWidth, UI.sRoundedCorners, clip ] { src = "/images/tak-2018-tk.jpg", description = "Fellesbilde 2018" }
+                    , UI.imageWithAttribution [] { src = "/images/tak-2018-tk.jpg", description = "Fellesbilde 2018", attribution = "Thomas Kvehaugen", isBoxed = False }
                     ]
                 ]
         , el [ UI.sPadding ] <|
             column (bannerImageAttributes window)
                 [ column [ UI.fillWidth, UI.lSpacing ]
                     [ image [ UI.fillWidth, UI.class "shake" ] { src = "/images/logo-2017-mm.png", description = "Logo 2017" }
-                    , image [ UI.fillWidth, UI.sRoundedCorners, clip ] { src = "/images/tak-2017-tk.jpg", description = "Fellesbilde 2017" }
+                    , UI.imageWithAttribution [] { src = "/images/tak-2017-tk.jpg", description = "Fellesbilde 2017", attribution = "Thomas Kvehaugen", isBoxed = False }
                     ]
                 ]
         , el [ UI.sPadding ] <|
             column (bannerImageAttributes window)
                 [ column [ UI.fillWidth, UI.lSpacing ]
                     [ image [ UI.fillWidth, UI.class "shake" ] { src = "/images/logo-2016-mm.png", description = "Logo 2016" }
-                    , image [ UI.fillWidth, UI.sRoundedCorners, clip ] { src = "/images/tak-2016-tk.jpg", description = "Fellesbilde 2016" }
+                    , UI.imageWithAttribution [] { src = "/images/tak-2016-tk.jpg", description = "Fellesbilde 2016", attribution = "Thomas Kvehaugen", isBoxed = False }
                     ]
                 ]
         , el [] none
