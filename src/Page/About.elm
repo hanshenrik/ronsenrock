@@ -34,7 +34,7 @@ view window =
                 Sommeren 2015 ble scene og utedasser bygget, og vi var i gang. Det viste seg fort at det heller ikke var umulig å finne en haug med rockere som ville komme å spille, og RønsenROCK var offisielt!
                 """
             ]
-        , UI.imageWithAttribution [] { src = "/images/festivalgjengen-tep.jpg", description = "Festivalgjengen", photographer = "Tom Erik Paulsen" }
+        , UI.imageWithAttribution [] { src = "/images/festivalgjengen-tep.jpg", description = "Festivalgjengen", attribution = "Tom Erik Paulsen" }
         , paragraph [ UI.sSpacing ]
             [ text """
                 Da det var duket for oppfølgeråret i 2016 måtte scenen ha en liten makeover, og er det noe dette festivallaget ikke mangler er det dugnadsånd! Venner og bekjente, frivillige og familie stilte opp og hjalp arrangørene med ny scene, salgsbu,
@@ -46,7 +46,7 @@ view window =
                 Festivalen er tuftet på goodwill og det overordnede målet er å legge til rette for en langhelg med ekte rockeglede, sjukt bra musikk, sosialt samvær og varmt øl. Og målet blir nådd hvert år med god margin.
                 """
             ]
-        , UI.imageWithAttribution [] { src = "/images/lydmann-tk.jpg", description = "Lydmann", photographer = "Thomas Kvehaugen" }
+        , UI.imageWithAttribution [] { src = "/images/lydmann-tk.jpg", description = "Lydmann", attribution = "Thomas Kvehaugen" }
         , paragraph [ UI.sSpacing ]
             [ text """
                 Festivalen har vokst og fortsetter å vokse. I prinsippet er dette en gratis festival, men arrangørene setter pris på økonomisk støtte fra deltakerne for å kunne opprettholde og utvikle festivalen videre.

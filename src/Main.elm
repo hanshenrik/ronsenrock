@@ -16,6 +16,7 @@ import Footer
 import Html.Attributes
 import Json.Decode as Decode
 import Page.About
+import Page.FestivalMap
 import Page.History
 import Page.Landing
 import Page.PracticalInfo
@@ -55,6 +56,7 @@ type Page
     = LandingPage
     | HistoryPage
     | PracticalInfoPage
+    | FestivalMapPage
     | AboutPage
 
 
@@ -83,6 +85,9 @@ pageFromUrl url =
 
         "/om" ->
             AboutPage
+
+        "/festivalkart" ->
+            FestivalMapPage
 
         _ ->
             LandingPage
@@ -171,6 +176,7 @@ navMenu model =
             , link [ UI.class "hoverable" ] { label = text "Hjem", url = "/" }
             , link [ UI.class "hoverable" ] { label = text "Historie", url = "/historie" }
             , link [ UI.class "hoverable" ] { label = text "Praktisk", url = "/praktisk" }
+            , link [ UI.class "hoverable" ] { label = text "Festivalkart", url = "/festivalkart" }
             , link [ UI.class "hoverable" ] { label = text "Om RønsenROCK", url = "/om" }
             ]
 
@@ -231,6 +237,9 @@ mainContent model =
 
                 AboutPage ->
                     Page.About.view model.window
+
+                FestivalMapPage ->
+                    Page.FestivalMap.view model.window
 
 
 view : Model -> Browser.Document Msg

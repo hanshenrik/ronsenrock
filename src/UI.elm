@@ -236,8 +236,8 @@ buttonLink attributes parameters =
     link (Background.color Color.yellow :: Font.color Color.black :: paddingXY (9 * 4) (9 * 2) :: xlRoundedCorners :: attributes) parameters
 
 
-imageWithAttribution : List (Attribute msg) -> { photographer : String, src : String, description : String } -> Element msg
-imageWithAttribution attributes { photographer, src, description } =
+imageWithAttribution : List (Attribute msg) -> { attribution : String, src : String, description : String } -> Element msg
+imageWithAttribution attributes { attribution, src, description } =
     image
         ([ fillWidth
          , Background.color Color.pink
@@ -255,7 +255,7 @@ imageWithAttribution attributes { photographer, src, description } =
             <|
                 text <|
                     "📷 "
-                        ++ photographer
+                        ++ attribution
          ]
             ++ boxed
             ++ attributes
