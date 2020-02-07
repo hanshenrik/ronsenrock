@@ -20,6 +20,7 @@ import Page.FestivalMap
 import Page.History
 import Page.Landing
 import Page.PracticalInfo
+import Page.Program
 import SmoothScroll exposing (scrollTo)
 import Task exposing (Task)
 import Time
@@ -58,6 +59,7 @@ type Page
     | PracticalInfoPage
     | FestivalMapPage
     | AboutPage
+    | ProgramPage
 
 
 type Msg
@@ -88,6 +90,9 @@ pageFromUrl url =
 
         "/festivalkart" ->
             FestivalMapPage
+
+        "/program" ->
+            ProgramPage
 
         _ ->
             LandingPage
@@ -177,6 +182,7 @@ navMenu model =
             , link [ UI.class "hoverable" ] { label = text "Historie", url = "/historie" }
             , link [ UI.class "hoverable" ] { label = text "Praktisk", url = "/praktisk" }
             , link [ UI.class "hoverable" ] { label = text "Festivalkart", url = "/festivalkart" }
+            , link [ UI.class "hoverable" ] { label = text "Program", url = "/program" }
             , link [ UI.class "hoverable" ] { label = text "Om RønsenROCK", url = "/om" }
             ]
 
@@ -217,6 +223,7 @@ mainContent model =
         el
             [ UI.class "dimmable"
             , UI.fillWidth
+            , height fill
             , centerX
             , if model.isMenuOpen then
                 UI.dimmed
@@ -240,6 +247,9 @@ mainContent model =
 
                 FestivalMapPage ->
                     Page.FestivalMap.view model.window
+
+                ProgramPage ->
+                    Page.Program.view model.window
 
 
 view : Model -> Browser.Document Msg

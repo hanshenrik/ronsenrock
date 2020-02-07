@@ -18,6 +18,8 @@ module UI exposing
     , lSpacing
     , mPadding
     , mSpacing
+    , monoFont
+    , p
     , responsivePadding
     , rowOrColumn
     , sPadding
@@ -28,6 +30,7 @@ module UI exposing
     , verticalDivider
     , xlPadding
     , xlRoundedCorners
+    , xlSpacing
     , xsSpacing
     , xxlPadding
     , xxlSpacing
@@ -49,6 +52,17 @@ bodyFont =
         [ Font.external
             { name = "Barlow"
             , url = "https://fonts.googleapis.com/css?family=Barlow:300,400,600,700&display=swap"
+            }
+        , Font.sansSerif
+        ]
+
+
+monoFont : Attribute msg
+monoFont =
+    Font.family
+        [ Font.external
+            { name = "Anonymous Pro"
+            , url = "https://fonts.googleapis.com/css?family=Anonymous+Pro:700&display=swap"
             }
         , Font.sansSerif
         ]
@@ -168,6 +182,11 @@ lSpacing =
     spacing <| spacingUnit * 4
 
 
+xlSpacing : Attribute msg
+xlSpacing =
+    spacing <| spacingUnit * 6
+
+
 xxlSpacing : Attribute msg
 xxlSpacing =
     spacing <| spacingUnit * 8
@@ -266,3 +285,8 @@ imageWithAttribution attributes { attribution, src, description } =
 ul : List (Element msg) -> Element msg
 ul elements =
     column [ sSpacing, paddingXY (4 * spacingUnit) 0 ] (List.map (\element -> row [ sSpacing ] [ el [] <| text "•", element ]) elements)
+
+
+p : String -> Element msg
+p s =
+    paragraph [] [ text s ]
