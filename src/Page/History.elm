@@ -50,7 +50,7 @@ view window =
         deviceClass =
             (classifyDevice window).class
 
-        ( heading2018, move2018Heading, ( height2018Logo, width2018Logo ) ) =
+        ( imageHeading, move2018Heading, ( height2018Logo, width2018Logo ) ) =
             case deviceClass of
                 BigDesktop ->
                     ( UI.h1, -250, ( px 600, px <| round <| 600 * 0.7587719298 ) )
@@ -96,7 +96,7 @@ view window =
                     |> wrappedRow [ UI.fillWidth, UI.sSpacing ]
                 , UI.imageWithAttribution [] { src = "/images/tak-2019-tk.jpg", description = "Fellesbilde 2019", attribution = "Thomas Kvehaugen", isBoxed = False }
                 ]
-        , UI.horisontalDivider
+        , el [ moveUp (9 * 3), UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
         , el [ UI.sPadding ] <|
             column (bannerImageAttributes window)
                 [ column
@@ -105,7 +105,7 @@ view window =
                         :: UI.class "shake"
                         :: UI.boxed
                     )
-                    [ heading2018 [ centerX, Font.color Color.yellow, htmlAttribute <| Html.Attributes.style "transform" <| "rotate(-30deg) translateX(" ++ String.fromInt move2018Heading ++ "px)" ] <| text "2018"
+                    [ imageHeading [ centerX, Font.color Color.yellow, htmlAttribute <| Html.Attributes.style "transform" <| "rotate(-30deg) translateX(" ++ String.fromInt move2018Heading ++ "px)" ] <| text "2018"
                     , image
                         [ centerX
                         , UI.fillWidth
@@ -116,7 +116,7 @@ view window =
                     ]
                 , UI.imageWithAttribution [] { src = "/images/tak-2018-tk.jpg", description = "Fellesbilde 2018", attribution = "Thomas Kvehaugen", isBoxed = False }
                 ]
-        , UI.horisontalDivider
+        , el [ moveUp (9 * 3), UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
         , el [ UI.sPadding ] <|
             column (bannerImageAttributes window)
                 [ column [ UI.fillWidth, UI.lSpacing ]
@@ -130,7 +130,7 @@ view window =
                     , UI.imageWithAttribution [] { src = "/images/tak-2017-tk.jpg", description = "Fellesbilde 2017", attribution = "Thomas Kvehaugen", isBoxed = False }
                     ]
                 ]
-        , UI.horisontalDivider
+        , el [ moveUp (9 * 3), UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
         , el [ UI.sPadding ] <|
             column (bannerImageAttributes window)
                 [ column [ UI.fillWidth, UI.lSpacing ]
@@ -144,19 +144,23 @@ view window =
                     , UI.imageWithAttribution [] { src = "/images/tak-2016-tk.jpg", description = "Fellesbilde 2016", attribution = "Thomas Kvehaugen", isBoxed = False }
                     ]
                 ]
-        , UI.horisontalDivider
+        , el [ moveUp (9 * 3), UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
         , el [ UI.sPadding ] <|
             column (bannerImageAttributes window)
-                [ column [ UI.fillWidth, UI.lSpacing ]
-                    [ image
-                        (UI.fillWidth
-                            :: imagePadding
-                            :: UI.class "shake"
-                            :: UI.boxed
-                        )
+                [ column
+                    (UI.fillWidth
+                        :: imagePadding
+                        :: UI.class "shake"
+                        :: UI.boxed
+                    )
+                    [ imageHeading [ UI.sPadding, centerX, Font.color Color.yellow ] <| text "2015"
+                    , image
+                        [ UI.fillWidth
+                        , centerX
+                        ]
                         { src = "/images/logo-2015.jpg", description = "Logo 2015" }
-                    , UI.imageWithAttribution [] { src = "/images/tak-2015-1-tk.jpg", description = "Fellesbilde 2015", attribution = "Thomas Kvehaugen", isBoxed = False }
                     ]
+                , UI.imageWithAttribution [] { src = "/images/tak-2015-1-tk.jpg", description = "Fellesbilde 2015", attribution = "Thomas Kvehaugen", isBoxed = False }
                 ]
         , el [] none
         ]
