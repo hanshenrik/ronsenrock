@@ -275,7 +275,14 @@ imageWithAttribution attributes { attribution, src, description, isBoxed } =
             [ alignBottom
             , alignLeft
             , Border.roundEach { topLeft = 0, topRight = 4, bottomRight = 0, bottomLeft = 0 }
-            , paddingXY 0 (3 * spacingUnit)
+            , paddingXY
+                (if isBoxed then
+                    0
+
+                 else
+                    spacingUnit
+                )
+                (3 * spacingUnit)
             , Font.size 14
             ]
           <|

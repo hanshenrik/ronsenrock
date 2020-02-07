@@ -13,26 +13,22 @@ import UI
 
 view : DeviceClass -> Element msg
 view deviceClass =
-    let
-        pageHeading =
-            case deviceClass of
-                Phone ->
-                    UI.h2
+    case deviceClass of
+        Phone ->
+            UI.imageWithAttribution [] { src = "/images/kart-lm.jpg", description = "Festivalkart", attribution = "Lisa Løtvedt Martinsen", isBoxed = False }
 
-                _ ->
-                    UI.h1
-    in
-    column [ UI.xlSpacing, centerX ]
-        [ pageHeading [ Font.color Color.yellow, centerX ] <| text "Festivalkart"
-        , el
-            [ UI.lSpacing
-            , UI.lPadding
-            , centerX
-            , width
-                (fill
-                    |> maximum 1000
-                )
-            ]
-          <|
-            UI.imageWithAttribution [] { src = "/images/kart-lm.jpg", description = "Festivalkart", attribution = "Lisa Løtvedt Martinsen", isBoxed = True }
-        ]
+        _ ->
+            column [ UI.xlSpacing, centerX ]
+                [ UI.h1 [ Font.color Color.yellow, centerX ] <| text "Festivalkart"
+                , el
+                    [ UI.lSpacing
+                    , UI.lPadding
+                    , centerX
+                    , width
+                        (fill
+                            |> maximum 1000
+                        )
+                    ]
+                  <|
+                    UI.imageWithAttribution [] { src = "/images/kart-lm.jpg", description = "Festivalkart", attribution = "Lisa Løtvedt Martinsen", isBoxed = True }
+                ]
