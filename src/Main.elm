@@ -18,6 +18,7 @@ import Json.Decode as Decode
 import Page.About
 import Page.History
 import Page.Landing
+import Page.PracticalInfo
 import SmoothScroll exposing (scrollTo)
 import Task exposing (Task)
 import Time
@@ -53,6 +54,7 @@ type alias Model =
 type Page
     = LandingPage
     | HistoryPage
+    | PracticalInfoPage
     | AboutPage
 
 
@@ -75,6 +77,9 @@ pageFromUrl url =
 
         "/historie" ->
             HistoryPage
+
+        "/praktisk" ->
+            PracticalInfoPage
 
         "/om" ->
             AboutPage
@@ -165,6 +170,7 @@ navMenu model =
             [ closeMenuButton
             , link [ UI.class "hoverable" ] { label = text "Hjem", url = "/" }
             , link [ UI.class "hoverable" ] { label = text "Historie", url = "/historie" }
+            , link [ UI.class "hoverable" ] { label = text "Praktisk", url = "/praktisk" }
             , link [ UI.class "hoverable" ] { label = text "Om RønsenROCK", url = "/om" }
             ]
 
@@ -219,6 +225,9 @@ mainContent model =
 
                 HistoryPage ->
                     Page.History.view model.window
+
+                PracticalInfoPage ->
+                    Page.PracticalInfo.view model.window
 
                 AboutPage ->
                     Page.About.view model.window

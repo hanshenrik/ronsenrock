@@ -24,6 +24,7 @@ module UI exposing
     , sRoundedCorners
     , sRoundedTopCorners
     , sSpacing
+    , ul
     , verticalDivider
     , xlPadding
     , xlRoundedCorners
@@ -260,3 +261,8 @@ imageWithAttribution attributes { photographer, src, description } =
             ++ attributes
         )
         { src = src, description = description }
+
+
+ul : List (Element msg) -> Element msg
+ul elements =
+    column [ sSpacing, paddingXY (4 * spacingUnit) 0 ] (List.map (\element -> row [ sSpacing ] [ el [] <| text "•", element ]) elements)
