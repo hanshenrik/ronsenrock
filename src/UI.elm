@@ -9,6 +9,8 @@ module UI exposing
     , h1
     , h2
     , h3
+    , h4
+    , h5
     , headingFont
     , horisontalDivider
     , lPadding
@@ -24,9 +26,9 @@ module UI exposing
     , verticalDivider
     , xlPadding
     , xlRoundedCorners
-    , xlSpacing
     , xsSpacing
     , xxlPadding
+    , xxlSpacing
     )
 
 import Color
@@ -81,12 +83,22 @@ h1 attributes =
 
 h2 : List (Attribute msg) -> Element msg -> Element msg
 h2 attributes =
-    heading 2 (Font.size 32 :: attributes)
+    heading 2 (Font.size 48 :: attributes)
 
 
 h3 : List (Attribute msg) -> Element msg -> Element msg
 h3 attributes =
+    heading 3 (Font.size 32 :: attributes)
+
+
+h4 : List (Attribute msg) -> Element msg -> Element msg
+h4 attributes =
     heading 3 (Font.size 24 :: attributes)
+
+
+h5 : List (Attribute msg) -> Element msg -> Element msg
+h5 attributes =
+    heading 3 (Font.size 18 :: attributes)
 
 
 class : String -> Attribute msg
@@ -99,34 +111,39 @@ dimmed =
     htmlAttribute <| Html.Attributes.style "opacity" "0.5"
 
 
+spacingUnit : Int
+spacingUnit =
+    9
+
+
 sPadding : Attribute msg
 sPadding =
-    padding 9
+    padding spacingUnit
 
 
 mPadding : Attribute msg
 mPadding =
-    padding <| 9 * 2
+    padding <| spacingUnit * 2
 
 
 lPadding : Attribute msg
 lPadding =
-    padding <| 9 * 4
+    padding <| spacingUnit * 4
 
 
 xlPadding : Attribute msg
 xlPadding =
-    padding <| 9 * 6
+    padding <| spacingUnit * 6
 
 
 xxlPadding : Attribute msg
 xxlPadding =
-    padding <| 9 * 8
+    padding <| spacingUnit * 8
 
 
 responsivePadding : Window -> Attribute msg
 responsivePadding { width } =
-    padding <| clamp (9 * 2) (9 * 8) (9 * width // 320)
+    padding <| clamp (spacingUnit * 2) (spacingUnit * 8) (spacingUnit * width // 320)
 
 
 xsSpacing : Attribute msg
@@ -136,22 +153,22 @@ xsSpacing =
 
 sSpacing : Attribute msg
 sSpacing =
-    spacing 9
+    spacing spacingUnit
 
 
 mSpacing : Attribute msg
 mSpacing =
-    spacing <| 9 * 2
+    spacing <| spacingUnit * 2
 
 
 lSpacing : Attribute msg
 lSpacing =
-    spacing <| 9 * 4
+    spacing <| spacingUnit * 4
 
 
-xlSpacing : Attribute msg
-xlSpacing =
-    spacing <| 9 * 8
+xxlSpacing : Attribute msg
+xxlSpacing =
+    spacing <| spacingUnit * 8
 
 
 fillWidth : Attribute msg

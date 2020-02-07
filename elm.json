@@ -15,9 +15,10 @@
             "elm/svg": "1.0.1",
             "elm/time": "1.0.0",
             "elm/url": "1.0.0",
+            "elm-community/easing-functions": "2.0.0",
+            "elm-community/list-extra": "8.2.3",
             "etaque/elm-transit": "7.0.5",
-            "mdgriffith/elm-ui": "1.1.5",
-            "elm-community/easing-functions": "2.0.0"
+            "mdgriffith/elm-ui": "1.1.5"
         },
         "indirect": {
             "elm/virtual-dom": "1.0.2"

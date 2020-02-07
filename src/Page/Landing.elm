@@ -28,7 +28,7 @@ view { window, time } =
                 _ ->
                     ( ( 600, 600 ), ( UI.xxlPadding, UI.h1 ) )
     in
-    column [ UI.fillWidth, centerY, UI.xlSpacing ]
+    column [ UI.fillWidth, centerY, UI.xxlSpacing ]
         [ column [ UI.sSpacing, centerX ]
             [ el [ centerX ] <| dateHeading [ Font.color Color.yellow, htmlAttribute <| Html.Attributes.style "transform" "rotate(-10deg)" ] <| text "2. – 5. juli"
             , el
@@ -62,7 +62,7 @@ view { window, time } =
                     :: UI.boxed
                 )
                 [ column [ UI.mSpacing ]
-                    [ paragraph [ Font.center, UI.fillWidth ] [ UI.h2 [] <| text "Spille på RønsenROCK 2020?" ]
+                    [ paragraph [ Font.center, UI.fillWidth ] [ UI.h3 [] <| text "Spille på RønsenROCK 2020?" ]
                     , paragraph [ Font.center ]
                         [ text "Vi tar i mot henvendelser frem til mars." ]
                     ]

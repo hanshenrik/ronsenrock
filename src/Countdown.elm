@@ -50,7 +50,7 @@ view window time =
                 , Background.color color
                 ]
             <|
-                UI.h2 [ alignBottom, centerX ] <|
+                UI.h3 [ alignBottom, centerX ] <|
                     text <|
                         String.fromInt unitsLeft
 

@@ -5,6 +5,7 @@ import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
 import Html.Attributes
+import List.Extra as List
 import Type.Window exposing (Window)
 import UI
 
@@ -45,13 +46,16 @@ bannerImageAttributes window =
 view : Window -> Element msg
 view window =
     let
-        rowOrColumn =
+        ( heading, move2018Heading ) =
             case (classifyDevice window).class of
                 BigDesktop ->
-                    row
+                    ( UI.h1, -200 )
+
+                Desktop ->
+                    ( UI.h1, -100 )
 
                 _ ->
-                    column
+                    ( UI.h2, -100 )
     in
     column
         [ UI.lSpacing
@@ -59,40 +63,40 @@ view window =
         , centerX
         , width
             (fill
-                |> maximum 800
+                |> maximum 1000
             )
         ]
-        [ column (bannerImageAttributes window)
-            [ UI.h1 [ Font.color Color.yellow ] <| text "2019"
-            , rowOrColumn [ UI.fillWidth, UI.lSpacing ]
-                [ image [ UI.fillWidth ] { src = "/images/logo-2019-mm-transparent.png", description = "Logo 2019" }
-                , wrappedRow [ UI.lSpacing, alignTop ]
-                    (artists.y2019
+        [ el [ UI.sPadding ] <|
+            column (bannerImageAttributes window)
+                [ column [ UI.fillWidth, UI.lSpacing ]
+                    [ image [ UI.fillWidth ] { src = "/images/logo-2019-mm-transparent.png", description = "Logo 2019" }
+                    , artists.y2019
                         |> List.sort
                         |> List.map text
-                    )
-                , image [ UI.fillWidth ] { src = "/images/tak-2019-tk.jpg", description = "Fellesbilde 2019" }
+                        |> wrappedRow [ UI.fillWidth, UI.mSpacing ]
+                    , image [ UI.fillWidth ] { src = "/images/tak-2019-tk.jpg", description = "Fellesbilde 2019" }
+                    ]
                 ]
-            ]
-        , column (bannerImageAttributes window)
-            [ UI.h1 [ Font.color Color.yellow ] <| text "2018"
-            , rowOrColumn [ UI.fillWidth ]
-                [ image [ UI.fillWidth ] { src = "/images/logo-2018-mm-transparent.png", description = "Logo 2018" }
-                , image [ UI.fillWidth ] { src = "/images/tak-2018-tk.jpg", description = "Fellesbilde 2018" }
+        , el [ UI.sPadding ] <|
+            column (bannerImageAttributes window)
+                [ heading [ centerX, Font.color Color.yellow, htmlAttribute <| Html.Attributes.style "transform" <| "rotate(-30deg) translateX(" ++ String.fromInt move2018Heading ++ "px)" ] <| text "2018"
+                , column [ UI.fillWidth ]
+                    [ image [ UI.fillWidth ] { src = "/images/logo-2018-mm-transparent.png", description = "Logo 2018" }
+                    , image [ UI.fillWidth ] { src = "/images/tak-2018-tk.jpg", description = "Fellesbilde 2018" }
+                    ]
                 ]
-            ]
-        , column (bannerImageAttributes window)
-            [ UI.h1 [ Font.color Color.yellow ] <| text "2017"
-            , rowOrColumn [ UI.fillWidth ]
-                [ image [ UI.fillWidth ] { src = "/images/logo-2017-mm.png", description = "Logo 2017" }
-                , image [ UI.fillWidth ] { src = "/images/tak-2017-tk.jpg", description = "Fellesbilde 2017" }
+        , el [ UI.sPadding ] <|
+            column (bannerImageAttributes window)
+                [ column [ UI.fillWidth ]
+                    [ image [ UI.fillWidth ] { src = "/images/logo-2017-mm.png", description = "Logo 2017" }
+                    , image [ UI.fillWidth ] { src = "/images/tak-2017-tk.jpg", description = "Fellesbilde 2017" }
+                    ]
                 ]
-            ]
-        , column (bannerImageAttributes window)
-            [ UI.h1 [ Font.color Color.yellow ] <| text "2016"
-            , rowOrColumn [ UI.fillWidth ]
-                [ image [ UI.fillWidth ] { src = "/images/logo-2016-mm.png", description = "Logo 2016" }
-                , image [ UI.fillWidth ] { src = "/images/tak-2016-tk.jpg", description = "Fellesbilde 2016" }
+        , el [ UI.sPadding ] <|
+            column (bannerImageAttributes window)
+                [ column [ UI.fillWidth ]
+                    [ image [ UI.fillWidth ] { src = "/images/logo-2016-mm.png", description = "Logo 2016" }
+                    , image [ UI.fillWidth ] { src = "/images/tak-2016-tk.jpg", description = "Fellesbilde 2016" }
+                    ]
                 ]
-            ]
         ]
