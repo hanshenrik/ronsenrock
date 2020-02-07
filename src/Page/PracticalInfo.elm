@@ -69,7 +69,7 @@ view deviceClass =
                 """
                 ]
             , paragraph [ UI.sSpacing ]
-                [ el [ Font.bold ] <| text "250,-", text " per dag eller ", el [ Font.bold ] <| text "350,-", text " for hele festivalen. 📱 Vipps, 💳 kort eller 💵 Kontant." ]
+                [ el [ Font.bold ] <| text "250,–", text " per dag eller ", el [ Font.bold ] <| text "350,-", text " for hele festivalen. 📱 Vipps, 💳 kort eller 💵 Kontant." ]
             , paragraph [ UI.sSpacing ]
                 [ text "Du kan også bidra i etterkant av festivalen på kontonummer 8475 10 75285." ]
             ]
@@ -95,7 +95,7 @@ view deviceClass =
             --
             , UI.p <| h3 [] <| text "👕 Hvordan får jeg tak i t-skjorte?"
             , paragraph [ UI.sSpacing ]
-                [ text "Vi har igjen trykket opp t-skjorter med ny, fet logo. Disse selges for kroner 250,- ved inngangen." ]
+                [ text "Vi har igjen trykket opp t-skjorter med ny, fet logo. Disse selges for ", el [ Font.bold ] <| text "250,–", text " ved inngangen." ]
 
             --
             , h3 [] <| text "🚫 Er det noe som ikke er lov?"

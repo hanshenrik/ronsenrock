@@ -38,9 +38,10 @@ artists =
 
 bannerImageAttributes : Window -> List (Attribute msg)
 bannerImageAttributes window =
-    UI.mSpacing
-        :: UI.responsivePadding window
-        :: UI.boxed
+    [ UI.lSpacing
+    , UI.responsivePadding window
+    , UI.fillWidth
+    ]
 
 
 view : Window -> Element msg
@@ -58,15 +59,15 @@ view window =
                     ( UI.h1, -175, ( px 600, px <| round <| 600 * 0.7587719298 ) )
 
                 _ ->
-                    ( UI.h2, -80, ( shrink, fill ) )
+                    ( UI.h3, -60, ( shrink, fill ) )
 
-        pageHeading =
+        ( pageHeading, imagePadding ) =
             case deviceClass of
                 Phone ->
-                    UI.h2
+                    ( UI.h2, UI.sPadding )
 
                 _ ->
-                    UI.h1
+                    ( UI.h1, UI.lPadding )
     in
     column
         [ UI.lSpacing
@@ -80,41 +81,56 @@ view window =
         [ UI.p <| pageHeading [ Font.color Color.yellow, centerX ] <| text "Tidligere artister"
         , el [ UI.sPadding ] <|
             column (bannerImageAttributes window)
-                [ column [ UI.fillWidth, UI.lSpacing ]
-                    [ image [ UI.fillWidth, UI.class "shake" ] { src = "/images/logo-2019-mm-transparent.png", description = "Logo 2019" }
-                    , artists.y2019
-                        |> List.sort
-                        |> List.intersperse "•"
-                        |> List.map text
-                        |> wrappedRow [ UI.fillWidth, UI.sSpacing ]
-                    , UI.imageWithAttribution [] { src = "/images/tak-2019-tk.jpg", description = "Fellesbilde 2019", attribution = "Thomas Kvehaugen", isBoxed = False }
-                    ]
+                [ image (UI.fillWidth :: centerX :: imagePadding :: UI.class "shake" :: UI.boxed) { src = "/images/logo-2019-mm-transparent.png", description = "Logo 2019" }
+                , artists.y2019
+                    |> List.sort
+                    |> List.intersperse "•"
+                    |> List.map text
+                    |> wrappedRow [ UI.fillWidth, UI.sSpacing ]
+                , UI.imageWithAttribution [] { src = "/images/tak-2019-tk.jpg", description = "Fellesbilde 2019", attribution = "Thomas Kvehaugen", isBoxed = False }
                 ]
+        , UI.horisontalDivider
         , el [ UI.sPadding ] <|
             column (bannerImageAttributes window)
-                [ heading2018 [ centerX, Font.color Color.yellow, htmlAttribute <| Html.Attributes.style "transform" <| "rotate(-25deg) translateX(" ++ String.fromInt move2018Heading ++ "px)" ] <| text "2018"
-                , column [ UI.fillWidth, UI.lSpacing ]
-                    [ image
+                [ column
+                    (UI.fillWidth
+                        :: imagePadding
+                        :: UI.boxed
+                    )
+                    [ heading2018 [ centerX, Font.color Color.yellow, htmlAttribute <| Html.Attributes.style "transform" <| "rotate(-30deg) translateX(" ++ String.fromInt move2018Heading ++ "px)" ] <| text "2018"
+                    , image
                         [ centerX
-                        , UI.class "shake"
+                        , UI.fillWidth
                         , height height2018Logo
                         , width width2018Logo
                         ]
                         { src = "/images/logo-2018-mm-transparent.png", description = "Logo 2018" }
-                    , UI.imageWithAttribution [] { src = "/images/tak-2018-tk.jpg", description = "Fellesbilde 2018", attribution = "Thomas Kvehaugen", isBoxed = False }
                     ]
+                , UI.imageWithAttribution [] { src = "/images/tak-2018-tk.jpg", description = "Fellesbilde 2018", attribution = "Thomas Kvehaugen", isBoxed = False }
                 ]
+        , UI.horisontalDivider
         , el [ UI.sPadding ] <|
             column (bannerImageAttributes window)
                 [ column [ UI.fillWidth, UI.lSpacing ]
-                    [ image [ UI.fillWidth, UI.class "shake" ] { src = "/images/logo-2017-mm.png", description = "Logo 2017" }
+                    [ image
+                        (UI.fillWidth
+                            :: imagePadding
+                            :: UI.boxed
+                        )
+                        { src = "/images/logo-2017-mm.png", description = "Logo 2017" }
                     , UI.imageWithAttribution [] { src = "/images/tak-2017-tk.jpg", description = "Fellesbilde 2017", attribution = "Thomas Kvehaugen", isBoxed = False }
                     ]
                 ]
+        , UI.horisontalDivider
         , el [ UI.sPadding ] <|
             column (bannerImageAttributes window)
                 [ column [ UI.fillWidth, UI.lSpacing ]
-                    [ image [ UI.fillWidth, UI.class "shake" ] { src = "/images/logo-2016-mm.png", description = "Logo 2016" }
+                    [ image
+                        (UI.fillWidth
+                            :: imagePadding
+                            :: UI.boxed
+                        )
+                        { src = "/images/logo-2016-mm.png", description = "Logo 2016" }
                     , UI.imageWithAttribution [] { src = "/images/tak-2016-tk.jpg", description = "Fellesbilde 2016", attribution = "Thomas Kvehaugen", isBoxed = False }
                     ]
                 ]
