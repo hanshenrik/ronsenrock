@@ -116,3 +116,9 @@ nav.open {
     transform: translate(2px, 1px) rotate(0deg);
   }
 }
+/* Internet Explorer fixes */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .s.c > .s {
+    flex-basis: auto !important;
+  }
+}
