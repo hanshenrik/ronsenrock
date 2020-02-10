@@ -152,11 +152,11 @@ update msg model =
 
 menuItems : List (Element Msg)
 menuItems =
-    [ link [ UI.class "hoverable", UI.sPadding ] { label = text "🎸 Hjem", url = "/" }
+    [ link [ UI.class "hoverable", UI.sPadding ] { label = text "🎸 2020", url = "/" }
     , link [ UI.class "hoverable", UI.sPadding ] { label = text "📆 Program", url = "/program" }
     , link [ UI.class "hoverable", UI.sPadding ] { label = text "⛺️ Praktisk info", url = "/praktisk" }
-    , link [ UI.class "hoverable", UI.sPadding ] { label = text "\u{1F9ED} Festivalkart", url = "/festivalkart" }
-    , link [ UI.class "hoverable", UI.sPadding ] { label = text "📜 Tidligere artister", url = "/tidligere-artister" }
+    , link [ UI.class "hoverable", UI.sPadding ] { label = text "🌎 Festivalkart", url = "/festivalkart" }
+    , link [ UI.class "hoverable", UI.sPadding ] { label = text "🎤 Tidligere artister", url = "/tidligere-artister" }
     , link [ UI.class "hoverable", UI.sPadding ] { label = text "ℹ️ Om RønsenROCK", url = "/om" }
     ]
 
@@ -190,12 +190,12 @@ desktopNavMenu model =
         , htmlAttribute <|
             Html.Attributes.style "background"
                 """linear-gradient(122deg
-                , rgb(255, 184, 20) 50%
-                , rgb(255, 96, 43) 50%
-                , rgb(255, 96, 43) 60%
-                , rgb(255, 63, 102) 60%
-                , rgb(255, 63, 102) 80%
-                , rgb(214, 25, 91) 80%)
+                , rgb(255, 184, 20) 85%
+                , rgb(255, 96, 43) 85%
+                , rgb(255, 96, 43) 92%
+                , rgb(255, 63, 102) 92%
+                , rgb(255, 63, 102) 95%
+                , rgb(214, 25, 91) 95%)
                 """
         , Border.shadow
             { offset = ( 0, 0 )
