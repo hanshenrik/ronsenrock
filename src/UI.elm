@@ -287,8 +287,7 @@ imageWithAttribution attributes { attribution, src, description, isBoxed } =
             ]
           <|
             text <|
-                "📷 "
-                    ++ attribution
+                attribution
         ]
 
 

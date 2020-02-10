@@ -15,7 +15,7 @@ view : DeviceClass -> Element msg
 view deviceClass =
     case deviceClass of
         Phone ->
-            UI.imageWithAttribution [] { src = "/images/kart-lm.jpg", description = "Festivalkart", attribution = "Lisa Løtvedt Martinsen", isBoxed = False }
+            UI.imageWithAttribution [] { src = "/images/kart-lm.jpg", description = "Festivalkart", attribution = "🎨 Lisa Løtvedt Martinsen", isBoxed = False }
 
         _ ->
             column [ UI.mPadding, UI.xlSpacing, centerX ]
@@ -30,5 +30,5 @@ view deviceClass =
                         )
                     ]
                   <|
-                    UI.imageWithAttribution [] { src = "/images/kart-lm.jpg", description = "Festivalkart", attribution = "Lisa Løtvedt Martinsen", isBoxed = True }
+                    UI.imageWithAttribution [] { src = "/images/kart-lm.jpg", description = "Festivalkart", attribution = "🎨 Lisa Løtvedt Martinsen", isBoxed = True }
                 ]

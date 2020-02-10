@@ -94,7 +94,7 @@ view window =
                     |> List.intersperse "•"
                     |> List.map text
                     |> wrappedRow [ UI.fillWidth, UI.sSpacing ]
-                , UI.imageWithAttribution [] { src = "/images/tak-2019-tk.jpg", description = "Fellesbilde 2019", attribution = "Thomas Kvehaugen", isBoxed = False }
+                , image [ UI.fillWidth ] { src = "/images/tak-2019-tk.jpg", description = "Fellesbilde 2019" }
                 ]
         , el [ moveUp (9 * 3), UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
         , el [ UI.sPadding ] <|
@@ -114,7 +114,7 @@ view window =
                         ]
                         { src = "/images/logo-2018-mm-transparent.png", description = "Logo 2018" }
                     ]
-                , UI.imageWithAttribution [] { src = "/images/tak-2018-tk.jpg", description = "Fellesbilde 2018", attribution = "Thomas Kvehaugen", isBoxed = False }
+                , image [ UI.fillWidth ] { src = "/images/tak-2018-tk.jpg", description = "Fellesbilde 2018" }
                 ]
         , el [ moveUp (9 * 3), UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
         , el [ UI.sPadding ] <|
@@ -127,7 +127,7 @@ view window =
                             :: UI.boxed
                         )
                         { src = "/images/logo-2017-mm.png", description = "Logo 2017" }
-                    , UI.imageWithAttribution [] { src = "/images/tak-2017-tk.jpg", description = "Fellesbilde 2017", attribution = "Thomas Kvehaugen", isBoxed = False }
+                    , image [ UI.fillWidth ] { src = "/images/tak-2017-tk.jpg", description = "Fellesbilde 2017" }
                     ]
                 ]
         , el [ moveUp (9 * 3), UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
@@ -141,7 +141,7 @@ view window =
                             :: UI.boxed
                         )
                         { src = "/images/logo-2016-mm.png", description = "Logo 2016" }
-                    , UI.imageWithAttribution [] { src = "/images/tak-2016-tk.jpg", description = "Fellesbilde 2016", attribution = "Thomas Kvehaugen", isBoxed = False }
+                    , image [ UI.fillWidth ] { src = "/images/tak-2016-tk.jpg", description = "Fellesbilde 2016" }
                     ]
                 ]
         , el [ moveUp (9 * 3), UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
@@ -160,7 +160,7 @@ view window =
                         ]
                         { src = "/images/logo-2015.jpg", description = "Logo 2015" }
                     ]
-                , UI.imageWithAttribution [] { src = "/images/tak-2015-1-tk.jpg", description = "Fellesbilde 2015", attribution = "Thomas Kvehaugen", isBoxed = False }
+                , image [ UI.fillWidth ] { src = "/images/tak-2015-1-tk.jpg", description = "Fellesbilde 2015" }
                 ]
         , el [] none
         ]
