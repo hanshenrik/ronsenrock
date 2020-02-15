@@ -31,7 +31,7 @@ view deviceClass =
         ]
         [ pageHeading [] <| text "Program"
         , column [ UI.mSpacing ]
-            [ dayHeading [ Font.color Color.yellow ] <| text "Torsdag 11. juli"
+            [ dayHeading [ Font.color Color.yellow ] <| text "Torsdag 2. juli"
             , row [ UI.lSpacing ]
                 [ el [ alignTop, UI.monoFont ] <| text "🕛 12:00"
                 , UI.p <| text "Festivalområdet åpner!"
@@ -46,7 +46,7 @@ view deviceClass =
             --     ]
             ]
         , column [ UI.mSpacing ]
-            [ dayHeading [ Font.color Color.yellow ] <| text "Fredag 12. juli"
+            [ dayHeading [ Font.color Color.yellow ] <| text "Fredag 3. juli"
             , row [ UI.lSpacing ]
                 [ el [ alignTop, UI.monoFont ] <| text "🕔 17:00"
                 , UI.p <| text "Tautrekking"
@@ -96,7 +96,7 @@ view deviceClass =
             --     ]
             ]
         , column [ UI.mSpacing ]
-            [ dayHeading [ Font.color Color.yellow ] <| text "Lørdag 13. juli"
+            [ dayHeading [ Font.color Color.yellow ] <| text "Lørdag 4. juli"
             , row [ UI.lSpacing ]
                 [ el [ alignTop, UI.monoFont ] <| text "🕙 10:00"
                 , UI.p <| text "Ryddeyoga"
