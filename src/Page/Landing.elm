@@ -5,7 +5,6 @@ import Countdown
 import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
-import Html as Html
 import Html.Attributes
 import Type.Window exposing (Window)
 import UI

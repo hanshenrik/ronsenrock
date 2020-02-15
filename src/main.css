@@ -18,7 +18,7 @@ a {
 }
 
 .hoverable {
-  transition: background-color 0.2s ease-out, color 0.2s ease-out;
+  transition: background-color 0.2s ease-out, color 0.2s ease-out, transform 0.2s ease-out;
   padding: 1rem 0;
 }
 .hoverable:not(a) {
@@ -36,8 +36,14 @@ a {
   transform: scale(1.1);
 }
 
-*:focus {
-  outline: 3px #9bcbff solid !important;
+.mobile-nav a,
+.desktop-nav a {
+  border: none !important;
+}
+.mobile-nav a:hover,
+.desktop-nav a:hover {
+  transform: scale(1.05);
+  background-color: transparent;
 }
 
 .mobile-nav {

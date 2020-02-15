@@ -15,7 +15,6 @@ import Element.Region as Region
 import Footer
 import Html.Attributes
 import Json.Decode as Decode
-import Page.About
 import Page.FestivalMap
 import Page.History
 import Page.Landing
@@ -58,7 +57,6 @@ type Page
     | HistoryPage
     | PracticalInfoPage
     | FestivalMapPage
-    | AboutPage
     | ProgramPage
 
 
@@ -79,14 +77,11 @@ pageFromUrl url =
         "/" ->
             LandingPage
 
-        "/tidligere-artister" ->
+        "/historie" ->
             HistoryPage
 
         "/praktisk" ->
             PracticalInfoPage
-
-        "/om" ->
-            AboutPage
 
         "/festivalkart" ->
             FestivalMapPage
@@ -150,14 +145,56 @@ update msg model =
             ( model, Cmd.none )
 
 
-menuItems : List (Element Msg)
-menuItems =
-    [ link [ UI.class "hoverable", UI.sPadding ] { label = text "🎸 2020", url = "/" }
-    , link [ UI.class "hoverable", UI.sPadding ] { label = text "📆 Program", url = "/program" }
-    , link [ UI.class "hoverable", UI.sPadding ] { label = text "⛺️ Praktisk info", url = "/praktisk" }
-    , link [ UI.class "hoverable", UI.sPadding ] { label = text "🌎 Festivalkart", url = "/festivalkart" }
-    , link [ UI.class "hoverable", UI.sPadding ] { label = text "🎤 Tidligere artister", url = "/tidligere-artister" }
-    , link [ UI.class "hoverable", UI.sPadding ] { label = text "ℹ️ Om RønsenROCK", url = "/om" }
+menuItems : Url.Url -> DeviceClass -> List (Element Msg)
+menuItems { path } deviceClass =
+    let
+        isActive url =
+            path == url
+
+        activeDot =
+            case deviceClass of
+                Phone ->
+                    onRight <|
+                        el
+                            [ centerY
+                            , width <| px 8
+                            , height <| px 8
+                            , moveDown 2
+                            , UI.xlRoundedCorners
+                            , Background.color Color.gray15
+                            ]
+                            none
+
+                _ ->
+                    below <|
+                        el
+                            [ centerX
+                            , width <| px 20
+                            , height <| px 20
+                            , Background.color Color.yellow
+                            , htmlAttribute <| Html.Attributes.style "transform" "rotate(45deg)"
+                            ]
+                            none
+
+        linkElement { label, url } =
+            link
+                ([ UI.class "hoverable"
+                 , UI.sPadding
+                 ]
+                    ++ (if isActive url then
+                            [ activeDot ]
+
+                        else
+                            []
+                       )
+                )
+                { label = label, url = url }
+    in
+    [ linkElement { label = text "🎸 2020", url = "/" }
+    , linkElement { label = text "📆 Program", url = "/program" }
+    , linkElement { label = text "⛺️ Praktisk info", url = "/praktisk" }
+    , linkElement { label = text "🌎 Festivalkart", url = "/festivalkart" }
+    , linkElement { label = text "📜 Historie", url = "/historie" }
     ]
 
 
@@ -169,21 +206,22 @@ navMenu model =
     in
     case deviceClass of
         Phone ->
-            mobileNavMenu model
+            mobileNavMenu model deviceClass
 
         Tablet ->
-            mobileNavMenu model
+            mobileNavMenu model deviceClass
 
         _ ->
-            desktopNavMenu model
+            desktopNavMenu model deviceClass
 
 
-desktopNavMenu : Model -> Element Msg
-desktopNavMenu model =
+desktopNavMenu : Model -> DeviceClass -> Element Msg
+desktopNavMenu { url } deviceClass =
     el
         [ Region.navigation
         , UI.fillWidth
         , height shrink
+        , UI.class "desktop-nav"
         , htmlAttribute <| Html.Attributes.style "position" "sticky"
         , htmlAttribute <| Html.Attributes.style "top" "0"
         , htmlAttribute <| Html.Attributes.style "z-index" "2"
@@ -197,26 +235,21 @@ desktopNavMenu model =
                 , rgb(255, 63, 102) 95%
                 , rgb(214, 25, 91) 95%)
                 """
-        , Border.shadow
-            { offset = ( 0, 0 )
-            , size = 1
-            , blur = 4
-            , color = Color.gray15
-            }
         , Font.color Color.mainBackground
         , Font.letterSpacing 2
         ]
     <|
         row
-            [ UI.sPadding
+            [ padding 12
             , UI.lSpacing
             , centerX
             ]
-            menuItems
+        <|
+            menuItems url deviceClass
 
 
-mobileNavMenu : Model -> Element Msg
-mobileNavMenu model =
+mobileNavMenu : Model -> DeviceClass -> Element Msg
+mobileNavMenu model deviceClass =
     el
         [ Region.navigation
         , width (fill |> maximum 280)
@@ -252,7 +285,7 @@ mobileNavMenu model =
             , UI.mSpacing
             ]
             (closeMenuButton
-                :: menuItems
+                :: menuItems model.url deviceClass
             )
 
 
@@ -314,9 +347,6 @@ mainContent model =
 
                 PracticalInfoPage ->
                     Page.PracticalInfo.view deviceClass
-
-                AboutPage ->
-                    Page.About.view deviceClass
 
                 FestivalMapPage ->
                     Page.FestivalMap.view deviceClass
