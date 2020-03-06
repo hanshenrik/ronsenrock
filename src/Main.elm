@@ -280,20 +280,16 @@ mobileNavMenu model deviceClass =
             htmlAttribute <| Html.Attributes.class "closed"
         ]
     <|
-        column
-            [ UI.mPadding
-            , UI.mSpacing
+        column []
+            [ closeMenuButton
+            , column [ UI.mPadding, UI.mSpacing ] <| menuItems model.url deviceClass
             ]
-            (closeMenuButton
-                :: menuItems model.url deviceClass
-            )
 
 
 toggleMenuButton : Bool -> Element Msg
 toggleMenuButton isMenuOpen =
     Input.button
-        [ UI.sPadding
-        , Font.color Color.white
+        [ Font.color Color.white
         , Font.size 30
         , UI.class "hoverable-alternative"
         , htmlAttribute <| Html.Attributes.style "position" "sticky"
@@ -384,6 +380,7 @@ view model =
                     case deviceClass of
                         Phone ->
                             openMenuButton
+
                         Tablet ->
                             openMenuButton
 
