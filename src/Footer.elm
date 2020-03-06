@@ -5,13 +5,13 @@ import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
 import Element.Region as Region
+import Html.Attributes
 import Type.Window exposing (Window)
 import UI
-import Html.Attributes
 
 
-default : Window -> Bool -> Element msg
-default window isMenuOpen =
+default : Window -> Element msg
+default window =
     el
         [ Region.footer
         , htmlAttribute <| Html.Attributes.style "position" "sticky"
@@ -20,12 +20,6 @@ default window isMenuOpen =
         , Background.color <| Color.withTransparency Color.white 0.2
         , UI.lPadding
         , UI.fillWidth
-        , UI.class "dimmable"
-        , if isMenuOpen then
-            UI.dimmed
-
-          else
-            UI.class ""
         ]
     <|
         UI.rowOrColumn window

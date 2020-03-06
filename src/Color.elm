@@ -3,6 +3,7 @@ module Color exposing
     , darkPink
     , gray
     , gray15
+    , lightPink
     , lightYellow
     , lightblack
     , mainBackground
@@ -20,6 +21,11 @@ import Element exposing (..)
 pink : Color
 pink =
     rgb255 255 63 102
+
+
+lightPink : Color
+lightPink =
+    rgb255 252 154 174
 
 
 darkPink : Color

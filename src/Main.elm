@@ -8,6 +8,7 @@ import Ease
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
+import Element.Events as Events
 import Element.Font as Font
 import Element.Input as Input
 import Element.Region as Region
@@ -23,6 +24,7 @@ import SmoothScroll exposing (scrollTo)
 import Task exposing (Task)
 import Time
 import Transit exposing (Step(..))
+import Transition
 import Type.Flags as Flags
 import Type.Window exposing (Window)
 import UI
@@ -48,6 +50,8 @@ type alias Model =
         , page : Page
         , window : Window
         , time : Int
+        , programPanel : Element Page.Program.Msg
+        , programPanelState : Page.Program.PanelState
         }
 
 
@@ -67,6 +71,7 @@ type Msg
     | Resized Int Int
     | TransitMsg (Transit.Msg Msg)
     | Tick Time.Posix
+    | GotProgramPageMsg Page.Program.Msg
     | NoOp
 
 
@@ -139,6 +144,11 @@ update msg model =
             ( { model | time = millis }
             , Cmd.none
             )
+
+        GotProgramPageMsg subMsg ->
+            case subMsg of
+                Page.Program.TogglePanel newProgramPanelState newProgramPanel ->
+                    ( { model | programPanel = newProgramPanel, programPanelState = newProgramPanelState }, Cmd.none )
 
         NoOp ->
             ( model, Cmd.none )
@@ -345,18 +355,22 @@ mainContent model =
         , htmlAttribute <| Html.Attributes.style "position" "relative"
         , htmlAttribute <| Html.Attributes.style "min-height" "100vh"
         , htmlAttribute <| Html.Attributes.style "z-index" "1"
+        , inFront <|
+            case deviceClass of
+                Phone ->
+                    openMenuButton
+
+                Tablet ->
+                    openMenuButton
+
+                _ ->
+                    none
         ]
     <|
         el
-            [ UI.class "dimmable"
-            , UI.fillWidth
+            [ UI.fillWidth
             , height fill
             , centerX
-            , if model.isMenuOpen then
-                UI.dimmed
-
-              else
-                UI.class ""
             ]
         <|
             case model.page of
@@ -373,35 +387,45 @@ mainContent model =
                     Page.FestivalMap.view deviceClass
 
                 ProgramPage ->
-                    Page.Program.view deviceClass
+                    Element.map GotProgramPageMsg <| Page.Program.view model.programPanel model.programPanelState deviceClass
 
 
 view : Model -> Browser.Document Msg
 view model =
-    let
-        deviceClass =
-            (classifyDevice model.window).class
-    in
     { title = "RønsenRock 2020"
     , body =
-        [ layout [ Background.color Color.mainBackground, Font.color Color.white, UI.bodyFont ] <|
+        [ layout
+            [ Background.color Color.mainBackground
+            , Font.color Color.white
+            , UI.bodyFont
+            ]
+          <|
             column
                 [ UI.fillWidth
                 , height fill
                 , inFront <|
-                    case deviceClass of
-                        Phone ->
-                            openMenuButton
+                    el
+                        ([ UI.fillWidth
+                         , height fill
+                         , htmlAttribute <| Html.Attributes.style "z-index" "-1"
+                         , Transition.transition [ "background-color" ]
+                         , Background.color Color.transparent
+                         ]
+                            ++ (if model.isMenuOpen then
+                                    [ Events.onClick <| ToggleMenu Nothing
+                                    , Background.color <| Color.withTransparency Color.black 0.4
+                                    , htmlAttribute <| Html.Attributes.style "z-index" "2"
+                                    ]
 
-                        Tablet ->
-                            openMenuButton
-
-                        _ ->
-                            none
+                                else
+                                    []
+                               )
+                        )
+                        none
                 ]
                 [ navMenu model
                 , mainContent model
-                , Footer.default model.window model.isMenuOpen
+                , Footer.default model.window
                 ]
         ]
     }
@@ -418,6 +442,8 @@ init flags url key =
                   , page = pageFromUrl url
                   , window = window
                   , time = Time.posixToMillis time
+                  , programPanel = none
+                  , programPanelState = Page.Program.Closed
                   }
                 , Cmd.none
                 )

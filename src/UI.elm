@@ -3,7 +3,6 @@ module UI exposing
     , boxed
     , buttonLink
     , class
-    , dimmed
     , divider
     , fillWidth
     , h1
@@ -35,6 +34,7 @@ module UI exposing
     , xsSpacing
     , xxlPadding
     , xxlSpacing
+    , xxsPadding
     )
 
 import Color
@@ -123,14 +123,14 @@ class name =
     htmlAttribute <| Html.Attributes.class name
 
 
-dimmed : Attribute msg
-dimmed =
-    htmlAttribute <| Html.Attributes.style "opacity" "0.5"
-
-
 spacingUnit : Int
 spacingUnit =
     9
+
+
+xxsPadding : Attribute msg
+xxsPadding =
+    padding 2
 
 
 xsPadding : Attribute msg

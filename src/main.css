@@ -57,8 +57,8 @@ a {
   transition: all 0.25s ease-out;
 }
 .mobile-nav.closed {
-  margin-left: -300px;
-  transform: translateX(-300px);
+  margin-left: -280px;
+  transform: translateX(-280px);
   opacity: 0;
   visibility: hidden;
 }
@@ -69,8 +69,22 @@ a {
   visibility: visible;
 }
 
-.dimmable {
-  transition: opacity 0.2s ease-in-out;
+.program-panel {
+  position: fixed !important;
+  bottom: 0;
+  top: 74px;
+  right: 0;
+  z-index: 2;
+
+  transition: all 0.25s ease-out;
+}
+.program-panel.closed {
+  transform: translateX(500px);
+  visibility: hidden;
+}
+.program-panel.open {
+  transform: translateX(0);
+  visibility: visible;
 }
 
 .shake:hover,
