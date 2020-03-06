@@ -1,6 +1,5 @@
 module Color exposing
     ( black
-    , blackTransparent
     , darkPink
     , gray
     , gray15
@@ -11,7 +10,7 @@ module Color exposing
     , pink
     , transparent
     , white
-    , whiteTransparent
+    , withTransparency
     , yellow
     )
 
@@ -78,19 +77,10 @@ gray15 =
     rgb255 50 50 50
 
 
-whiteTransparent : Float -> Color
-whiteTransparent alpha =
+withTransparency : Color -> Float -> Color
+withTransparency original alpha =
     let
-        original =
-            toRgb white
+        originalRgb =
+            toRgb original
     in
-    fromRgb <| { original | alpha = alpha }
-
-
-blackTransparent : Float -> Color
-blackTransparent alpha =
-    let
-        original =
-            toRgb black
-    in
-    fromRgb <| { original | alpha = alpha }
+    fromRgb <| { originalRgb | alpha = alpha }

@@ -209,12 +209,12 @@ rowOrColumn window =
 
 horisontalDivider : Element msg
 horisontalDivider =
-    el [ Border.widthEach { top = 0, left = 0, right = 0, bottom = 1 }, Border.color <| Color.whiteTransparent 0.1, width fill ] none
+    el [ Border.widthEach { top = 0, left = 0, right = 0, bottom = 1 }, Border.color <| Color.withTransparency Color.white 0.1, width fill ] none
 
 
 verticalDivider : Element msg
 verticalDivider =
-    el [ Border.widthEach { top = 0, left = 1, right = 0, bottom = 0 }, Border.color <| Color.whiteTransparent 0.1, height fill ] none
+    el [ Border.widthEach { top = 0, left = 1, right = 0, bottom = 0 }, Border.color <| Color.withTransparency Color.white 0.1, height fill ] none
 
 
 divider : Window -> Element msg
