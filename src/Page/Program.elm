@@ -90,7 +90,8 @@ view panelContent panelState deviceClass =
                 { label =
                     row [ UI.mSpacing, UI.xxsPadding ]
                         [ el [ alignTop, UI.monoFont ] <| row [ UI.sSpacing ] [ el [ Font.size 30 ] <| text "🕛", text "12:00" ]
-                        , row [ UI.sSpacing ] [ text "Åpning!", text "👉"]
+                        , text "Åpning!"
+                        , text "👉"
                         ]
                 , onPress =
                     Just <|

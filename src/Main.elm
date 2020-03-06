@@ -128,6 +128,7 @@ update msg model =
                     ( 0, 300 )
                     { model
                         | isMenuOpen = False
+                        , programPanelState = Page.Program.Closed
                     }
 
         ToggleMenu maybeState ->
