@@ -31,6 +31,7 @@ module UI exposing
     , xlPadding
     , xlRoundedCorners
     , xlSpacing
+    , xsPadding
     , xsSpacing
     , xxlPadding
     , xxlSpacing
@@ -130,6 +131,11 @@ dimmed =
 spacingUnit : Int
 spacingUnit =
     9
+
+
+xsPadding : Attribute msg
+xsPadding =
+    padding 5
 
 
 sPadding : Attribute msg

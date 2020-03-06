@@ -2,6 +2,7 @@
   --lightYellow: rgb(248, 198, 82);
   --yellow: rgb(255, 184, 20);
   --orange: rgb(255, 96, 43);
+  --pink: rgb(255, 63, 102);
   --black: rgb(23, 23, 23);
 }
 
@@ -18,7 +19,8 @@ a {
 }
 
 .hoverable {
-  transition: background-color 0.2s ease-out, color 0.2s ease-out, transform 0.2s ease-out;
+  transition: background-color 0.2s ease-out, color 0.2s ease-out,
+    transform 0.2s ease-out;
   padding: 1rem 0;
 }
 .hoverable:not(a) {
@@ -79,6 +81,11 @@ a {
   transform-origin: 50% 50%;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
+}
+
+*:focus {
+  outline: var(--pink) solid 1px !important;
+  box-shadow: none !important;
 }
 
 @keyframes shaking {

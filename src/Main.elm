@@ -293,7 +293,7 @@ toggleMenuButton isMenuOpen =
         , Font.size 30
         , UI.class "hoverable-alternative"
         , htmlAttribute <| Html.Attributes.style "position" "sticky"
-        , htmlAttribute <| Html.Attributes.style "top" "0"
+        , htmlAttribute <| Html.Attributes.style "top" "2px"
         , htmlAttribute <| Html.Attributes.style "z-index" "2"
         , UI.mPadding
         ]
