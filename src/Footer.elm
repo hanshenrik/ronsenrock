@@ -7,15 +7,17 @@ import Element.Font as Font
 import Element.Region as Region
 import Type.Window exposing (Window)
 import UI
+import Html.Attributes
 
 
 default : Window -> Bool -> Element msg
 default window isMenuOpen =
     el
         [ Region.footer
-        , alignBottom
+        , htmlAttribute <| Html.Attributes.style "position" "sticky"
+        , htmlAttribute <| Html.Attributes.style "bottom" "0"
         , Font.size 16
-        , Background.color <| Color.whiteTransparent 0.075
+        , Background.color <| Color.withTransparency Color.white 0.2
         , UI.lPadding
         , UI.fillWidth
         , UI.class "dimmable"

@@ -291,7 +291,16 @@ mobileNavMenu model deviceClass =
 
 toggleMenuButton : Bool -> Element Msg
 toggleMenuButton isMenuOpen =
-    Input.button [ UI.sPadding, Font.color Color.white, Font.size 30, UI.class "hoverable-alternative" ]
+    Input.button
+        [ UI.sPadding
+        , Font.color Color.white
+        , Font.size 30
+        , UI.class "hoverable-alternative"
+        , htmlAttribute <| Html.Attributes.style "position" "sticky"
+        , htmlAttribute <| Html.Attributes.style "top" "0"
+        , htmlAttribute <| Html.Attributes.style "z-index" "2"
+        , UI.mPadding
+        ]
         { label =
             text <|
                 if isMenuOpen then
@@ -324,6 +333,10 @@ mainContent model =
         , height fill
         , paddingEach { top = 9 * 6, right = 0, bottom = 0, left = 0 }
         , Region.mainContent
+        , Background.color Color.mainBackground
+        , htmlAttribute <| Html.Attributes.style "position" "relative"
+        , htmlAttribute <| Html.Attributes.style "min-height" "100vh"
+        , htmlAttribute <| Html.Attributes.style "z-index" "1"
         ]
     <|
         el
@@ -357,6 +370,10 @@ mainContent model =
 
 view : Model -> Browser.Document Msg
 view model =
+    let
+        deviceClass =
+            (classifyDevice model.window).class
+    in
     { title = "RønsenRock 2020"
     , body =
         [ layout [ Background.color Color.mainBackground, Font.color Color.white, UI.bodyFont ] <|
@@ -364,17 +381,18 @@ view model =
                 [ UI.fillWidth
                 , height fill
                 , inFront <|
-                    el
-                        [ htmlAttribute <| Html.Attributes.style "position" "sticky"
-                        , htmlAttribute <| Html.Attributes.style "top" "0"
-                        , UI.mSpacing
-                        , UI.mPadding
-                        ]
-                        openMenuButton
+                    case deviceClass of
+                        Phone ->
+                            openMenuButton
+                        Tablet ->
+                            openMenuButton
+
+                        _ ->
+                            none
                 ]
                 [ navMenu model
                 , mainContent model
-                , el [ UI.fillWidth, Events.onClick <| ToggleMenu (Just False) ] <| Footer.default model.window model.isMenuOpen
+                , Footer.default model.window model.isMenuOpen
                 ]
         ]
     }
