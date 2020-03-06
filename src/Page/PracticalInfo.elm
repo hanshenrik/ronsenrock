@@ -94,7 +94,7 @@ view deviceClass =
             , h3 [] <| text "👙 Kan jeg bade noe sted?"
             , paragraph [ UI.sSpacing ]
                 [ text "Ja! En kort rusletur fra festivalområdet kan vi by på finfine badefasiliteter!" ]
-            , UI.imageWithAttribution [] { src = "/images/strand-mm.jpg", description = "Bading", attribution = "Maria Martinsen", isBoxed = True }
+            , UI.imageWithAttribution [] { src = "/images/strand-mm.jpg", description = "Bading", attribution = "📷 Maria Martinsen", isBoxed = True }
 
             --
             , h3 [] <| text "🚽 Hvilke fasiliteter finnes?"
