@@ -8,7 +8,6 @@ import Ease
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
-import Element.Events as Events
 import Element.Font as Font
 import Element.Input as Input
 import Element.Region as Region
@@ -151,9 +150,21 @@ menuItems { path } deviceClass =
         isActive url =
             path == url
 
-        activeDot =
+        activeIndicator =
             case deviceClass of
                 Phone ->
+                    onRight <|
+                        el
+                            [ centerY
+                            , width <| px 8
+                            , height <| px 8
+                            , moveDown 2
+                            , UI.xlRoundedCorners
+                            , Background.color Color.gray15
+                            ]
+                            none
+
+                Tablet ->
                     onRight <|
                         el
                             [ centerY
@@ -169,10 +180,11 @@ menuItems { path } deviceClass =
                     below <|
                         el
                             [ centerX
-                            , width <| px 20
-                            , height <| px 20
+                            , width <| px 21
+                            , height <| px 21
                             , Background.color Color.yellow
                             , htmlAttribute <| Html.Attributes.style "transform" "rotate(45deg)"
+                            , htmlAttribute <| Html.Attributes.style "margin-top" "5px"
                             ]
                             none
 
@@ -182,7 +194,7 @@ menuItems { path } deviceClass =
                  , UI.sPadding
                  ]
                     ++ (if isActive url then
-                            [ activeDot ]
+                            [ activeIndicator ]
 
                         else
                             []
@@ -240,7 +252,7 @@ desktopNavMenu { url } deviceClass =
         ]
     <|
         row
-            [ padding 12
+            [ UI.mPadding
             , UI.lSpacing
             , centerX
             ]
