@@ -10,7 +10,7 @@ var flags = {
   time: Date.now()
 };
 
-Elm.Main.init({
+var app = Elm.Main.init({
   node: document.getElementById("root"),
   flags: flags
 });
@@ -19,3 +19,7 @@ Elm.Main.init({
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+app.ports.toggleBodyNoScroll.subscribe(shouldBePresent => {
+  document.body.classList.toggle("no-scroll", shouldBePresent);
+});

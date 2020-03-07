@@ -15,11 +15,13 @@ import Element.Region as Region
 import Footer
 import Html.Attributes
 import Json.Decode as Decode
+import Json.Encode as Encode
 import Page.FestivalMap
 import Page.History
 import Page.Landing
 import Page.PracticalInfo
 import Page.Program
+import Ports
 import SmoothScroll exposing (scrollTo)
 import Task exposing (Task)
 import Time
@@ -149,7 +151,28 @@ update msg model =
         GotProgramPageMsg subMsg ->
             case subMsg of
                 Page.Program.TogglePanel newProgramPanelState newProgramPanel ->
-                    ( { model | programPanel = newProgramPanel, programPanelState = newProgramPanelState }, Cmd.none )
+                    let
+                        deviceClass =
+                            (classifyDevice model.window).class
+
+                        preventScrollMsg =
+                            Ports.toggleBodyNoScroll <|
+                                Encode.bool <|
+                                    case newProgramPanelState of
+                                        Page.Program.Open ->
+                                            True
+
+                                        Page.Program.Closed ->
+                                            False
+                    in
+                    ( { model | programPanel = newProgramPanel, programPanelState = newProgramPanelState }
+                    , case deviceClass of
+                        Phone ->
+                            preventScrollMsg
+
+                        _ ->
+                            Cmd.none
+                    )
 
         NoOp ->
             ( model, Cmd.none )

@@ -12,6 +12,10 @@ body {
   font-weight: lighter;
 }
 
+body.no-scroll {
+  overflow: hidden;
+}
+
 a {
   border-width: 2px 0 4px 0 !important;
   border-color: transparent transparent var(--lightYellow) transparent !important;

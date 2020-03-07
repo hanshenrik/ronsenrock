@@ -1,6 +1,6 @@
-port module Ports exposing (cache)
+port module Ports exposing (toggleBodyNoScroll)
 
 import Json.Encode as Encode
 
 
-port cache : Encode.Value -> Cmd msg
+port toggleBodyNoScroll : Encode.Value -> Cmd msg

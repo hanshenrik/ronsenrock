@@ -18,7 +18,7 @@ default window =
         , htmlAttribute <| Html.Attributes.style "bottom" "0"
         , Font.size 16
         , Background.color <| Color.withTransparency Color.white 0.2
-        , UI.lPadding
+        , UI.xlPadding
         , UI.fillWidth
         ]
     <|
