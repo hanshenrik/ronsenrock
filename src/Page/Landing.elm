@@ -27,7 +27,7 @@ view { window, time } =
                 _ ->
                     ( ( 600, 600 ), ( UI.xxlPadding, UI.h1 ) )
     in
-    column [ UI.fillWidth, centerY, UI.xxlSpacing, paddingXY 0 (4 * 9) ]
+    column [ UI.fillWidth, centerY, UI.xxlSpacing, paddingEach { top = 4 * 9, right = 0, bottom = 0, left = 0 } ]
         [ column [ UI.sSpacing, centerX ]
             [ el [ centerX ] <| dateHeading [ Font.color Color.yellow, htmlAttribute <| Html.Attributes.style "transform" "rotate(-10deg)" ] <| text "2. – 5. juli"
             , image
@@ -59,13 +59,37 @@ view { window, time } =
                     :: UI.boxed
                 )
                 [ column [ UI.mSpacing ]
-                    [ paragraph [ Font.center, UI.fillWidth ] [ UI.h3 [] <| text "Spille på RønsenROCK 2020?" ]
+                    [ paragraph [ Font.center, UI.fillWidth ] [ UI.h3 [] <| text "Få oppdateringer på Facebook" ]
                     , paragraph [ Font.center ]
-                        [ text "Vi tar i mot henvendelser frem til mars." ]
+                        [ text "Ikke gå glipp av nyheter om årets festival – meld deg på eventet på Facebook." ]
                     ]
-                , UI.buttonLink [ UI.class "hoverable", centerX ] { label = row [ UI.mSpacing ] [ text "Meld interesse", text "▷" ], url = "mailto:booking@rønsenrock.no" }
+                , UI.buttonLink [ UI.class "hoverable", centerX ] { label = row [ UI.mSpacing ] [ text "Til Facebook", text "▷" ], url = "https://www.facebook.com/events/1276322845893719/" }
                 ]
+        , el [] none
 
+        -- , el
+        --     (centerX
+        --         :: (case deviceClass of
+        --                 Phone ->
+        --                     [ UI.sPadding ]
+        --                 _ ->
+        --                     []
+        --            )
+        --     )
+        --   <|
+        --     column
+        --         (Font.center
+        --             :: UI.lSpacing
+        --             :: responsivePadding
+        --             :: UI.boxed
+        --         )
+        --         [ column [ UI.mSpacing ]
+        --             [ paragraph [ Font.center, UI.fillWidth ] [ UI.h3 [] <| text "Spille på RønsenROCK 2020?" ]
+        --             , paragraph [ Font.center ]
+        --                 [ text "Vi tar i mot henvendelser frem til mars." ]
+        --             ]
+        --         , UI.buttonLink [ UI.class "hoverable", centerX ] { label = row [ UI.mSpacing ] [ text "Meld interesse", text "▷" ], url = "mailto:booking@rønsenrock.no" }
+        --         ]
         -- , el [ centerX, width <| px 200 ] <| UI.horisontalDivider
         -- , el [ centerX ] <|
         --     html <|
@@ -79,29 +103,4 @@ view { window, time } =
         --             ]
         --             []
         , el [ UI.fillWidth, height <| px dividerImageSize, Background.image "/images/chill-2018.jpg" ] none
-        , el
-            (centerX
-                :: (case deviceClass of
-                        Phone ->
-                            [ UI.sPadding ]
-
-                        _ ->
-                            []
-                   )
-            )
-          <|
-            column
-                (Font.center
-                    :: UI.lSpacing
-                    :: responsivePadding
-                    :: UI.boxed
-                )
-                [ column [ UI.mSpacing ]
-                    [ paragraph [ Font.center, UI.fillWidth ] [ UI.h3 [] <| text "Få oppdateringer på Facebook" ]
-                    , paragraph [ Font.center ]
-                        [ text "Ikke gå glipp av nyheter om årets festival – meld deg på eventet på Facebook." ]
-                    ]
-                , UI.buttonLink [ UI.class "hoverable", centerX ] { label = row [ UI.mSpacing ] [ text "Til Facebook", text "▷" ], url = "https://www.facebook.com/events/1276322845893719/" }
-                ]
-        , el [] none
         ]
