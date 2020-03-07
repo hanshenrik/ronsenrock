@@ -47,10 +47,8 @@ view panelContent panelState deviceClass =
                 [ UI.class "program-panel"
                 , width (fill |> maximum 500)
                 , height fill
-                , Background.color Color.lightPink
-                , Font.color Color.black
+                , Background.color Color.darkPink
                 , UI.mPadding
-                , UI.mSpacing
                 , scrollbarY
                 , case panelState of
                     Open ->
@@ -75,6 +73,29 @@ view panelContent panelState deviceClass =
                     }
                 , content
                 ]
+
+        entry clock time title info =
+            Input.button [ pointer, Transition.transition [ "transform" ], mouseOver [ scale 1.025 ] ]
+                { label =
+                    row [ UI.mSpacing, UI.xxsPadding ]
+                        [ el [ alignTop, UI.monoFont ] <| row [ UI.sSpacing ] [ el [ Font.size 30 ] <| text clock, text time ]
+                        , text title
+                        , text "👉"
+                        ]
+                , onPress =
+                    Just <|
+                        TogglePanel Open <|
+                            column [ UI.mSpacing ]
+                                ((UI.h3 [centerX] <|
+                                    row [ UI.mSpacing, UI.xxsPadding ]
+                                        [ el [ alignTop, UI.monoFont ] <| row [ UI.mSpacing ] [ text clock, text time ]
+                                        , text "/"
+                                        , text title
+                                        ]
+                                 )
+                                    :: info
+                                )
+                }
     in
     column
         [ UI.lSpacing
@@ -86,39 +107,28 @@ view panelContent panelState deviceClass =
         [ pageHeading [] <| text "Program"
         , column [ UI.mSpacing ]
             [ dayHeading [ Font.color Color.yellow ] <| text "Torsdag 2. juli"
-            , Input.button [ pointer, Transition.transition [ "transform" ], mouseOver [ scale 1.025 ] ]
-                { label =
-                    row [ UI.mSpacing, UI.xxsPadding ]
-                        [ el [ alignTop, UI.monoFont ] <| row [ UI.sSpacing ] [ el [ Font.size 30 ] <| text "🕛", text "12:00" ]
-                        , text "Åpning!"
-                        , text "👉"
-                        ]
-                , onPress =
-                    Just <|
-                        TogglePanel Open <|
-                            column [ UI.mSpacing ]
-                                [ image [ centerX, width (fill |> maximum 450), height (fill |> maximum 300) ] { src = "/images/maria-skilt-ss.jpg", description = "Skilt" }
-                                , UI.p <| text "Her er det om å gjøre å være på plass og få seg den beste spotten! Vi har fire ulike camper som sprer seg over festivalområdet, og alle campsa kommer med “alltid hyggelig nabogaranti”."
-                                , UI.p <| text "Det er også en on-going konkurranse om den beste campen. De som vinner får æren av å eie vårt fantastiske vandretrofè og skryte rettighetene et helt år!"
-                                , UI.p <| text "Denne dagen handler om å finne festivalånden og bare kose seg med musikk, varmt øl, teltoppsetting og leik. Det utspiller seg alltid en heftig volleyballturnering utover dagen, og Rockbaya er aldri mer levende enn den første natta! I tillegg er DjDaMIK med på å sette stemningen over hele festivalplassen, med groovy toner fra platesamlinga si."
-                                ]
-                }
+            , entry "🕛"
+                "12:00"
+                "Åpning!"
+                [ image [ centerX, width (fill |> maximum 450), height (fill |> maximum 300) ] { src = "/images/artists/djdamik.jpg", description = "Skilt" }
+                , UI.p <| text "Her er det om å gjøre å være på plass og få seg den beste spotten! Vi har fire ulike camper som sprer seg over festivalområdet, og alle campsa kommer med “alltid hyggelig nabogaranti”."
+                , UI.p <| text "Det er også en on-going konkurranse om den beste campen. De som vinner får æren av å eie vårt fantastiske vandretrofè og skryte rettighetene et helt år!"
+                , UI.p <| text "Denne dagen handler om å finne festivalånden og bare kose seg med musikk, varmt øl, teltoppsetting og leik. Det utspiller seg alltid en heftig volleyballturnering utover dagen, og Rockbaya er aldri mer levende enn den første natta!"
+                , UI.p <| text "I tillegg er DjDaMIK med på å sette stemningen over hele festivalplassen, med groovy toner fra platesamlinga si."
+                ]
             ]
         , column [ UI.mSpacing ]
             [ dayHeading [ Font.color Color.yellow ] <| text "Fredag 3. juli"
-            , row [ UI.mSpacing ]
-                [ el [ alignTop, UI.monoFont ] <| row [ UI.sSpacing ] [ el [ Font.size 30 ] <| text "🕔", text "17:00" ]
-                , UI.p <| text "Tautrekking"
+            , entry "🕔"
+                "17:00"
+                "Tautrekking"
+                [ image [ centerX, width (fill |> maximum 450), height (fill |> maximum 300) ] { src = "/images/tautrekking-1.jpg", description = "Tautrekking" }
+                , UI.p <| text "Tautrekking skrev seg inn i olympisk historie på 1900-tallet, og selv om det ikke er en gren i OL i dag har RønsenROCK tatt på seg jobben med å føre konkurransen videre!"
+                , UI.p <| text "Her vanker det heftig premie til vinnerlaget."
                 ]
-
-            -- [ Html.img [ UI.src "/images/tautrekking3-sbf.jpg" ] []
-            -- , el [] <| text "Tautrekking skrev seg inn i olympisk historie på 1900-tallet, og selv om det ikke er en gren i OL i dag har RønsenROCK tatt på seg jobben med å føre konkurransen videre! Her vanker det heftig premie til vinnerlaget."
-            -- ]
             , row [ UI.mSpacing ]
                 [ el [ alignTop, UI.monoFont ] <| row [ UI.sSpacing ] [ el [ Font.size 30 ] <| text "🕖", text "19:00" ]
                 , UI.p <| text "Konsertrekke #1"
-
-                -- , el [ alignRight, UI.class "show-more-button", pointer, mouseOver [ scale 1.2 ] ] <| text "👇"
                 ]
 
             --     [ el [] <| text "Klokka sju smeller det når RønsenROCKs uoffisielle husband åpner ballet"
@@ -154,14 +164,13 @@ view panelContent panelState deviceClass =
             ]
         , column [ UI.mSpacing ]
             [ dayHeading [ Font.color Color.yellow ] <| text "Lørdag 4. juli"
-            , row [ UI.mSpacing ]
-                [ el [ alignTop, UI.monoFont ] <| row [ UI.sSpacing ] [ el [ Font.size 30 ] <| text "🕙", text "10:00" ]
-                , UI.p <| text "Ryddeyoga"
-
-                -- , el [ alignRight, UI.class "show-more-button", pointer, mouseOver [ scale 1.2 ] ] <| text "👇"
+            , entry "🕙"
+                "10:00"
+                "Ryddeyoga"
+                [ image [ centerX, width (fill |> maximum 450), height (fill |> maximum 300) ] { src = "/images/ryddeyoga-2.jpg", description = "Ryddeyoga" }
+                , UI.p <| text "Når man bor sammen på slikt et stort område er det viktig å hjelpe hverandre med å holde det fint og hyggelig rundt seg."
+                , UI.p <| text "Vi inviterer derfor til yoga-time for å løsne litt på ledda og friske opp sjela, selvfølgelig med en kopp kaffe attot! Så tar vi oss en rydderunde og gjør oss klare til verdens koseligste dagssett"
                 ]
-
-            -- , Html.div [ UI.class "event-info" ] [ el [] <| text "Når man bor sammen på slikt et stort område er det viktig å hjelpe hverandre med å holde det fint og hyggelig rundt seg. Vi inviterer derfor til yoga-time for å løsne litt på ledda og friske opp sjela, selvfølgelig med en kopp kaffe attot! Så tar vi oss en rydderunde og gjør oss klare til verdens koseligste dagssett" ]
             , row [ UI.mSpacing ]
                 [ el [ alignTop, UI.monoFont ] <| row [ UI.sSpacing ] [ el [ Font.size 30 ] <| text "🕛", text "12:00" ]
                 , UI.p <| text "Konsertrekke #2"
@@ -198,18 +207,13 @@ view panelContent panelState deviceClass =
             --             ]
             --         ]
             --     ]
-            , row [ UI.mSpacing ]
-                [ el [ alignTop, UI.monoFont ] <| row [ UI.sSpacing ] [ el [ Font.size 30 ] <| text "🕔", text "17:00" ]
-                , UI.p <| text "Båreløp"
-
-                -- , el [ alignRight, UI.class "show-more-button", pointer, mouseOver [ scale 1.2 ] ] <| text "👇"
+            , entry "🕔"
+                "17:00"
+                "Båreløp"
+                [ image [ centerX, width (fill |> maximum 450), height (fill |> maximum 300) ] { src = "/images/barelop-1.jpg", description = "Båreløp" }
+                , UI.p <| text "Klokka fem vanker festivalens kuleste konkurranse, det legendariske Båreløpet!"
+                , UI.p <| text "Etter vi har kåret vinneren av løpet og vinnerne av årets «BesteCamp» tar vi oss et lite pust i bakken før det nok en gang smeller fra scenen!"
                 ]
-
-            -- , Html.div [ UI.class "event-info" ]
-            --     [ Html.img [ UI.src "/images/baare2-sbf.jpg" ] []
-            --     , el [] <| text "Klokka fem vanker festivalens kuleste konkurranse, det legendariske Båreløpet! Etter vi har kåret vinneren av løpet og vinnerne av årets “BesteCamp” tar vi oss et lite pust i bakken før det nok en gang smeller fra scenen!"
-            --     , Html.img [ UI.src "/images/beste-camp-mm.jpg" ] []
-            --     ]
             , row [ UI.mSpacing ]
                 [ el [ alignTop, UI.monoFont ] <| row [ UI.sSpacing ] [ el [ Font.size 30 ] <| text "🕖", text "19:00" ]
                 , UI.p <| text "Konsertrekke #3"
