@@ -62,11 +62,11 @@ view deviceClass =
                 [ text "Kommer du sørfra, og du ikke er lokalkjent, er det greieste å late som om du kommer nordfra og følge den samme veibeskrivelsen." ]
             , h3 [] <| text "🚂 Med tog"
             , paragraph [ UI.sSpacing ]
-                [ text "I og med at Eidsvoll er Vy sin navle, er det mange togavganger som stopper på Eidsvoll stasjon. Sjekk ", newTabLink [ UI.class "hoverable" ] { label = text "vy.no", url = "https://vy.no" }, text " for detaljer." ]
+                [ text "I og med at Eidsvoll er Vy sin navle, er det mange togavganger som stopper på Eidsvoll stasjon. Sjekk ", newTabLink [] { label = text "vy.no", url = "https://vy.no" }, text " for detaljer." ]
             , paragraph [ UI.sSpacing ]
                 [ text "Når du har gått av på Eidsvoll stasjon (ikke Eidsvoll Verk!), er det fremdeles rundt 7 kilometer til du er framme. Kollektivtilbudet herfra er heller skralt, så her er alternativene taxi, venner med bil, sykkel eller å ta beina fatt." ]
             , paragraph [ UI.sSpacing ]
-                [ text "Det er mange som kjører forbi stasjonen på vei til festivalen, så det er sikkert mulig å organisere samkjøring på ", newTabLink [ UI.class "hoverable" ] { label = text "Facebook-eventet", url = "https://www.facebook.com/events/1276322845893719/" }, text "." ]
+                [ text "Det er mange som kjører forbi stasjonen på vei til festivalen, så det er sikkert mulig å organisere samkjøring på ", newTabLink [] { label = text "Facebook-eventet", url = "https://www.facebook.com/events/1276322845893719/" }, text "." ]
             ]
         , column [ UI.lSpacing ]
             [ h1 [ Font.color Color.yellow ] <| text "Hvor mye koster det?"

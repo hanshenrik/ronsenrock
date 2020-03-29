@@ -17,22 +17,24 @@ body.no-scroll {
 }
 
 a {
-  border-width: 2px 0 4px 0 !important;
+  border-width: 2px 0 !important;
   border-color: transparent transparent var(--lightYellow) transparent !important;
-  border-style: solid;
+  border-style: solid !important;
+  padding: 0.1rem 0 0.3rem 0 !important;
 }
-
+a,
 .hoverable {
   transition: background-color 0.2s ease-out, color 0.2s ease-out,
     transform 0.2s ease-out;
-  padding: 1rem 0;
 }
-.hoverable:not(a) {
-  padding: 0.5rem !important;
-}
+a:hover,
 .hoverable:hover {
   background-color: var(--lightYellow);
   color: var(--black);
+}
+
+.hoverable:not(a) {
+  padding: 0.5rem !important;
 }
 
 .hoverable-alternative {

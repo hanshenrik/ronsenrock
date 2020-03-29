@@ -33,13 +33,13 @@ view panelContent panelState deviceClass =
         ( closeIconSize, closeIconAlign ) =
             case deviceClass of
                 Phone ->
-                    ( 50, alignRight )
+                    ( 30, alignRight )
 
                 Tablet ->
-                    ( 50, alignRight )
+                    ( 30, alignRight )
 
                 _ ->
-                    ( 30, alignLeft )
+                    ( 40, alignLeft )
 
         panel content =
             column
@@ -61,13 +61,12 @@ view panelContent panelState deviceClass =
                     , height <| px closeIconSize -- Safari fix
                     , Font.size closeIconSize
                     , Font.color Color.white
-                    , Font.shadow { offset = ( 2, 2 ), blur = 0, color = Color.withTransparency Color.black 0.7 }
                     , UI.class "hoverable-alternative"
                     , htmlAttribute <| Html.Attributes.style "position" "sticky"
-                    , htmlAttribute <| Html.Attributes.style "top" "2px"
+                    , htmlAttribute <| Html.Attributes.style "top" "0px"
                     , htmlAttribute <| Html.Attributes.style "z-index" "2"
                     ]
-                    { label = text "⤫"
+                    { label = text "👈"
                     , onPress = Just <| TogglePanel Closed content
                     }
                 , content
@@ -77,18 +76,17 @@ view panelContent panelState deviceClass =
             Input.button [ pointer, Transition.transition [ "transform" ], mouseOver [ scale 1.025 ] ]
                 { label =
                     row [ UI.mSpacing, UI.xxsPadding ]
-                        [ el [ alignTop, UI.monoFont ] <| row [ UI.sSpacing ] [ el [ Font.size 30 ] <| text clock, text time ]
+                        [ el [ alignTop ] <| row [ UI.sSpacing ] [ el [ Font.size 22 ] <| text clock, text time ]
                         , text title
                         , text "👉"
                         ]
                 , onPress =
                     Just <|
                         TogglePanel Open <|
-                            column [ UI.mSpacing ]
-                                ((UI.h3 [centerX] <|
-                                    row [ UI.mSpacing, UI.xxsPadding ]
-                                        [ el [ alignTop, UI.monoFont ] <| row [ UI.mSpacing ] [ text clock, text time ]
-                                        , text "/"
+                            column [ UI.lSpacing, paddingEach { top = 0, right = 0, bottom = 9 * 10, left = 0 } ]
+                                ((UI.h3 [] <|
+                                    wrappedRow [ UI.mSpacing, UI.xxsPadding ]
+                                        [ el [ alignTop ] <| row [ UI.mSpacing ] [ text time ]
                                         , text title
                                         ]
                                  )
@@ -126,7 +124,7 @@ view panelContent panelState deviceClass =
                 , UI.p <| text "Her vanker det heftig premie til vinnerlaget."
                 ]
             , row [ UI.mSpacing ]
-                [ el [ alignTop, UI.monoFont ] <| row [ UI.sSpacing ] [ el [ Font.size 30 ] <| text "🕖", text "19:00" ]
+                [ el [ alignTop ] <| row [ UI.sSpacing ] [ el [ Font.size 22 ] <| text "🕖", text "19:00" ]
                 , UI.p <| text "Konsertrekke #1"
                 ]
 
@@ -171,7 +169,7 @@ view panelContent panelState deviceClass =
                 , UI.p <| text "Vi inviterer derfor til yoga-time for å løsne litt på ledda og friske opp sjela, selvfølgelig med en kopp kaffe attot! Så tar vi oss en rydderunde og gjør oss klare til verdens koseligste dagssett"
                 ]
             , row [ UI.mSpacing ]
-                [ el [ alignTop, UI.monoFont ] <| row [ UI.sSpacing ] [ el [ Font.size 30 ] <| text "🕛", text "12:00" ]
+                [ el [ alignTop ] <| row [ UI.sSpacing ] [ el [ Font.size 22 ] <| text "🕛", text "12:00" ]
                 , UI.p <| text "Konsertrekke #2"
 
                 -- , el [ alignRight, UI.class "show-more-button", pointer, mouseOver [ scale 1.2 ] ] <| text "👇"
@@ -214,7 +212,7 @@ view panelContent panelState deviceClass =
                 , UI.p <| text "Etter vi har kåret vinneren av løpet og vinnerne av årets «BesteCamp» tar vi oss et lite pust i bakken før det nok en gang smeller fra scenen!"
                 ]
             , row [ UI.mSpacing ]
-                [ el [ alignTop, UI.monoFont ] <| row [ UI.sSpacing ] [ el [ Font.size 30 ] <| text "🕖", text "19:00" ]
+                [ el [ alignTop ] <| row [ UI.sSpacing ] [ el [ Font.size 22 ] <| text "🕖", text "19:00" ]
                 , UI.p <| text "Konsertrekke #3"
 
                 -- , el [ alignRight, UI.class "show-more-button", pointer, mouseOver [ scale 1.2 ] ] <| text "👇"

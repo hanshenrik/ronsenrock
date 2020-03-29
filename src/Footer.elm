@@ -26,18 +26,18 @@ default window =
             [ centerX, UI.lSpacing ]
             [ column [ alignTop, UI.sSpacing ]
                 [ row []
-                    [ newTabLink [ UI.class "hoverable" ] { label = text "✉️ post@rønsenrock.no", url = "mailto:post@rønsenrock.no" }
+                    [ newTabLink [] { label = text "✉️ post@rønsenrock.no", url = "mailto:post@rønsenrock.no" }
                     ]
                 , row []
-                    [ newTabLink [ UI.class "hoverable" ] { label = text "🎸 booking@rønsenrock.no", url = "mailto:booking@rønsenrock.no" }
+                    [ newTabLink [] { label = text "🎸 booking@rønsenrock.no", url = "mailto:booking@rønsenrock.no" }
                     ]
                 , row []
-                    [ newTabLink [ UI.class "hoverable" ] { label = text "🔨 hanshenrik", url = "https://github.com/hanshenrik" }
+                    [ newTabLink [] { label = text "🔨 hanshenrik", url = "https://github.com/hanshenrik" }
                     ]
                 ]
             , UI.divider window
             , column [ alignTop, UI.sSpacing ]
-                [ newTabLink [ UI.class "hoverable" ] { label = text "🙂📘 Facebook", url = "https://facebook.com/rockogrull" }
-                , newTabLink [ UI.class "hoverable" ] { label = text "📸 Instagram", url = "https://www.instagram.com/ronsen_rock/" }
+                [ newTabLink [] { label = text "🙂📘 Facebook", url = "https://facebook.com/rockogrull" }
+                , newTabLink [] { label = text "📸 Instagram", url = "https://www.instagram.com/ronsen_rock/" }
                 ]
             ]

@@ -308,4 +308,8 @@ ul elements =
 
 p : Element msg -> Element msg
 p element =
-    paragraph [ htmlAttribute <| Html.Attributes.style "overflow-wrap" "break-word" ] [ element ]
+    paragraph
+        [ htmlAttribute <| Html.Attributes.style "overflow-wrap" "break-word"
+        , htmlAttribute <| Html.Attributes.style "line-height" "1.4"
+        ]
+        [ element ]

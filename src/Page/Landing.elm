@@ -63,7 +63,7 @@ view { window, time } =
                     , paragraph [ Font.center ]
                         [ text "Ikke gå glipp av nyheter om årets festival – meld deg på eventet på Facebook." ]
                     ]
-                , UI.buttonLink [ UI.class "hoverable", centerX ] { label = row [ UI.mSpacing ] [ text "Til Facebook", text "▷" ], url = "https://www.facebook.com/events/1276322845893719/" }
+                , UI.buttonLink [ UI.class "hoverable", centerX ] { label = row [ UI.mSpacing, UI.mPadding ] [ text "Til Facebook", text "▷" ], url = "https://www.facebook.com/events/1276322845893719/" }
                 ]
         , el [] none
 
