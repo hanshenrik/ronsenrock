@@ -3,7 +3,6 @@ module Page.Program exposing (Msg(..), PanelState(..), view)
 import Color
 import Element exposing (..)
 import Element.Background as Background
-import Element.Events as Events
 import Element.Font as Font
 import Element.Input as Input
 import Html.Attributes
@@ -114,7 +113,7 @@ view panelContent panelState deviceClass =
                 , UI.p <| text "Her er det om å gjøre å være på plass og få seg den beste spotten! Vi har fire ulike camper som sprer seg over festivalområdet, og alle campsa kommer med “alltid hyggelig nabogaranti”."
                 , UI.p <| text "Det er også en on-going konkurranse om den beste campen. De som vinner får æren av å eie vårt fantastiske vandretrofè og skryte rettighetene et helt år!"
                 , UI.p <| text "Denne dagen handler om å finne festivalånden og bare kose seg med musikk, varmt øl, teltoppsetting og leik. Det utspiller seg alltid en heftig volleyballturnering utover dagen, og Rockbaya er aldri mer levende enn den første natta!"
-                , UI.p <| text "I tillegg er DjDaMIK med på å sette stemningen over hele festivalplassen, med groovy toner fra platesamlinga si."
+                , UI.p <| text "I tillegg er Dj Damik med på å sette stemningen over hele festivalplassen, med groovy toner fra platesamlinga si."
                 ]
             ]
         , column [ UI.mSpacing ]

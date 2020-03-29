@@ -9,29 +9,13 @@ import Type.Window exposing (Window)
 import UI
 
 
-artists : { y2019 : List String, y2018 : List String }
+artists : { y2019 : List String, y2018 : List String, y2017 : List String, y2016 : List String, y2015 : List String }
 artists =
-    { y2019 =
-        [ "Inglorious Retards"
-        , "AARB"
-        , "Astralplane"
-        , "Drukkenbolt"
-        , "Dance Commander"
-        , "Dømt"
-        , "Helt Greit Band"
-        , "Helmer"
-        , "Impaired"
-        , "The Loop Brothers"
-        , "Andreas Fagertun"
-        , "Janos"
-        , "Levitation B Band"
-        , "Blacklands"
-        , "Bolt"
-        , "!Pysh"
-        , "Thundering Voices"
-        , "Sorgen"
-        ]
-    , y2018 = []
+    { y2019 = [ "Inglorious Retards", "AARB", "Astralplane", "Drukkenbolt", "Dance Commander", "Dømt", "Helt Greit Band", "Helmer", "Impaired", "The Loop Brothers", "Andreas Fagertun", "Janos", "Levitation B Band", "Blacklands", "Bolt", "!Pysh", "Thundering Voices", "Sorgen", "Dj Damik" ]
+    , y2018 = [ "Detroit Sound", "Rainbowhead", "Forgetaboutit", "Bucktooth Dan", "Marius Abrahamsen", "Sorgen", "Norrøna Band", "Sigurd og Røkla", "Konger og Keisere", "Honeyroll", "Inglorious Retards", "Dårlig Hjort", "Helt Greit Band", "Thundering Voices", "Dance Commander", "Nasty Dogs", "Glutton", "Victor & Dacota" ]
+    , y2017 = [ "Skamfuret Værbitt", "Porto", "Glass Club", "Mark Steiner & His Problems", "Somewhere Beyond", "The Dead Beat", "Punch", "Thundering Voices", "Helt Greit Band", "HARB", "Forbeaboutit", "Inglorious Retards", "Axsang" ]
+    , y2016 = [ "Jow Blob", "Honeyroll", "Pantalones El Chico Grande", "NARB", "Vossafårs", "Inglorious Retards", "Festivalsjefen og Jeg", "State of Confusion", "Punch", "Helt Greit Band", "Lazy Petite", "Requinox" ]
+    , y2015 = [ "Jow Blob", "Ingloriuos Retards", "Lazy Petite", "Kokt Torsk/Stekt Torsk", "Helt Greit Band", "Pantalones El Chico Grande", "Leafy" ]
     }
 
 
@@ -41,6 +25,15 @@ bannerImageAttributes window =
     , UI.responsivePadding window
     , UI.fillWidth
     ]
+
+
+artistList : List String -> Element msg
+artistList a =
+    a
+        |> List.sort
+        |> List.intersperse "•"
+        |> List.map text
+        |> wrappedRow [ UI.fillWidth, UI.mSpacing ]
 
 
 view : Window -> Element msg
@@ -78,7 +71,7 @@ view window =
             )
         ]
         [ UI.p <| pageHeading [] <| text "Historie"
-        , UI.p <| subHeading [ Font.color Color.yellow ] <| text "Tidligere artister"
+        , UI.p <| subHeading [ Font.color Color.yellow ] <| text "Tidligere år"
         , el [ UI.sPadding ] <|
             column (bannerImageAttributes window)
                 [ image
@@ -89,14 +82,10 @@ view window =
                         :: UI.boxed
                     )
                     { src = "/images/logo-2019-mm-transparent.png", description = "Logo 2019" }
-                , artists.y2019
-                    |> List.sort
-                    |> List.intersperse "•"
-                    |> List.map text
-                    |> wrappedRow [ UI.fillWidth, UI.sSpacing ]
+                , artistList artists.y2019
                 , image [ UI.fillWidth ] { src = "/images/tak-2019-tk.jpg", description = "Fellesbilde 2019" }
                 ]
-        , el [ moveUp (9 * 3), UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
+        , el [ moveUp 9, UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
         , el [ UI.sPadding ] <|
             column (bannerImageAttributes window)
                 [ column
@@ -114,9 +103,10 @@ view window =
                         ]
                         { src = "/images/logo-2018-mm-transparent.png", description = "Logo 2018" }
                     ]
+                , artistList artists.y2018
                 , image [ UI.fillWidth ] { src = "/images/tak-2018-tk.jpg", description = "Fellesbilde 2018" }
                 ]
-        , el [ moveUp (9 * 3), UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
+        , el [ moveUp 9, UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
         , el [ UI.sPadding ] <|
             column (bannerImageAttributes window)
                 [ column [ UI.fillWidth, UI.lSpacing ]
@@ -127,10 +117,11 @@ view window =
                             :: UI.boxed
                         )
                         { src = "/images/logo-2017-mm.png", description = "Logo 2017" }
+                    , artistList artists.y2017
                     , image [ UI.fillWidth ] { src = "/images/tak-2017-tk.jpg", description = "Fellesbilde 2017" }
                     ]
                 ]
-        , el [ moveUp (9 * 3), UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
+        , el [ moveUp 9, UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
         , el [ UI.sPadding ] <|
             column (bannerImageAttributes window)
                 [ column [ UI.fillWidth, UI.lSpacing ]
@@ -141,10 +132,11 @@ view window =
                             :: UI.boxed
                         )
                         { src = "/images/logo-2016-mm.png", description = "Logo 2016" }
+                    , artistList artists.y2016
                     , image [ UI.fillWidth ] { src = "/images/tak-2016-tk.jpg", description = "Fellesbilde 2016" }
                     ]
                 ]
-        , el [ moveUp (9 * 3), UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
+        , el [ moveUp 9, UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
         , el [ UI.sPadding ] <|
             column (bannerImageAttributes window)
                 [ column
@@ -153,13 +145,10 @@ view window =
                         :: UI.class "shake"
                         :: UI.boxed
                     )
-                    [ imageHeading [ UI.sPadding, centerX, Font.color Color.yellow ] <| text "2015"
-                    , image
-                        [ UI.fillWidth
-                        , centerX
-                        ]
-                        { src = "/images/logo-2015.jpg", description = "Logo 2015" }
+                    [ imageHeading [ UI.mPadding, centerX, Font.color Color.yellow ] <| text "2015"
+                    , image [ UI.fillWidth, centerX ] { src = "/images/logo-2015.jpg", description = "Logo 2015" }
                     ]
+                , artistList artists.y2015
                 , image [ UI.fillWidth ] { src = "/images/tak-2015-1-tk.jpg", description = "Fellesbilde 2015" }
                 ]
         , UI.p <| subHeading [ Font.color Color.yellow ] <| text "Hva er RønsenROCK?"
