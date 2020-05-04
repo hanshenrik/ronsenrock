@@ -192,7 +192,7 @@ menuItems { path } deviceClass =
                             [ centerY
                             , width <| px 8
                             , height <| px 8
-                            , moveDown 2
+                            , moveRight 8
                             , UI.xlRoundedCorners
                             , Background.color Color.gray15
                             ]
@@ -204,7 +204,7 @@ menuItems { path } deviceClass =
                             [ centerY
                             , width <| px 8
                             , height <| px 8
-                            , moveDown 2
+                            , moveRight 8
                             , UI.xlRoundedCorners
                             , Background.color Color.gray15
                             ]
