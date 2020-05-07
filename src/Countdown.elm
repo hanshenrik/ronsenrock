@@ -66,7 +66,7 @@ view window time =
         none
 
     else
-        row [ UI.fillWidth, spaceEvenly, UI.sSpacing, height <| px (2 * 60 + 64) ]
+        row [ UI.fillWidth, spaceEvenly, UI.sSpacing, height <| px (2 * 80 + 64) ]
             [ column [ alignBottom, UI.sSpacing ] [ barColumn daysLeft Color.yellow, el [ centerX ] <| text "dager" ]
             , column [ alignBottom, UI.sSpacing ] [ barColumn hoursLeft Color.orange, el [ centerX ] <| text "timer" ]
             , column [ alignBottom, UI.sSpacing ] [ barColumn minutesLeft Color.pink, el [ centerX ] <| text minutesLabel ]

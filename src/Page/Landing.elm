@@ -39,9 +39,9 @@ view { window, time } =
                 ]
                 { src = "/images/logo-2020-mm-transparent.png", description = "Logo" }
             ]
-        , column [ Font.center, centerX, UI.mSpacing ]
+        , column [ Font.center, centerX, UI.mSpacing, UI.mPadding ]
             [ UI.p <| text "RønsenROCK 2020 er dessverre avlyst på grunn av koronasituasjonen 💔"
-            , UI.p <| text "Vi sees på RønsenROCK 2021 om ca."
+            , UI.p <| text "Men! Vi sees på RønsenROCK 2021 om ca."
             ]
         , el [ centerX ] <| Countdown.view window time
         , el [ UI.fillWidth, height <| px dividerImageSize, Background.image "/images/tak-2019-tk.jpg" ] none
