@@ -29,8 +29,8 @@ view { window, time } =
     in
     column [ UI.fillWidth, centerY, UI.xxlSpacing, paddingEach { top = 4 * 9, right = 0, bottom = 0, left = 0 } ]
         [ column [ UI.sSpacing, centerX ]
-            [ el [ centerX ] <| dateHeading [ Font.color Color.yellow, htmlAttribute <| Html.Attributes.style "transform" "rotate(-10deg)" ] <| text "2. – 5. juli"
-            , image
+            [ -- el [ centerX ] <| dateHeading [ Font.color Color.yellow, htmlAttribute <| Html.Attributes.style "transform" "rotate(-10deg)" ] <| text "2. – 5. juli",
+              image
                 [ centerX
                 , centerY
                 , height <| px <| round <| logoSize / 1.5
@@ -38,6 +38,10 @@ view { window, time } =
                 , UI.class "shake"
                 ]
                 { src = "/images/logo-2020-mm-transparent.png", description = "Logo" }
+            ]
+        , column [ Font.center, centerX, UI.mSpacing ]
+            [ UI.p <| text "RønsenROCK 2020 er dessverre avlyst på grunn av koronasituasjonen 💔"
+            , UI.p <| text "Vi sees på RønsenROCK 2021 om ca."
             ]
         , el [ centerX ] <| Countdown.view window time
         , el [ UI.fillWidth, height <| px dividerImageSize, Background.image "/images/tak-2019-tk.jpg" ] none
