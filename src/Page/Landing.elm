@@ -4,6 +4,7 @@ import Color
 import Countdown
 import Element exposing (..)
 import Element.Background as Background
+import Element.Border as Border
 import Element.Font as Font
 import Html.Attributes
 import Type.Window exposing (Window)
@@ -39,9 +40,12 @@ view { window, time } =
                 ]
                 { src = "/images/logo-2020-mm-transparent.png", description = "Logo" }
             ]
-        , column [ Font.center, centerX, UI.mSpacing, UI.mPadding ]
-            [ UI.p <| text "RønsenROCK 2021 er dessverre også avlyst på grunn av koronasituasjonen 💔"
-            , UI.p <| text "Men! Vi håper vi sees på RønsenROCK 2022 om ca."
+        , column [ centerX, UI.mPadding, UI.xsSpacing ]
+            [ el [ centerX ] <|
+                column [ Font.center, centerX, UI.mSpacing, UI.lPadding, Background.color Color.lightYellow, Font.color Color.black, UI.sRoundedCorners ]
+                    [ UI.p <| text "RønsenROCK 2021 er dessverre også avlyst på grunn av koronasituasjonen 💔"
+                    ]
+            , el [ centerX, Font.center, UI.lPadding ] <| UI.p <| text "Men! Vi håper vi sees på RønsenROCK 2022 om ca. …"
             ]
         , el [ centerX ] <| Countdown.view window time
         , el [ UI.fillWidth, height <| px dividerImageSize, Background.image "/images/tak-2019-tk.jpg" ] none
@@ -56,19 +60,20 @@ view { window, time } =
                    )
             )
           <|
-            column
-                (Font.center
-                    :: UI.lSpacing
-                    :: responsivePadding
-                    :: UI.boxed
-                )
-                [ column [ UI.mSpacing ]
-                    [ paragraph [ Font.center, UI.fillWidth ] [ UI.h3 [] <| text "Få oppdateringer på Facebook" ]
-                    , paragraph [ Font.center ]
-                        [ text "Ikke gå glipp av nyheter om neste års festival – lik Rønsenrock festivallag på Facebook." ]
+            el [ UI.mPadding ] <|
+                column
+                    (Font.center
+                        :: UI.lSpacing
+                        :: responsivePadding
+                        :: UI.boxed
+                    )
+                    [ column [ UI.mSpacing ]
+                        [ paragraph [ Font.center, UI.fillWidth ] [ UI.h3 [] <| text "Få oppdateringer på Facebook" ]
+                        , paragraph [ Font.center ]
+                            [ text "Ikke gå glipp av nyheter om neste års festival – lik Rønsenrock festivallag på Facebook." ]
+                        ]
+                    , UI.buttonLink [ UI.class "hoverable", centerX ] { label = row [ UI.mSpacing, UI.mPadding ] [ text "Til Facebook", text "▷" ], url = "https://www.facebook.com/RockogRull/" }
                     ]
-                , UI.buttonLink [ UI.class "hoverable", centerX ] { label = row [ UI.mSpacing, UI.mPadding ] [ text "Til Facebook", text "▷" ], url = "https://www.facebook.com/RockogRull/" }
-                ]
         , el [] none
 
         -- , el

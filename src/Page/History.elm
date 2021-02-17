@@ -72,85 +72,80 @@ view window =
         ]
         [ UI.p <| pageHeading [] <| text "Historie"
         , UI.p <| subHeading [ Font.color Color.yellow ] <| text "Tidligere år"
-        , el [ UI.sPadding ] <|
-            column (bannerImageAttributes window)
+        , column (bannerImageAttributes window)
+            [ image
+                (UI.fillWidth
+                    :: centerX
+                    :: imagePadding
+                    :: UI.class "shake"
+                    :: UI.boxed
+                )
+                { src = "/images/logo-2019-mm-transparent.png", description = "Logo 2019" }
+            , artistList artists.y2019
+            , image [ UI.fillWidth ] { src = "/images/tak-2019-tk.jpg", description = "Fellesbilde 2019" }
+            ]
+        , el [ moveUp 9, UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
+        , column (bannerImageAttributes window)
+            [ column
+                (UI.fillWidth
+                    :: imagePadding
+                    :: UI.class "shake"
+                    :: UI.boxed
+                )
+                [ imageHeading [ centerX, Font.color Color.yellow, htmlAttribute <| Html.Attributes.style "transform" <| "rotate(-30deg) translateX(" ++ String.fromInt move2018Heading ++ "px)" ] <| text "2018"
+                , image
+                    [ centerX
+                    , UI.fillWidth
+                    , height height2018Logo
+                    , width width2018Logo
+                    ]
+                    { src = "/images/logo-2018-mm-transparent.png", description = "Logo 2018" }
+                ]
+            , artistList artists.y2018
+            , image [ UI.fillWidth ] { src = "/images/tak-2018-tk.jpg", description = "Fellesbilde 2018" }
+            ]
+        , el [ moveUp 9, UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
+        , column (bannerImageAttributes window)
+            [ column [ UI.fillWidth, UI.lSpacing ]
                 [ image
                     (UI.fillWidth
-                        :: centerX
                         :: imagePadding
                         :: UI.class "shake"
                         :: UI.boxed
                     )
-                    { src = "/images/logo-2019-mm-transparent.png", description = "Logo 2019" }
-                , artistList artists.y2019
-                , image [ UI.fillWidth ] { src = "/images/tak-2019-tk.jpg", description = "Fellesbilde 2019" }
+                    { src = "/images/logo-2017-mm.png", description = "Logo 2017" }
+                , artistList artists.y2017
+                , image [ UI.fillWidth ] { src = "/images/tak-2017-tk.jpg", description = "Fellesbilde 2017" }
                 ]
+            ]
         , el [ moveUp 9, UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
-        , el [ UI.sPadding ] <|
-            column (bannerImageAttributes window)
-                [ column
+        , column (bannerImageAttributes window)
+            [ column [ UI.fillWidth, UI.lSpacing ]
+                [ image
                     (UI.fillWidth
                         :: imagePadding
                         :: UI.class "shake"
                         :: UI.boxed
                     )
-                    [ imageHeading [ centerX, Font.color Color.yellow, htmlAttribute <| Html.Attributes.style "transform" <| "rotate(-30deg) translateX(" ++ String.fromInt move2018Heading ++ "px)" ] <| text "2018"
-                    , image
-                        [ centerX
-                        , UI.fillWidth
-                        , height height2018Logo
-                        , width width2018Logo
-                        ]
-                        { src = "/images/logo-2018-mm-transparent.png", description = "Logo 2018" }
-                    ]
-                , artistList artists.y2018
-                , image [ UI.fillWidth ] { src = "/images/tak-2018-tk.jpg", description = "Fellesbilde 2018" }
+                    { src = "/images/logo-2016-mm.png", description = "Logo 2016" }
+                , artistList artists.y2016
+                , image [ UI.fillWidth ] { src = "/images/tak-2016-tk.jpg", description = "Fellesbilde 2016" }
                 ]
+            ]
         , el [ moveUp 9, UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
-        , el [ UI.sPadding ] <|
-            column (bannerImageAttributes window)
-                [ column [ UI.fillWidth, UI.lSpacing ]
-                    [ image
-                        (UI.fillWidth
-                            :: imagePadding
-                            :: UI.class "shake"
-                            :: UI.boxed
-                        )
-                        { src = "/images/logo-2017-mm.png", description = "Logo 2017" }
-                    , artistList artists.y2017
-                    , image [ UI.fillWidth ] { src = "/images/tak-2017-tk.jpg", description = "Fellesbilde 2017" }
-                    ]
+        , column (bannerImageAttributes window)
+            [ column
+                (UI.fillWidth
+                    :: imagePadding
+                    :: UI.class "shake"
+                    :: UI.boxed
+                )
+                [ imageHeading [ UI.mPadding, centerX, Font.color Color.yellow ] <| text "2015"
+                , image [ UI.fillWidth, centerX ] { src = "/images/logo-2015.jpg", description = "Logo 2015" }
                 ]
-        , el [ moveUp 9, UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
-        , el [ UI.sPadding ] <|
-            column (bannerImageAttributes window)
-                [ column [ UI.fillWidth, UI.lSpacing ]
-                    [ image
-                        (UI.fillWidth
-                            :: imagePadding
-                            :: UI.class "shake"
-                            :: UI.boxed
-                        )
-                        { src = "/images/logo-2016-mm.png", description = "Logo 2016" }
-                    , artistList artists.y2016
-                    , image [ UI.fillWidth ] { src = "/images/tak-2016-tk.jpg", description = "Fellesbilde 2016" }
-                    ]
-                ]
-        , el [ moveUp 9, UI.fillWidth, paddingXY (9 * 12) 0, centerX ] <| UI.horisontalDivider
-        , el [ UI.sPadding ] <|
-            column (bannerImageAttributes window)
-                [ column
-                    (UI.fillWidth
-                        :: imagePadding
-                        :: UI.class "shake"
-                        :: UI.boxed
-                    )
-                    [ imageHeading [ UI.mPadding, centerX, Font.color Color.yellow ] <| text "2015"
-                    , image [ UI.fillWidth, centerX ] { src = "/images/logo-2015.jpg", description = "Logo 2015" }
-                    ]
-                , artistList artists.y2015
-                , image [ UI.fillWidth ] { src = "/images/tak-2015-1-tk.jpg", description = "Fellesbilde 2015" }
-                ]
+            , artistList artists.y2015
+            , image [ UI.fillWidth ] { src = "/images/tak-2015-1-tk.jpg", description = "Fellesbilde 2015" }
+            ]
         , UI.p <| subHeading [ Font.color Color.yellow ] <| text "Hva er RønsenROCK?"
         , paragraph [ UI.sSpacing ]
             [ text """
