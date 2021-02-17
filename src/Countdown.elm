@@ -12,9 +12,9 @@ import UI
 view : Window -> Int -> Element msg
 view window time =
     let
-        -- 1625137200000 is 2021-07-01 11:00:00+01:00
+        -- 1656687600000 is 2022-07-01 17:00:00+02:00
         countdownTimestamp =
-            1625137200000
+            1656687600000
 
         timeDiff =
             countdownTimestamp - time

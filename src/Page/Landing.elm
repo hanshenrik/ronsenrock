@@ -40,8 +40,8 @@ view { window, time } =
                 { src = "/images/logo-2020-mm-transparent.png", description = "Logo" }
             ]
         , column [ Font.center, centerX, UI.mSpacing, UI.mPadding ]
-            [ UI.p <| text "RønsenROCK 2020 er dessverre avlyst på grunn av koronasituasjonen 💔"
-            , UI.p <| text "Men! Vi sees på RønsenROCK 2021 om ca."
+            [ UI.p <| text "RønsenROCK 2021 er dessverre også avlyst på grunn av koronasituasjonen 💔"
+            , UI.p <| text "Men! Vi håper vi sees på RønsenROCK 2022 om ca."
             ]
         , el [ centerX ] <| Countdown.view window time
         , el [ UI.fillWidth, height <| px dividerImageSize, Background.image "/images/tak-2019-tk.jpg" ] none
@@ -65,9 +65,9 @@ view { window, time } =
                 [ column [ UI.mSpacing ]
                     [ paragraph [ Font.center, UI.fillWidth ] [ UI.h3 [] <| text "Få oppdateringer på Facebook" ]
                     , paragraph [ Font.center ]
-                        [ text "Ikke gå glipp av nyheter om årets festival – meld deg på eventet på Facebook." ]
+                        [ text "Ikke gå glipp av nyheter om neste års festival – lik Rønsenrock festivallag på Facebook." ]
                     ]
-                , UI.buttonLink [ UI.class "hoverable", centerX ] { label = row [ UI.mSpacing, UI.mPadding ] [ text "Til Facebook", text "▷" ], url = "https://www.facebook.com/events/1276322845893719/" }
+                , UI.buttonLink [ UI.class "hoverable", centerX ] { label = row [ UI.mSpacing, UI.mPadding ] [ text "Til Facebook", text "▷" ], url = "https://www.facebook.com/RockogRull/" }
                 ]
         , el [] none
 
